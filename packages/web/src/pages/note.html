@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Shared Note - UtilDeck</title>
+  <link rel="icon" type="image/png" href="../assets/icon-64.png">
+  <link rel="apple-touch-icon" href="../assets/icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/icon-64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Shared note</h2>
+      <p id="meta" class="tool-description" aria-live="polite">Loading…</p>
+
+      <div id="errorBox" class="pick-hint" hidden></div>
+
+      <form id="passwordBox" class="share-section" hidden>
+        <p class="tool-description">This note is password protected.</p>
+        <div class="control-row">
+          <div class="field">
+            <label for="notePassword">Password</label>
+            <input type="password" id="notePassword" class="text-input" autocomplete="off" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Unlock</button>
+        </div>
+        <p id="passwordStatus" class="status" aria-live="polite"></p>
+      </form>
+
+      <div id="noteBox" hidden>
+        <textarea id="noteContent" class="output-box" readonly spellcheck="false" style="min-height: 320px;"></textarea>
+        <div class="control-row" style="justify-content: flex-end; margin-top: 1rem;">
+          <button id="copyBtn" class="btn btn-secondary">Copy text</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ by <strong>Aryash</strong> | <a href="https://x.com/Aaryash747" target="_blank">@Aaryash747</a> | <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a></p>
+  </footer>
+
+  <script type="module">
+    import { initTheme, copyText, readJson } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { NOTES_API, NOTES_UNAVAILABLE } from '../scripts/config.js';
+
+    initNav();
+    initTheme(document.getElementById('themeToggle'));
+
+    const meta = document.getElementById('meta');
+    const errorBox = document.getElementById('errorBox');
+    const passwordBox = document.getElementById('passwordBox');
+    const passwordInput = document.getElementById('notePassword');
+    const passwordStatus = document.getElementById('passwordStatus');
+    const noteBox = document.getElementById('noteBox');
+    const noteContent = document.getElementById('noteContent');
+    const copyBtn = document.getElementById('copyBtn');
+
+    const id = new URLSearchParams(location.search).get('id');
+    let expiresAt = null;
+
+    const showError = message => {
+      meta.textContent = '';
+      errorBox.textContent = message;
+      errorBox.hidden = false;
+      passwordBox.hidden = true;
+      noteBox.hidden = true;
+    };
+
+    // "Expires at 4:12 PM (2h 40m left)", refreshed every minute
+    function updateExpiry() {
+      if (!expiresAt) return;
+      const left = expiresAt - Date.now();
+      if (left <= 0) {
+        showError('This note has expired and is no longer available.');
+        return;
+      }
+      const time = new Date(expiresAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+      const hours = Math.floor(left / 3600000);
+      const minutes = Math.floor((left % 3600000) / 60000);
+      meta.textContent = `Expires at ${time} (${hours}h ${minutes}m left). Notes are deleted after that.`;
+    }
+
+    async function load(password) {
+      const query = password ? `?password=${encodeURIComponent(password)}` : '';
+      const response = await fetch(`${NOTES_API}/${encodeURIComponent(id)}${query}`);
+      const data = await readJson(response);
+      if (!data) {
+        showError(NOTES_UNAVAILABLE);
+        return;
+      }
+
+      if (response.status === 401 || response.status === 403) {
+        meta.textContent = '';
+        passwordBox.hidden = false;
+        passwordStatus.textContent = password ? 'That password is not right.' : '';
+        passwordStatus.classList.toggle('error', Boolean(password));
+        passwordInput.focus();
+        return;
+      }
+      if (!response.ok) {
+        showError(data.error || 'This note could not be loaded.');
+        return;
+      }
+
+      expiresAt = data.expiresAt;
+      passwordBox.hidden = true;
+      noteBox.hidden = false;
+      noteContent.value = data.content;
+      updateExpiry();
+      setInterval(updateExpiry, 60000);
+    }
+
+    passwordBox.addEventListener('submit', e => {
+      e.preventDefault();
+      load(passwordInput.value);
+    });
+
+    copyBtn.addEventListener('click', () => copyText(noteContent.value, copyBtn));
+
+    if (!id) {
+      showError('This link is missing a note id.');
+    } else {
+      load(null).catch(() => showError('Could not reach the notes server. Check your connection.'));
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Speed Counter - UtilDeck</title>
+  <link rel="icon" type="image/png" href="../assets/icon-64.png">
+  <link rel="apple-touch-icon" href="../assets/icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+  <style>
+    .speed-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      min-height: calc(100vh - 300px);
+      margin-top: 1.5rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .speed-stats-top {
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-item-label {
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-item-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent-color);
+      font-family: 'Monaco', monospace;
+      letter-spacing: 2px;
+    }
+
+    .speed-input-box {
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 2rem;
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 1.3rem;
+      line-height: 2;
+      color: var(--text-primary);
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      user-select: none;
+      box-shadow: none;
+      max-width: 900px;
+      text-align: center;
+      letter-spacing: 0.5px;
+      height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      position: relative;
+    }
+
+    .speed-text-container {
+      display: inline-block;
+      transition: transform 0.05s ease-out;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    .speed-input-box .correct {
+      color: #28a745;
+      opacity: 0.5;
+    }
+
+    .speed-input-box .incorrect {
+      color: #ff4757;
+      background: rgba(255, 71, 87, 0.1);
+    }
+
+    .speed-input-box .current {
+      background: var(--accent-color);
+      color: white;
+      padding: 0 2px;
+      border-radius: 2px;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 49%, 100% { opacity: 1; }
+      50%, 99% { opacity: 0.3; }
+    }
+
+    #typingInput {
+      position: absolute;
+      left: -9999px;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .speed-controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .speed-controls button {
+      min-width: 120px;
+    }
+
+    @media (max-width: 768px) {
+      .speed-stats-top {
+        gap: 2rem;
+      }
+
+      .stat-item-value {
+        font-size: 2rem;
+      }
+
+      .speed-input-box {
+        font-size: 1.1rem;
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/icon-64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section" style="background: transparent; border: none; padding: 0;">
+      <div class="speed-wrapper">
+        <!-- Stats at top -->
+        <div class="speed-stats-top">
+          <div class="stat-item">
+            <div class="stat-item-label">WPM</div>
+            <div class="stat-item-value" id="wpmValue">0</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-item-label">Acc</div>
+            <div class="stat-item-value" id="accuracyValue">0%</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-item-label">Time</div>
+            <div class="stat-item-value" id="timeDisplay">0:00</div>
+          </div>
+        </div>
+
+        <!-- Main typing area -->
+        <div class="speed-input-box" id="textToType" style="display: flex; flex-direction: column;">
+          <div class="speed-text-container" id="textContainer"></div>
+          <div id="resultsScreen" style="display: none; text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 2rem;">
+            <h2 style="font-size: 2rem; margin: 0;">Test Finished! 🎉</h2>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; justify-content: center;">
+              <div>
+                <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">WPM</div>
+                <div style="font-size: 2rem; color: var(--accent-color); font-weight: 700;" id="finalWpm">0</div>
+              </div>
+              <div>
+                <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Accuracy</div>
+                <div style="font-size: 2rem; color: var(--accent-color); font-weight: 700;" id="finalAcc">0%</div>
+              </div>
+              <div>
+                <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Time</div>
+                <div style="font-size: 2rem; color: var(--accent-color); font-weight: 700;" id="finalTime">0:00</div>
+              </div>
+            </div>
+            <button id="copyResultsBtn" class="btn btn-secondary" style="margin-top: 1rem;">Copy Results</button>
+          </div>
+        </div>
+        <textarea id="typingInput"></textarea>
+
+        <!-- Controls -->
+        <div class="speed-controls">
+          <button class="btn btn-primary" id="startBtn">Start Typing</button>
+          <button class="btn btn-secondary" id="resetBtn">Reset</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ by <strong>Aryash</strong> | <a href="https://x.com/Aaryash747" target="_blank">@Aaryash747</a> | <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a></p>
+  </footer>
+
+  <script type="module">
+    import { initNav } from '../scripts/nav.js';
+    initNav();
+    import { initTheme } from '../scripts/utils.js';
+
+    const themeToggle = document.getElementById('themeToggle');
+    const textToType = document.getElementById('textToType');
+    const textContainer = document.getElementById('textContainer');
+    const typingInput = document.getElementById('typingInput');
+    const startBtn = document.getElementById('startBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const timeDisplay = document.getElementById('timeDisplay');
+    const wpmValue = document.getElementById('wpmValue');
+    const accuracyValue = document.getElementById('accuracyValue');
+
+    initTheme(themeToggle);
+
+    const sampleTexts = [
+      'The quick brown fox jumps over the lazy dog. This pangram contains every letter of the alphabet at least once, making it perfect for testing typing speed and accuracy.',
+      'Programming is the art of solving problems with code. It requires patience, practice, and a willingness to learn from mistakes. Every error is an opportunity to improve your skills.',
+      'Web development combines creativity with technical knowledge. Building interactive experiences that work across devices is both challenging and rewarding for developers.',
+      'Typing speed is measured in words per minute, commonly abbreviated as WPM. A good typing speed varies depending on the profession, but 40 WPM is considered average.',
+      'The future belongs to those who believe in the beauty of their dreams. Success is not final, failure is not fatal: it is the courage to continue that counts.',
+      'Design is not just what it looks like and feels like. Design is how it works. Great design is invisible, it becomes part of the experience.',
+      'The only way to do great work is to love what you do. If you have not found it yet, keep looking. Do not settle.'
+    ];
+
+    let currentText = '';
+    let startTime = null;
+    let isActive = false;
+    let timerInterval = null;
+
+    function selectRandomText() {
+      currentText = sampleTexts[Math.floor(Math.random() * sampleTexts.length)];
+      renderText();
+    }
+
+    function renderText() {
+      const typed = typingInput.value;
+      let html = '';
+
+      for (let i = 0; i < currentText.length; i++) {
+        if (i < typed.length) {
+          if (typed[i] === currentText[i]) {
+            html += `<span class="correct">${escapeHtml(currentText[i])}</span>`;
+          } else {
+            html += `<span class="incorrect">${escapeHtml(currentText[i])}</span>`;
+          }
+        } else if (i === typed.length) {
+          html += `<span class="current">${escapeHtml(currentText[i])}</span>`;
+        } else {
+          html += escapeHtml(currentText[i]);
+        }
+      }
+
+      textContainer.innerHTML = html;
+
+      // Calculate scroll position - show 10-12 lines total
+      const lineHeight = 52; // 2rem line-height
+      const textBeforeCursor = currentText.substring(0, typed.length);
+      const linesBeforeCursor = (textBeforeCursor.match(/\n/g) || []).length;
+
+      // Scroll to keep cursor in middle of visible area (after line 5-6)
+      let scrollY = 0;
+      if (linesBeforeCursor > 5) {
+        scrollY = (linesBeforeCursor - 5) * lineHeight;
+      }
+      textContainer.style.transform = `translateY(-${scrollY}px)`;
+
+      updateStats();
+    }
+
+    function updateStats() {
+      const typed = typingInput.value;
+      const elapsed = startTime ? (Date.now() - startTime) / 1000 : 0;
+
+      // Calculate words more accurately
+      const typedWords = typed.length > 0 ? Math.max(1, typed.trim().split(/\s+/).filter(w => w.length > 0).length) : 0;
+      const wpm = elapsed > 0 ? Math.round((typedWords / elapsed) * 60) : 0;
+
+      let correct = 0;
+      for (let i = 0; i < typed.length && i < currentText.length; i++) {
+        if (typed[i] === currentText[i]) correct++;
+      }
+
+      const accuracy = typed.length > 0 ? Math.round((correct / typed.length) * 100) : 0;
+
+      // Always update WPM if test is active
+      if (isActive) {
+        wpmValue.textContent = Math.max(0, wpm);
+        accuracyValue.textContent = accuracy + '%';
+      }
+
+      if (typed.length >= currentText.length && typed.length > 0 && isActive) {
+        finishTest();
+      }
+    }
+
+    function updateTimer() {
+      if (!startTime) return;
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const minutes = Math.floor(elapsed / 60);
+      const seconds = elapsed % 60;
+      timeDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function startTest() {
+      if (isActive) return;
+      isActive = true;
+      startTime = Date.now();
+      typingInput.value = '';
+      typingInput.focus();
+      startBtn.textContent = 'Finish';
+      renderText();
+
+      timerInterval = setInterval(updateTimer, 100);
+    }
+
+    function finishTest() {
+      isActive = false;
+      startBtn.textContent = 'Restart';
+      if (timerInterval) clearInterval(timerInterval);
+
+      // Show results screen
+      const typed = typingInput.value;
+      const elapsed = (Date.now() - startTime) / 1000;
+      const typedWords = typed.trim().split(/\s+/).filter(w => w.length > 0).length;
+      const wpm = Math.round((typedWords / elapsed) * 60);
+
+      let correct = 0;
+      for (let i = 0; i < typed.length && i < currentText.length; i++) {
+        if (typed[i] === currentText[i]) correct++;
+      }
+      const accuracy = Math.round((correct / typed.length) * 100);
+
+      const minutes = Math.floor(elapsed / 60);
+      const seconds = Math.floor(elapsed % 60);
+      const timeStr = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+      document.getElementById('finalWpm').textContent = Math.max(0, wpm);
+      document.getElementById('finalAcc').textContent = accuracy + '%';
+      document.getElementById('finalTime').textContent = timeStr;
+
+      document.getElementById('textContainer').style.display = 'none';
+      document.getElementById('resultsScreen').style.display = 'flex';
+    }
+
+    function reset() {
+      isActive = false;
+      startTime = null;
+      typingInput.value = '';
+      startBtn.textContent = 'Start Typing';
+      timeDisplay.textContent = '0:00';
+      wpmValue.textContent = '0';
+      accuracyValue.textContent = '0%';
+      document.getElementById('textContainer').style.display = 'block';
+      document.getElementById('resultsScreen').style.display = 'none';
+      selectRandomText();
+      if (timerInterval) clearInterval(timerInterval);
+    }
+
+    startBtn.addEventListener('click', () => {
+      if (startBtn.textContent === 'Start Typing') {
+        startTest();
+      } else if (startBtn.textContent === 'Finish') {
+        finishTest();
+      } else {
+        reset();
+      }
+    });
+
+    resetBtn.addEventListener('click', reset);
+
+    document.getElementById('copyResultsBtn').addEventListener('click', () => {
+      const wpm = document.getElementById('finalWpm').textContent;
+      const acc = document.getElementById('finalAcc').textContent;
+      const time = document.getElementById('finalTime').textContent;
+      const resultsText = `WPM: ${wpm}, Accuracy: ${acc}, Time: ${time}`;
+
+      navigator.clipboard.writeText(resultsText).then(() => {
+        const btn = document.getElementById('copyResultsBtn');
+        const originalText = 'Copy Results';
+        btn.textContent = '✓ Copied';
+        setTimeout(() => btn.textContent = originalText, 2000);
+      }).catch(err => {
+        console.error('Copy failed:', err);
+        const btn = document.getElementById('copyResultsBtn');
+        btn.textContent = '✓ Copied';
+        setTimeout(() => btn.textContent = 'Copy Results', 2000);
+      });
+    });
+
+    typingInput.addEventListener('input', renderText);
+
+    // Allow typing to start automatically
+    typingInput.addEventListener('focus', () => {
+      if (!isActive && startBtn.textContent === 'Start Typing') {
+        startTest();
+      }
+    });
+
+    // Click on text to focus input
+    textContainer.addEventListener('click', () => {
+      typingInput.focus();
+    });
+
+    textToType.addEventListener('click', () => {
+      typingInput.focus();
+    });
+
+    // Auto-focus input when starting
+    document.addEventListener('keypress', () => {
+      if (!isActive) {
+        typingInput.focus();
+      }
+    });
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Initialize
+    selectRandomText();
+
+    // Auto-focus input on load
+    setTimeout(() => typingInput.focus(), 500);
+  </script>
+</body>
+</html>

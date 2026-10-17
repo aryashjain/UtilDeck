@@ -1,0 +1,14 @@
+{
+  "name": "@text-toolkit/web",
+  "version": "1.0.0",
+  "description": "Frontend for text toolkit",
+  "type": "module",
+  "scripts": {
+    "dev": "npx http-server src -p 8000 -c-1",
+    "build": "echo 'Static site - copy src/* to dist/'",
+    "preview": "npx http-server dist -p 8000"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

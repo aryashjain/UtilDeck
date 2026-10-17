@@ -1,0 +1,15 @@
+{
+  "name": "text-toolkit",
+  "version": "1.0.0",
+  "description": "A comprehensive text processing toolkit with notepad, tools, and Cloudflare Workers backend",
+  "private": true,
+  "workspaces": [
+    "packages/web",
+    "packages/worker"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w packages/web",
+    "build": "npm run build -w packages/web && npm run build -w packages/worker",
+    "deploy": "npm run deploy -w packages/worker"
+  }
+}

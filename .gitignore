@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Cloudflare local state and secrets
+.wrangler/
+.dev.vars
+.env
+.env.*
+
+# Local editor and Claude settings
+.claude/settings.local.json
+.idea/
+.vscode/
+
+# OS and logs
+.DS_Store
+*.log
+
+# Build output
+dist/
+
+# Original artwork exports kept in the project root. The web app uses copies in packages/web/src/assets.
+/Gemini_Generated_Image_*.png
+/Screenshot*.png
+readme

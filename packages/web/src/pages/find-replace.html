@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find & Replace - UtilDeck</title>
+  <link rel="icon" type="image/png" href="../assets/icon-64.png">
+  <link rel="apple-touch-icon" href="../assets/icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/icon-64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Find & Replace</h2>
+      <p class="tool-description">
+        Replace every match in your text. Turn on regular expressions to use patterns like <code>\d+</code> or capture groups like <code>$1</code>.
+      </p>
+
+      <div class="split-layout">
+        <div class="split-input">
+          <div class="split-input-pair">
+            <label for="input">Text Input</label>
+            <textarea id="input" placeholder="Paste your text here..."></textarea>
+          </div>
+        </div>
+
+        <div class="split-output">
+          <div class="field-grid">
+            <div class="field">
+              <label for="findText">Find</label>
+              <input type="text" id="findText" class="text-input" placeholder="Text to find" spellcheck="false">
+            </div>
+            <div class="field">
+              <label for="replaceText">Replace with</label>
+              <input type="text" id="replaceText" class="text-input" placeholder="Replacement" spellcheck="false">
+            </div>
+          </div>
+
+          <div class="control-row">
+            <label class="checkbox-option"><input type="checkbox" id="useRegex"> Regular expression</label>
+            <label class="checkbox-option"><input type="checkbox" id="matchCase"> Match case</label>
+          </div>
+
+          <p id="status" class="status" aria-live="polite"></p>
+
+          <div class="output-header">
+            <h3>Result</h3>
+            <div class="output-actions">
+              <button id="useResultBtn" class="btn btn-secondary">Use as input</button>
+              <button id="copyBtn" class="btn btn-secondary">Copy</button>
+            </div>
+          </div>
+          <textarea id="output" placeholder="The result will appear here..." readonly style="flex: 1; min-height: 0;"></textarea>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ by <strong>Aryash</strong> | <a href="https://x.com/Aaryash747" target="_blank">@Aaryash747</a> | <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a></p>
+  </footer>
+
+  <script type="module">
+    import { initTheme, copyText } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+
+    initNav();
+
+    const themeToggle = document.getElementById('themeToggle');
+    const input = document.getElementById('input');
+    const findText = document.getElementById('findText');
+    const replaceText = document.getElementById('replaceText');
+    const useRegex = document.getElementById('useRegex');
+    const matchCase = document.getElementById('matchCase');
+    const status = document.getElementById('status');
+    const output = document.getElementById('output');
+    const useResultBtn = document.getElementById('useResultBtn');
+    const copyBtn = document.getElementById('copyBtn');
+
+    initTheme(themeToggle);
+
+    function setStatus(message, isError = false) {
+      status.textContent = message;
+      status.classList.toggle('error', isError);
+    }
+
+    function update() {
+      const text = input.value;
+      const find = findText.value;
+      output.value = text;
+
+      if (!find) {
+        setStatus('');
+        return;
+      }
+
+      let pattern;
+      try {
+        const source = useRegex.checked ? find : find.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        pattern = new RegExp(source, matchCase.checked ? 'g' : 'gi');
+      } catch (err) {
+        setStatus(`Invalid regular expression: ${err.message}`, true);
+        return;
+      }
+
+      const count = (text.match(pattern) || []).length;
+      const replacement = replaceText.value;
+      // Regex mode keeps $1-style references; plain mode inserts the text literally
+      output.value = text.replace(pattern, useRegex.checked ? replacement : () => replacement);
+
+      setStatus(`${count} match${count === 1 ? '' : 'es'} replaced`);
+    }
+
+    [input, findText, replaceText].forEach(el => el.addEventListener('input', update));
+    [useRegex, matchCase].forEach(el => el.addEventListener('change', update));
+
+    useResultBtn.addEventListener('click', () => {
+      input.value = output.value;
+      update();
+    });
+
+    copyBtn.addEventListener('click', () => copyText(output.value, copyBtn));
+  </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notepad - UtilDeck</title>
+  <link rel="icon" type="image/png" href="../assets/icon-64.png">
+  <link rel="apple-touch-icon" href="../assets/icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/icon-64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="editor">✏️ Notepad</button>
+        <button class="tab-btn" data-tab="stats">📊 Stats</button>
+        <button class="tab-btn" data-tab="share">🔗 Share</button>
+      </div>
+
+      <div class="tab-content active" id="editor">
+        <textarea id="notepad" placeholder="Start typing... Your notes are automatically saved to your browser."></textarea>
+        <div class="editor-toolbar">
+          <button id="clearBtn" class="btn btn-secondary">Clear</button>
+          <button id="exportTxtBtn" class="btn btn-secondary">Export (.txt)</button>
+          <button id="exportMdBtn" class="btn btn-secondary">Export (.md)</button>
+        </div>
+      </div>
+
+      <div class="tab-content" id="stats">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Words</div>
+            <div class="stat-value" id="wordCount">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Characters</div>
+            <div class="stat-value" id="charCount">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Sentences</div>
+            <div class="stat-value" id="sentenceCount">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Reading Time</div>
+            <div class="stat-value" id="readingTime">0m</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="share">
+        <div class="share-section">
+          <h3>Share this note</h3>
+          <p class="tool-description">Anyone with the link can read it. The link works for 3 hours, then the note is deleted from our servers.</p>
+          <div class="share-controls">
+            <input type="checkbox" id="passwordProtect" />
+            <label for="passwordProtect">Password protect</label>
+            <input type="password" id="sharePassword" class="text-input" placeholder="Password" style="display: none;">
+          </div>
+          <button id="generateShareBtn" class="btn btn-primary">Generate share link</button>
+          <p id="shareStatus" class="status" aria-live="polite"></p>
+          <div id="shareLink" class="share-link" style="display: none;">
+            <input type="text" id="shareLinkInput" readonly>
+            <button id="copyLinkBtn" class="btn btn-secondary">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ by <strong>Aryash</strong> | <a href="https://x.com/Aaryash747" target="_blank">@Aaryash747</a> | <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a></p>
+  </footer>
+
+  <script type="module">
+    import { initNav } from '../scripts/nav.js';
+    initNav();
+  </script>
+  <script type="module" src="../scripts/main.js"></script>
+</body>
+</html>

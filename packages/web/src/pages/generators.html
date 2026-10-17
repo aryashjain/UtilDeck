@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generators - UtilDeck</title>
+  <link rel="icon" type="image/png" href="../assets/icon-64.png">
+  <link rel="apple-touch-icon" href="../assets/icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/icon-64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="lorem">Lorem Ipsum</button>
+        <button class="tab-btn" data-tab="slug">Slug Generator</button>
+      </div>
+
+      <!-- Lorem Ipsum Tab -->
+      <div class="tab-content active" id="lorem">
+        <h2>Lorem Ipsum Generator</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+          Generate placeholder text for designs and mockups.
+        </p>
+
+        <div style="display: flex; gap: 1rem; align-items: flex-end; margin-bottom: 1rem;">
+          <div style="flex: 0 0 auto;">
+            <label for="loremCount" style="display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem;">
+              Paragraphs
+            </label>
+            <input type="number" id="loremCount" value="3" min="1" max="50" style="width: 80px; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 0.5rem; background-color: var(--bg-primary); color: var(--text-primary);">
+          </div>
+          <button id="generateLoremBtn" class="btn btn-primary">Generate</button>
+        </div>
+
+        <div style="display: flex; gap: 1rem; align-items: center;">
+          <h3 style="margin: 0; flex: 1;">Output</h3>
+          <div style="display: flex; gap: 0.5rem;">
+            <button id="copyLoremBtn" class="btn btn-secondary">Copy</button>
+          </div>
+        </div>
+        <textarea id="loremOutput" readonly style="min-height: 250px; width: 100%; margin-top: 0.5rem;"></textarea>
+      </div>
+
+      <!-- Slug Generator Tab -->
+      <div class="tab-content" id="slug">
+        <h2>Slug Generator</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+          Convert text to URL-friendly slugs.
+        </p>
+
+        <div class="split-layout">
+          <div class="split-input">
+            <div class="split-input-pair">
+              <label for="slugInput">Text Input</label>
+              <textarea id="slugInput" placeholder="Enter text to convert to slug..."></textarea>
+            </div>
+          </div>
+
+          <div class="split-output">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+              <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                <input type="checkbox" id="keepNumbers" checked>
+                <span style="font-size: 0.9rem;">Keep numbers</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                <input type="checkbox" id="replaceDashes" checked>
+                <span style="font-size: 0.9rem;">Replace with dashes</span>
+              </label>
+            </div>
+
+            <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.75rem;">
+              <h3 style="margin: 0; flex: 1;">Result</h3>
+              <button id="copySlugBtn" class="btn btn-secondary">Copy</button>
+            </div>
+            <input type="text" id="slugOutput" readonly style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 0.5rem; background-color: var(--bg-primary); color: var(--text-primary); font-family: monospace;">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ by <strong>Aryash</strong> | <a href="https://x.com/Aaryash747" target="_blank">@Aaryash747</a> | <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a></p>
+  </footer>
+
+  <script type="module">
+    import { initNav } from '../scripts/nav.js';
+    initNav();
+    import { initTheme } from '../scripts/utils.js';
+
+    const themeToggle = document.getElementById('themeToggle');
+    initTheme(themeToggle);
+
+    const loremText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+    const words = loremText.split(' ');
+
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabName = btn.dataset.tab;
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(tabName).classList.add('active');
+      });
+    });
+
+    // Lorem Ipsum Generator
+    document.getElementById('generateLoremBtn').addEventListener('click', () => {
+      const count = parseInt(document.getElementById('loremCount').value);
+      let result = '';
+
+      for (let i = 0; i < count; i++) {
+        let para = [];
+        const sentenceCount = 4 + Math.floor(Math.random() * 4);
+
+        for (let s = 0; s < sentenceCount; s++) {
+          const wordCount = 5 + Math.floor(Math.random() * 15);
+          let sentence = [];
+
+          for (let w = 0; w < wordCount; w++) {
+            sentence.push(words[Math.floor(Math.random() * words.length)]);
+          }
+
+          let text = sentence.join(' ');
+          text = text.charAt(0).toUpperCase() + text.slice(1) + '.';
+          para.push(text);
+        }
+
+        result += para.join(' ') + '\n\n';
+      }
+
+      document.getElementById('loremOutput').value = result.trim();
+    });
+
+    const copyLoremBtn = document.getElementById('copyLoremBtn');
+    if (copyLoremBtn) {
+      copyLoremBtn.addEventListener('click', () => {
+        const textarea = document.getElementById('loremOutput');
+        const text = textarea ? textarea.value : '';
+
+        if (!text) {
+          copyLoremBtn.textContent = 'Nothing to copy';
+          setTimeout(() => copyLoremBtn.textContent = 'Copy', 2000);
+          return;
+        }
+
+        try {
+          navigator.clipboard.writeText(text).then(() => {
+            copyLoremBtn.textContent = '✓ Copied';
+            setTimeout(() => copyLoremBtn.textContent = 'Copy', 2000);
+          }).catch(() => {
+            copyLoremBtn.textContent = '✓ Copied';
+            setTimeout(() => copyLoremBtn.textContent = 'Copy', 2000);
+          });
+        } catch (e) {
+          copyLoremBtn.textContent = '✓ Copied';
+          setTimeout(() => copyLoremBtn.textContent = 'Copy', 2000);
+        }
+      });
+    }
+
+    // Slug Generator
+    function generateSlug() {
+      const input = document.getElementById('slugInput').value;
+      const keepNumbers = document.getElementById('keepNumbers').checked;
+      const replaceDashes = document.getElementById('replaceDashes').checked;
+
+      let slug = input
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '');
+
+      if (!keepNumbers) {
+        slug = slug.replace(/\d/g, '');
+      }
+
+      if (replaceDashes) {
+        slug = slug.replace(/\s+/g, '-');
+      } else {
+        slug = slug.replace(/\s+/g, '_');
+      }
+
+      slug = slug.replace(/-+/g, '-').replace(/_+/g, '_');
+
+      document.getElementById('slugOutput').value = slug;
+    }
+
+    document.getElementById('slugInput').addEventListener('input', generateSlug);
+    document.getElementById('keepNumbers').addEventListener('change', generateSlug);
+    document.getElementById('replaceDashes').addEventListener('change', generateSlug);
+
+    const copySlugBtn = document.getElementById('copySlugBtn');
+    if (copySlugBtn) {
+      copySlugBtn.addEventListener('click', () => {
+        const input = document.getElementById('slugOutput');
+        const text = input ? input.value : '';
+
+        if (!text) {
+          copySlugBtn.textContent = 'Nothing to copy';
+          setTimeout(() => copySlugBtn.textContent = 'Copy', 2000);
+          return;
+        }
+
+        try {
+          navigator.clipboard.writeText(text).then(() => {
+            copySlugBtn.textContent = '✓ Copied';
+            setTimeout(() => copySlugBtn.textContent = 'Copy', 2000);
+          }).catch(() => {
+            copySlugBtn.textContent = '✓ Copied';
+            setTimeout(() => copySlugBtn.textContent = 'Copy', 2000);
+          });
+        } catch (e) {
+          copySlugBtn.textContent = '✓ Copied';
+          setTimeout(() => copySlugBtn.textContent = 'Copy', 2000);
+        }
+      });
+    }
+  </script>
+</body>
+</html>

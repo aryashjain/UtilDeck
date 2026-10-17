@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Counter - UtilDeck</title>
+  <link rel="icon" type="image/png" href="../assets/icon-64.png">
+  <link rel="apple-touch-icon" href="../assets/icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/icon-64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Word & Character Counter</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+        Analyze your text with detailed statistics including word count, character count, sentence count, and reading time.
+      </p>
+
+      <div class="split-layout">
+        <div class="split-input">
+          <div class="split-input-pair">
+            <label for="textInput">Text Input</label>
+            <textarea id="textInput" placeholder="Paste or type your text here..."></textarea>
+          </div>
+        </div>
+
+        <div class="split-output">
+          <div class="stats-container">
+            <h3 style="margin: 0 0 0.75rem 0; font-size: 0.95rem;">Live Statistics</h3>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-label">Words</div>
+                <div class="stat-value" id="words">0</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Chars</div>
+                <div class="stat-value" id="chars">0</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">No Space</div>
+                <div class="stat-value" id="charsNoSpace">0</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Sentences</div>
+                <div class="stat-value" id="sentences">0</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Paragraphs</div>
+                <div class="stat-value" id="paragraphs">0</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Read Time</div>
+                <div class="stat-value" id="readTime">0m</div>
+              </div>
+            </div>
+          </div>
+          <div class="editor-toolbar" style="margin-top: 1rem;">
+            <button id="clearBtn" class="btn btn-secondary">Clear</button>
+            <button id="copyStatsBtn" class="btn btn-secondary">Copy Stats</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ by <strong>Aryash</strong> | <a href="https://x.com/Aaryash747" target="_blank">@Aaryash747</a> | <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a></p>
+  </footer>
+
+  <script type="module">
+    import { initNav } from '../scripts/nav.js';
+    initNav();
+    import { initTheme } from '../scripts/utils.js';
+
+    const textInput = document.getElementById('textInput');
+    const themeToggle = document.getElementById('themeToggle');
+    const clearBtn = document.getElementById('clearBtn');
+    const copyStatsBtn = document.getElementById('copyStatsBtn');
+
+    initTheme(themeToggle);
+
+    function updateStats() {
+      const text = textInput.value;
+      const trimmed = text.trim();
+
+      const words = trimmed ? trimmed.split(/\s+/).length : 0;
+      const chars = text.length;
+      const charsNoSpace = text.replace(/\s/g, '').length;
+      const sentences = trimmed ? (trimmed.match(/[.!?]+/g) || []).length : 0;
+      const paragraphs = trimmed ? trimmed.split(/\n\n+/).filter(p => p.trim()).length : 0;
+      const readTime = Math.ceil(words / 200);
+
+      document.getElementById('words').textContent = words;
+      document.getElementById('chars').textContent = chars;
+      document.getElementById('charsNoSpace').textContent = charsNoSpace;
+      document.getElementById('sentences').textContent = sentences;
+      document.getElementById('paragraphs').textContent = paragraphs;
+      document.getElementById('readTime').textContent = readTime + 'm';
+    }
+
+    textInput.addEventListener('input', updateStats);
+
+    clearBtn.addEventListener('click', () => {
+      if (textInput.value && confirm('Clear all text?')) {
+        textInput.value = '';
+        updateStats();
+      }
+    });
+
+    copyStatsBtn.addEventListener('click', () => {
+      const stats = `Words: ${document.getElementById('words').textContent}
+Characters: ${document.getElementById('chars').textContent}
+Sentences: ${document.getElementById('sentences').textContent}
+Paragraphs: ${document.getElementById('paragraphs').textContent}
+Reading Time: ${document.getElementById('readTime').textContent}`;
+
+      try {
+        navigator.clipboard.writeText(stats).then(() => {
+          const originalText = 'Copy Stats';
+          copyStatsBtn.textContent = '✓ Copied';
+          setTimeout(() => copyStatsBtn.textContent = originalText, 2000);
+        }).catch(err => {
+          console.error('Copy failed:', err);
+          copyStatsBtn.textContent = '✓ Copied';
+          setTimeout(() => copyStatsBtn.textContent = 'Copy Stats', 2000);
+        });
+      } catch (e) {
+        console.error('Clipboard error:', e);
+        copyStatsBtn.textContent = '✓ Copied';
+        setTimeout(() => copyStatsBtn.textContent = 'Copy Stats', 2000);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Compressor - UtilDeck</title>
+  <link rel="icon" type="image/png" href="../assets/icon-64.png">
+  <link rel="apple-touch-icon" href="../assets/icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/icon-64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Image Compressor</h2>
+      <p class="tool-description">
+        Make images smaller for email, forms and websites. Your image never leaves your browser.
+      </p>
+
+      <label id="dropZone" class="drop-zone" tabindex="0">
+        <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp" hidden>
+        <span class="drop-zone-title">Drop an image here, or click to choose one</span>
+        <span class="drop-zone-hint">PNG, JPEG or WebP</span>
+      </label>
+
+      <div id="workspace" class="image-workspace" hidden>
+        <div class="control-panel">
+          <div class="field">
+            <label for="quality">Quality: <strong id="qualityValue">80</strong>%</label>
+            <input type="range" id="quality" min="10" max="100" value="80">
+          </div>
+
+          <div class="field">
+            <label for="format">Output format</label>
+            <select id="format" class="text-input">
+              <option value="image/jpeg">JPEG (smallest)</option>
+              <option value="image/webp">WebP</option>
+              <option value="image/png">PNG (lossless)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="maxWidth">Max width (px)</label>
+            <input type="number" id="maxWidth" class="text-input" min="1" placeholder="Keep original">
+          </div>
+
+          <div class="field">
+            <label>&nbsp;</label>
+            <button id="replaceBtn" class="btn btn-secondary">Choose another image</button>
+          </div>
+        </div>
+
+        <p id="status" class="status" aria-live="polite"></p>
+
+        <div class="compare-grid">
+          <figure class="compare-card">
+            <figcaption>Original</figcaption>
+            <img id="originalPreview" alt="Original image preview">
+            <p id="originalMeta" class="compare-meta"></p>
+          </figure>
+          <figure class="compare-card">
+            <figcaption>Compressed</figcaption>
+            <img id="resultPreview" alt="Compressed image preview">
+            <p id="resultMeta" class="compare-meta"></p>
+          </figure>
+        </div>
+
+        <div class="control-row" style="justify-content: flex-end; margin-top: 1rem;">
+          <a id="downloadBtn" class="btn btn-primary" download>Download</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ by <strong>Aryash</strong> | <a href="https://x.com/Aaryash747" target="_blank">@Aaryash747</a> | <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a></p>
+  </footer>
+
+  <script type="module">
+    import { initTheme } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+
+    initNav();
+
+    const themeToggle = document.getElementById('themeToggle');
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const workspace = document.getElementById('workspace');
+    const quality = document.getElementById('quality');
+    const qualityValue = document.getElementById('qualityValue');
+    const format = document.getElementById('format');
+    const maxWidth = document.getElementById('maxWidth');
+    const replaceBtn = document.getElementById('replaceBtn');
+    const status = document.getElementById('status');
+    const originalPreview = document.getElementById('originalPreview');
+    const resultPreview = document.getElementById('resultPreview');
+    const originalMeta = document.getElementById('originalMeta');
+    const resultMeta = document.getElementById('resultMeta');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    initTheme(themeToggle);
+
+    let sourceFile = null;
+    let sourceImage = null;
+    let resultUrl = null;
+    let resultName = '';
+    let runId = 0;
+
+    const formatBytes = bytes => {
+      if (bytes < 1024) return `${bytes} B`;
+      if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+      return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+    };
+
+    const extensionFor = type => ({ 'image/jpeg': 'jpg', 'image/webp': 'webp', 'image/png': 'png' })[type];
+
+    function loadImage(file) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => resolve({ img, url });
+        img.onerror = () => {
+          URL.revokeObjectURL(url);
+          reject(new Error('That file could not be read as an image.'));
+        };
+        img.src = url;
+      });
+    }
+
+    async function compress() {
+      if (!sourceImage) return;
+      const currentRun = ++runId;
+
+      const type = format.value;
+      const scale = maxWidth.value && Number(maxWidth.value) < sourceImage.naturalWidth
+        ? Number(maxWidth.value) / sourceImage.naturalWidth
+        : 1;
+      const width = Math.round(sourceImage.naturalWidth * scale);
+      const height = Math.round(sourceImage.naturalHeight * scale);
+
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      // JPEG has no transparency, so fill white behind transparent pixels
+      if (type === 'image/jpeg') {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, width, height);
+      }
+      ctx.drawImage(sourceImage, 0, 0, width, height);
+
+      const blob = await new Promise(resolve => canvas.toBlob(resolve, type, quality.value / 100));
+      if (currentRun !== runId) return; // a newer setting change superseded this run
+      if (!blob) {
+        status.textContent = 'Your browser could not encode this format.';
+        status.classList.add('error');
+        return;
+      }
+
+      if (resultUrl) URL.revokeObjectURL(resultUrl);
+      resultUrl = URL.createObjectURL(blob);
+      resultName = `${sourceFile.name.replace(/\.[^.]+$/, '')}-compressed.${extensionFor(type)}`;
+
+      resultPreview.src = resultUrl;
+      downloadBtn.href = resultUrl;
+      downloadBtn.download = resultName;
+
+      const saved = 1 - blob.size / sourceFile.size;
+      resultMeta.textContent = `${width} × ${height} · ${formatBytes(blob.size)}`;
+      status.classList.remove('error');
+      status.textContent = saved >= 0
+        ? `${Math.round(saved * 100)}% smaller than the original`
+        : `Larger than the original by ${Math.round(-saved * 100)}%. Try a lower quality or WebP.`;
+    }
+
+    async function setFile(file) {
+      if (!file || !file.type.startsWith('image/')) {
+        status.textContent = 'Please choose a PNG, JPEG or WebP image.';
+        status.classList.add('error');
+        return;
+      }
+      try {
+        const { img, url } = await loadImage(file);
+        sourceFile = file;
+        sourceImage = img;
+        originalPreview.src = url;
+        originalMeta.textContent = `${img.naturalWidth} × ${img.naturalHeight} · ${formatBytes(file.size)}`;
+        // Keep the source when the user chose PNG originally so lossless stays the default
+        format.value = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
+        workspace.hidden = false;
+        dropZone.hidden = true;
+        await compress();
+      } catch (err) {
+        status.textContent = err.message;
+        status.classList.add('error');
+      }
+    }
+
+    quality.addEventListener('input', () => {
+      qualityValue.textContent = quality.value;
+      compress();
+    });
+    format.addEventListener('change', compress);
+    maxWidth.addEventListener('input', compress);
+
+    fileInput.addEventListener('change', () => setFile(fileInput.files[0]));
+    replaceBtn.addEventListener('click', () => {
+      workspace.hidden = true;
+      dropZone.hidden = false;
+      fileInput.value = '';
+      fileInput.click();
+    });
+
+    dropZone.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        fileInput.click();
+      }
+    });
+    dropZone.addEventListener('dragover', e => {
+      e.preventDefault();
+      dropZone.classList.add('dragging');
+    });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragging'));
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('dragging');
+      setFile(e.dataTransfer.files[0]);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UtilDeck - Free Text Tools That Run in Your Browser</title>
+  <meta name="description" content="Free text tools that run in your browser: word counter, case converter, find and replace, text diff, JSON formatter, encoders, generators and more.">
+  <link rel="icon" type="image/png" href="assets/icon-64.png">
+  <link rel="apple-touch-icon" href="assets/icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="assets/icon-64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="hero">
+      <h2>A deck of tools, made for you</h2>
+      <p>Count, clean, compare, convert and generate text. Everything runs in your browser, so nothing you paste is uploaded unless you create a share link.</p>
+      <div id="deck" class="deck" aria-label="All tools"></div>
+    </section>
+
+    <nav id="categoryIndex" class="category-index" aria-label="Jump to a category"></nav>
+    <p id="resultCount" class="result-count" aria-live="polite"></p>
+    <div id="toolSections"></div>
+    <div id="emptyState" class="empty-state" hidden></div>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ by <strong>Aryash</strong> | <a href="https://x.com/Aaryash747" target="_blank">@Aaryash747</a> | <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a></p>
+  </footer>
+
+  <script type="module" src="scripts/home.js"></script>
+</body>
+</html>

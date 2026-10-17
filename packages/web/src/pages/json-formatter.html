@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Formatter - UtilDeck</title>
+  <link rel="icon" type="image/png" href="../assets/icon-64.png">
+  <link rel="apple-touch-icon" href="../assets/icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/icon-64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>JSON Formatter</h2>
+      <p class="tool-description">
+        Paste JSON to check it, pretty-print it with your preferred indent, or minify it to a single line.
+      </p>
+
+      <div class="split-layout">
+        <div class="split-input">
+          <div class="split-input-pair">
+            <label for="input">JSON Input</label>
+            <textarea id="input" placeholder='{"paste": "your JSON here"}' spellcheck="false"></textarea>
+          </div>
+        </div>
+
+        <div class="split-output">
+          <div class="control-row">
+            <div class="segmented" role="group" aria-label="Output mode">
+              <button class="btn btn-secondary active" data-mode="format">Format</button>
+              <button class="btn btn-secondary" data-mode="minify">Minify</button>
+            </div>
+            <div class="field">
+              <label for="indent">Indent</label>
+              <select id="indent" class="text-input">
+                <option value="2">2 spaces</option>
+                <option value="4">4 spaces</option>
+                <option value="tab">Tab</option>
+              </select>
+            </div>
+          </div>
+
+          <p id="status" class="status" aria-live="polite"></p>
+
+          <div class="output-header">
+            <h3>Result</h3>
+            <div class="output-actions">
+              <button id="useResultBtn" class="btn btn-secondary">Use as input</button>
+              <button id="copyBtn" class="btn btn-secondary">Copy</button>
+            </div>
+          </div>
+          <textarea id="output" placeholder="Formatted JSON will appear here..." readonly style="flex: 1; min-height: 0;" spellcheck="false"></textarea>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ by <strong>Aryash</strong> | <a href="https://x.com/Aaryash747" target="_blank">@Aaryash747</a> | <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a></p>
+  </footer>
+
+  <script type="module">
+    import { initTheme, copyText } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+
+    initNav();
+
+    const themeToggle = document.getElementById('themeToggle');
+    const input = document.getElementById('input');
+    const indent = document.getElementById('indent');
+    const status = document.getElementById('status');
+    const output = document.getElementById('output');
+    const useResultBtn = document.getElementById('useResultBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const modeButtons = document.querySelectorAll('[data-mode]');
+
+    let mode = 'format';
+
+    initTheme(themeToggle);
+
+    function update() {
+      const text = input.value;
+      if (!text.trim()) {
+        output.value = '';
+        status.textContent = '';
+        status.classList.remove('error');
+        return;
+      }
+
+      let parsed;
+      try {
+        parsed = JSON.parse(text);
+      } catch (err) {
+        output.value = '';
+        status.textContent = `Invalid JSON: ${err.message}`;
+        status.classList.add('error');
+        return;
+      }
+
+      const space = indent.value === 'tab' ? '\t' : Number(indent.value);
+      output.value = mode === 'minify'
+        ? JSON.stringify(parsed)
+        : JSON.stringify(parsed, null, space);
+      status.textContent = '✓ Valid JSON';
+      status.classList.remove('error');
+    }
+
+    modeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        mode = btn.dataset.mode;
+        modeButtons.forEach(b => b.classList.toggle('active', b === btn));
+        update();
+      });
+    });
+
+    input.addEventListener('input', update);
+    indent.addEventListener('change', update);
+
+    useResultBtn.addEventListener('click', () => {
+      input.value = output.value;
+      update();
+    });
+
+    copyBtn.addEventListener('click', () => copyText(output.value, copyBtn));
+  </script>
+</body>
+</html>

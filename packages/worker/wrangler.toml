@@ -1,0 +1,18 @@
+name = "text-toolkit-worker"
+type = "javascript"
+account_id = ""
+workers_dev = true
+
+# KV Namespace for storing shared notes
+kv_namespaces = [
+  { binding = "NOTES", preview_id = "notes_preview" }
+]
+
+# Environment configuration
+# Point this at your site domain so the Worker serves /api next to the static pages
+[env.production]
+name = "text-toolkit-worker"
+route = "yourdomain.com/api/*"
+
+[env.staging]
+name = "text-toolkit-worker-staging"

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Converter - UtilDeck</title>
+  <link rel="icon" type="image/png" href="../assets/icon-64.png">
+  <link rel="apple-touch-icon" href="../assets/icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/icon-64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Case Converter</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+        Convert text to different cases: UPPER, lower, Title Case, Sentence case, camelCase, snake_case, and more.
+      </p>
+
+      <div class="split-layout">
+        <div class="split-input">
+          <div class="split-input-pair">
+            <label for="textInput">Text Input</label>
+            <textarea id="textInput" placeholder="Paste your text here..."></textarea>
+          </div>
+        </div>
+
+        <div class="split-output">
+          <h3 style="margin: 0;">Case Conversion Buttons</h3>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; flex: 0; margin-bottom: 1rem;">
+            <button class="btn btn-secondary" data-case="upper">UPPERCASE</button>
+            <button class="btn btn-secondary" data-case="lower">lowercase</button>
+            <button class="btn btn-secondary" data-case="title">Title Case</button>
+            <button class="btn btn-secondary" data-case="sentence">Sentence case</button>
+            <button class="btn btn-secondary" data-case="camel">camelCase</button>
+            <button class="btn btn-secondary" data-case="snake">snake_case</button>
+            <button class="btn btn-secondary" data-case="kebab">kebab-case</button>
+            <button class="btn btn-secondary" data-case="pascal">PascalCase</button>
+          </div>
+
+          <div style="display: flex; gap: 1rem; align-items: center; margin: 1rem 0 0.75rem 0;">
+            <h3 style="margin: 0; flex: 1;">Result</h3>
+            <div style="display: flex; gap: 0.5rem;">
+              <button id="copyBtn" class="btn btn-secondary">Copy</button>
+              <button id="clearBtn" class="btn btn-secondary">Clear</button>
+            </div>
+          </div>
+          <textarea id="result" placeholder="Converted text will appear here..." readonly style="flex: 1; min-height: 0;"></textarea>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ by <strong>Aryash</strong> | <a href="https://x.com/Aaryash747" target="_blank">@Aaryash747</a> | <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a></p>
+  </footer>
+
+  <script type="module">
+    import { initNav } from '../scripts/nav.js';
+    initNav();
+    import { initTheme } from '../scripts/utils.js';
+
+    const textInput = document.getElementById('textInput');
+    const result = document.getElementById('result');
+    const themeToggle = document.getElementById('themeToggle');
+    const copyBtn = document.getElementById('copyBtn');
+    const clearBtn = document.getElementById('clearBtn');
+
+    initTheme(themeToggle);
+
+    const caseConverters = {
+      upper: (text) => text.toUpperCase(),
+      lower: (text) => text.toLowerCase(),
+      title: (text) => text.replace(/\b\w/g, (char) => char.toUpperCase()),
+      sentence: (text) => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(),
+      camel: (text) => text
+        .toLowerCase()
+        .replace(/[_\s-](.)/g, (_, char) => char.toUpperCase())
+        .replace(/^(.)/, (char) => char.toLowerCase()),
+      snake: (text) => text
+        .toLowerCase()
+        .replace(/\s+/g, '_')
+        .replace(/([a-z])([A-Z])/g, '$1_$2'),
+      kebab: (text) => text
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/([a-z])([A-Z])/g, '$1-$2'),
+      pascal: (text) => text
+        .toLowerCase()
+        .replace(/[_\s-](.)/g, (_, char) => char.toUpperCase())
+        .replace(/^(.)/, (char) => char.toUpperCase()),
+    };
+
+    document.querySelectorAll('[data-case]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const caseType = btn.dataset.case;
+        result.value = caseConverters[caseType](textInput.value);
+      });
+    });
+
+    copyBtn.addEventListener('click', () => {
+      if (!result.value) {
+        copyBtn.textContent = 'Nothing to copy';
+        setTimeout(() => {
+          copyBtn.textContent = 'Copy';
+        }, 2000);
+        return;
+      }
+      navigator.clipboard.writeText(result.value).then(() => {
+        const originalText = 'Copy';
+        copyBtn.textContent = '✓ Copied';
+        setTimeout(() => {
+          copyBtn.textContent = originalText;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed:', err);
+        copyBtn.textContent = 'Copy failed';
+        setTimeout(() => copyBtn.textContent = 'Copy', 2000);
+      });
+    });
+
+    clearBtn.addEventListener('click', () => {
+      textInput.value = '';
+      result.value = '';
+    });
+  </script>
+</body>
+</html>

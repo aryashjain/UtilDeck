@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Cropper - UtilDeck</title>
+  <link rel="icon" type="image/png" href="../assets/icon-64.png">
+  <link rel="apple-touch-icon" href="../assets/icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/icon-64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Image Cropper</h2>
+      <p class="tool-description">
+        Drag on the image to select the area you want to keep. Pick an aspect ratio for social posts, thumbnails or banners. Cropping happens in your browser.
+      </p>
+
+      <label id="dropZone" class="drop-zone" tabindex="0">
+        <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp" hidden>
+        <span class="drop-zone-title">Drop an image here, or click to choose one</span>
+        <span class="drop-zone-hint">PNG, JPEG or WebP</span>
+      </label>
+
+      <div id="workspace" class="image-workspace" hidden>
+        <div class="control-panel">
+          <div class="field">
+            <label for="aspect">Aspect ratio</label>
+            <select id="aspect" class="text-input">
+              <option value="free">Free</option>
+              <option value="1">1:1 (square)</option>
+              <option value="0.8">4:5 (Instagram portrait)</option>
+              <option value="1.3333333">4:3</option>
+              <option value="1.7777778">16:9</option>
+              <option value="1.5">3:2</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="format">Output format</label>
+            <select id="format" class="text-input">
+              <option value="image/png">PNG (lossless)</option>
+              <option value="image/jpeg">JPEG</option>
+              <option value="image/webp">WebP</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>&nbsp;</label>
+            <button id="resetBtn" class="btn btn-secondary">Reset selection</button>
+          </div>
+
+          <div class="field">
+            <label>&nbsp;</label>
+            <button id="replaceBtn" class="btn btn-secondary">Choose another image</button>
+          </div>
+        </div>
+
+        <p id="status" class="status" aria-live="polite"></p>
+
+        <div class="crop-stage-wrap">
+          <div id="stage" class="crop-stage">
+            <img id="image" alt="Image to crop" draggable="false">
+            <div id="cropBox" class="crop-box"></div>
+          </div>
+        </div>
+
+        <div class="control-row" style="justify-content: space-between; margin-top: 1rem;">
+          <p id="cropInfo" class="status" style="margin: 0;"></p>
+          <div class="output-actions">
+            <a id="downloadBtn" class="btn btn-primary" download>Crop &amp; Download</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ by <strong>Aryash</strong> | <a href="https://x.com/Aaryash747" target="_blank">@Aaryash747</a> | <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a></p>
+  </footer>
+
+  <script type="module">
+    import { initTheme } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+
+    initNav();
+
+    const themeToggle = document.getElementById('themeToggle');
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const workspace = document.getElementById('workspace');
+    const aspect = document.getElementById('aspect');
+    const format = document.getElementById('format');
+    const resetBtn = document.getElementById('resetBtn');
+    const replaceBtn = document.getElementById('replaceBtn');
+    const status = document.getElementById('status');
+    const stage = document.getElementById('stage');
+    const image = document.getElementById('image');
+    const cropBox = document.getElementById('cropBox');
+    const cropInfo = document.getElementById('cropInfo');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    initTheme(themeToggle);
+
+    // The selection lives in the image's natural pixels, so it survives window resizes
+    let sourceFile = null;
+    let selection = null; // { x, y, w, h } in natural pixels
+    let dragStart = null;
+    let downloadUrl = null;
+    let downloadRun = 0; // newer requests win, so a slow earlier encode can't overwrite them
+
+    const ratioValue = () => (aspect.value === 'free' ? null : Number(aspect.value));
+    const naturalSize = () => ({ w: image.naturalWidth, h: image.naturalHeight });
+
+    function centeredSelection(ratio) {
+      const { w: nw, h: nh } = naturalSize();
+      let w = nw;
+      let h = ratio ? nw / ratio : nh;
+      if (h > nh) {
+        h = nh;
+        w = ratio ? nh * ratio : nw;
+      }
+      return { x: Math.round((nw - w) / 2), y: Math.round((nh - h) / 2), w: Math.round(w), h: Math.round(h) };
+    }
+
+    function renderSelection() {
+      if (!selection) return;
+      const scale = image.clientWidth / image.naturalWidth;
+      cropBox.hidden = false;
+      cropBox.style.left = `${selection.x * scale}px`;
+      cropBox.style.top = `${selection.y * scale}px`;
+      cropBox.style.width = `${selection.w * scale}px`;
+      cropBox.style.height = `${selection.h * scale}px`;
+      cropInfo.textContent = `Selection: ${selection.w} × ${selection.h} px`;
+    }
+
+    function resetSelection() {
+      selection = centeredSelection(ratioValue());
+      renderSelection();
+      prepareDownload();
+    }
+
+    // Convert a pointer position to natural image pixels, clamped to the image
+    function pointToImage(event) {
+      const rect = image.getBoundingClientRect();
+      const scale = image.naturalWidth / rect.width;
+      const x = Math.min(Math.max(event.clientX - rect.left, 0), rect.width) * scale;
+      const y = Math.min(Math.max(event.clientY - rect.top, 0), rect.height) * scale;
+      return { x, y };
+    }
+
+    // Build the selection from the drag start and current point, honoring the aspect ratio
+    function selectionFromDrag(start, end) {
+      const { w: nw, h: nh } = naturalSize();
+      const ratio = ratioValue();
+      const dirX = end.x >= start.x ? 1 : -1;
+      const dirY = end.y >= start.y ? 1 : -1;
+      let w = Math.abs(end.x - start.x);
+      let h = Math.abs(end.y - start.y);
+
+      if (ratio) {
+        // Use the larger dimension so the box follows the pointer in both directions
+        const size = Math.max(w, h * ratio);
+        w = size;
+        h = size / ratio;
+      }
+
+      const maxW = dirX > 0 ? nw - start.x : start.x;
+      const maxH = dirY > 0 ? nh - start.y : start.y;
+      if (w > maxW) {
+        w = maxW;
+        if (ratio) h = w / ratio;
+      }
+      if (h > maxH) {
+        h = maxH;
+        if (ratio) w = h * ratio;
+      }
+
+      const x = dirX > 0 ? start.x : start.x - w;
+      const y = dirY > 0 ? start.y : start.y - h;
+      return {
+        x: Math.round(x),
+        y: Math.round(y),
+        w: Math.max(1, Math.round(w)),
+        h: Math.max(1, Math.round(h)),
+      };
+    }
+
+    stage.addEventListener('pointerdown', e => {
+      if (!image.naturalWidth) return;
+      stage.setPointerCapture(e.pointerId);
+      dragStart = pointToImage(e);
+      selection = { x: Math.round(dragStart.x), y: Math.round(dragStart.y), w: 1, h: 1 };
+      renderSelection();
+    });
+
+    stage.addEventListener('pointermove', e => {
+      if (!dragStart) return;
+      selection = selectionFromDrag(dragStart, pointToImage(e));
+      renderSelection();
+    });
+
+    const endDrag = () => { dragStart = null; };
+    stage.addEventListener('pointerup', () => { endDrag(); prepareDownload(); });
+    stage.addEventListener('pointercancel', endDrag);
+
+    window.addEventListener('resize', renderSelection);
+
+    aspect.addEventListener('change', resetSelection);
+    resetBtn.addEventListener('click', resetSelection);
+    format.addEventListener('change', prepareDownload);
+
+    function prepareDownload() {
+      if (!selection || !image.naturalWidth) return;
+      const run = ++downloadRun;
+      const { x, y, w, h } = selection;
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      if (format.value === 'image/jpeg') {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, w, h);
+      }
+      ctx.drawImage(image, x, y, w, h, 0, 0, w, h);
+
+      canvas.toBlob(blob => {
+        if (!blob || run !== downloadRun) return;
+        if (downloadUrl) URL.revokeObjectURL(downloadUrl);
+        downloadUrl = URL.createObjectURL(blob);
+        const ext = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp' }[format.value];
+        downloadBtn.href = downloadUrl;
+        downloadBtn.download = `${sourceFile.name.replace(/\.[^.]+$/, '')}-cropped.${ext}`;
+      }, format.value, 0.92);
+    }
+
+    function setFile(file) {
+      if (!file || !file.type.startsWith('image/')) {
+        status.textContent = 'Please choose a PNG, JPEG or WebP image.';
+        status.classList.add('error');
+        return;
+      }
+      sourceFile = file;
+      status.textContent = '';
+      status.classList.remove('error');
+      image.onload = () => {
+        workspace.hidden = false;
+        dropZone.hidden = true;
+        resetSelection();
+      };
+      image.onerror = () => {
+        status.textContent = 'That file could not be read as an image.';
+        status.classList.add('error');
+      };
+      if (image.src.startsWith('blob:')) URL.revokeObjectURL(image.src);
+      image.src = URL.createObjectURL(file);
+    }
+
+    fileInput.addEventListener('change', () => setFile(fileInput.files[0]));
+    replaceBtn.addEventListener('click', () => {
+      workspace.hidden = true;
+      dropZone.hidden = false;
+      fileInput.value = '';
+      fileInput.click();
+    });
+
+    dropZone.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        fileInput.click();
+      }
+    });
+    dropZone.addEventListener('dragover', e => {
+      e.preventDefault();
+      dropZone.classList.add('dragging');
+    });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragging'));
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('dragging');
+      setFile(e.dataTransfer.files[0]);
+    });
+  </script>
+</body>
+</html>

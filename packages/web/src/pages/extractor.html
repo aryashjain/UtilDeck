@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Extractor - UtilDeck</title>
+  <link rel="icon" type="image/png" href="../assets/icon-64.png">
+  <link rel="apple-touch-icon" href="../assets/icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/icon-64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Text Extractor</h2>
+      <p class="tool-description">
+        Pull emails, URLs, numbers and hashtags out of messy text, such as a web page copied into a document or a list of mixed contacts.
+      </p>
+
+      <div class="split-layout">
+        <div class="split-input">
+          <div class="split-input-pair">
+            <label for="input">Text Input</label>
+            <textarea id="input" placeholder="Paste your text here..."></textarea>
+          </div>
+        </div>
+
+        <div class="split-output">
+          <div class="control-row">
+            <label class="checkbox-option"><input type="checkbox" id="emails" checked> Emails</label>
+            <label class="checkbox-option"><input type="checkbox" id="urls" checked> URLs</label>
+            <label class="checkbox-option"><input type="checkbox" id="numbers"> Numbers</label>
+            <label class="checkbox-option"><input type="checkbox" id="hashtags" checked> Hashtags</label>
+          </div>
+          <div class="control-row">
+            <label class="checkbox-option"><input type="checkbox" id="dedupe" checked> Remove duplicates</label>
+          </div>
+
+          <p id="status" class="status" aria-live="polite"></p>
+
+          <div class="output-header">
+            <h3>Result</h3>
+            <div class="output-actions">
+              <button id="copyBtn" class="btn btn-secondary">Copy</button>
+            </div>
+          </div>
+          <textarea id="output" placeholder="Extracted items will appear here..." readonly style="flex: 1; min-height: 0;"></textarea>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ by <strong>Aryash</strong> | <a href="https://x.com/Aaryash747" target="_blank">@Aaryash747</a> | <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a></p>
+  </footer>
+
+  <script type="module">
+    import { initTheme, copyText } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+
+    initNav();
+
+    const themeToggle = document.getElementById('themeToggle');
+    const input = document.getElementById('input');
+    const status = document.getElementById('status');
+    const output = document.getElementById('output');
+    const copyBtn = document.getElementById('copyBtn');
+    const dedupe = document.getElementById('dedupe');
+
+    const kinds = [
+      { id: 'emails', label: 'Emails', pattern: /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g },
+      { id: 'urls', label: 'URLs', pattern: /\b(?:https?:\/\/|www\.)[^\s<>"'`]+/gi, clean: s => s.replace(/[.,;:!?)\]]+$/, '') },
+      { id: 'numbers', label: 'Numbers', pattern: /\d+(?:\.\d+)?/g },
+      { id: 'hashtags', label: 'Hashtags', pattern: /#[\p{L}\p{N}_]+/gu },
+    ];
+
+    initTheme(themeToggle);
+
+    function update() {
+      const text = input.value;
+      const sections = [];
+      let total = 0;
+
+      for (const kind of kinds) {
+        if (!document.getElementById(kind.id).checked) continue;
+
+        let items = (text.match(kind.pattern) || []).map(item => kind.clean ? kind.clean(item) : item);
+        if (dedupe.checked) items = [...new Set(items)];
+
+        total += items.length;
+        if (items.length > 0) {
+          sections.push(`${kind.label} (${items.length})\n${items.join('\n')}`);
+        }
+      }
+
+      output.value = sections.join('\n\n');
+      status.textContent = text.trim()
+        ? `${total} item${total === 1 ? '' : 's'} found`
+        : '';
+    }
+
+    input.addEventListener('input', update);
+    document.querySelectorAll('input[type="checkbox"]').forEach(el => el.addEventListener('change', update));
+
+    copyBtn.addEventListener('click', () => copyText(output.value, copyBtn));
+  </script>
+</body>
+</html>
