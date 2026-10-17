@@ -1,11 +1,11 @@
 name = "utildeck"
-main = "src/index.js"
+main = "packages/worker/src/index.js"
 compatibility_date = "2025-01-01"
 workers_dev = true
 
 # Serve the static site from the same Worker, so /api and the pages share one origin
 [assets]
-directory = "../web/src"
+directory = "packages/web/src"
 binding = "ASSETS"
 
 # Shared notes storage. Create it with: npx wrangler kv namespace create NOTES

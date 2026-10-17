@@ -5,9 +5,9 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
+    "dev": "wrangler dev --config ../../wrangler.toml",
     "build": "echo \"Wrangler builds automatically\"",
-    "deploy": "wrangler deploy"
+    "deploy": "wrangler deploy --config ../../wrangler.toml"
   },
   "devDependencies": {
     "wrangler": "^3.114.0"
