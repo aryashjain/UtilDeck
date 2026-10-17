@@ -8,8 +8,7 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
 
-    // Same-origin in production (the Worker route sits next to the site), so CORS is only
-    // needed for local development on a different port.
+    // The site and the API share one origin, so CORS is only needed for other origins.
     const corsHeaders = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS',
@@ -32,7 +31,11 @@ export default {
       return handleDeleteNote(request, env, corsHeaders);
     }
 
-    return json({ error: 'Not found' }, 404, corsHeaders);
+    // Unknown API routes get a JSON 404. Everything else is the static site.
+    if (path.startsWith('/api/')) {
+      return json({ error: 'Not found' }, 404, corsHeaders);
+    }
+    return env.ASSETS.fetch(request);
   },
 };
 

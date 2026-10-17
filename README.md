@@ -91,24 +91,30 @@ npm run build
 
 ### Deploying
 
-1. **Configure Cloudflare:**
-   - Run `wrangler login`
-   - Create the notes namespace: `npx wrangler kv namespace create NOTES`
-   - Put the returned id in `packages/worker/wrangler.toml` (the `kv_namespaces` entry) and add your account ID
-   - Set the production `route` to your domain's `/api/*` so the Worker answers `/api` on the same site
-   - For local development, run `npm run dev -w packages/worker` and point `packages/web/src/scripts/config.js` at `http://localhost:8787/api/notes`
+One Cloudflare Worker serves the site and the notes API, so there's no separate Pages project.
+
+1. **Log in and create the notes storage** (once):
+   ```bash
+   npx wrangler login
+   npx wrangler kv namespace create NOTES
+   npx wrangler kv namespace create NOTES --preview
+   ```
+   Paste the two returned ids into `packages/worker/wrangler.toml`, replacing the `REPLACE_WITH_...` values.
 
 2. **Deploy:**
    ```bash
    npm run deploy
    ```
+   The site is then live at `https://utildeck.<your-subdomain>.workers.dev`. To use your own domain, add it under Workers & Pages → utildeck → Settings → Domains & Routes.
+
+For local development, run `npm run dev -w packages/worker` and open `http://localhost:8787`. The site and notes both work there.
 
 ## Tech Stack
 
 - **Frontend:** Vanilla JavaScript, CSS3 (light/dark mode); image tools use the Canvas API
 - **Backend:** Cloudflare Workers
 - **Storage:** Cloudflare KV (for shared notes)
-- **Hosting:** Cloudflare Pages (static) + Workers (dynamic)
+- **Hosting:** one Cloudflare Worker that serves the static site and the API
 
 ## API Endpoints
 

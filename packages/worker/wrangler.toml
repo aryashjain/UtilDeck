@@ -1,18 +1,16 @@
-name = "text-toolkit-worker"
-type = "javascript"
-account_id = ""
+name = "utildeck"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
 workers_dev = true
 
-# KV Namespace for storing shared notes
-kv_namespaces = [
-  { binding = "NOTES", preview_id = "notes_preview" }
-]
+# Serve the static site from the same Worker, so /api and the pages share one origin
+[assets]
+directory = "../web/src"
+binding = "ASSETS"
 
-# Environment configuration
-# Point this at your site domain so the Worker serves /api next to the static pages
-[env.production]
-name = "text-toolkit-worker"
-route = "yourdomain.com/api/*"
-
-[env.staging]
-name = "text-toolkit-worker-staging"
+# Shared notes storage. Create it with: npx wrangler kv namespace create NOTES
+# then paste the returned ids below.
+[[kv_namespaces]]
+binding = "NOTES"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+preview_id = "REPLACE_WITH_PREVIEW_KV_NAMESPACE_ID"

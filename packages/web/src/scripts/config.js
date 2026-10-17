@@ -1,5 +1,5 @@
-// Where the notes API lives. In production the Worker sits on the same domain under /api.
-// For local development against `wrangler dev`, use http://localhost:8787/api/notes instead.
+// Where the notes API lives. The Worker serves both the site and /api, so this path works
+// in production and under `npm run dev -w packages/worker` (http://localhost:8787).
 export const NOTES_API = '/api/notes';
 
 // Shared notes expire this many hours after they are created. Keep in sync with the Worker.
