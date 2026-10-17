@@ -1,3 +1,14 @@
+// Swaps the header logo and favicon to match the theme: light artwork on light, dark on dark
+export function syncBrandIcons() {
+  const dark = document.documentElement.classList.contains('dark-mode');
+  const logo = document.querySelector('img.brand-logo');
+  const icon = document.querySelector('link[rel="icon"]');
+  const base = (logo?.getAttribute('src') || icon?.getAttribute('href') || '').replace(/[^/]*$/, '');
+  const file = base + (dark ? 'dark-icon64.png' : 'light-icon64.png');
+  if (logo) logo.src = file;
+  if (icon) icon.href = file;
+}
+
 export function initTheme(themeToggle) {
   const THEME_KEY = 'toolkit_theme';
   const savedTheme = localStorage.getItem(THEME_KEY);
@@ -10,17 +21,15 @@ export function initTheme(themeToggle) {
   } else {
     themeToggle.textContent = '🌙';
   }
+  syncBrandIcons();
 
   themeToggle.addEventListener('click', () => {
     document.documentElement.classList.toggle('dark-mode');
     const isDark = document.documentElement.classList.contains('dark-mode');
     localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
     themeToggle.textContent = isDark ? '☀️' : '🌙';
+    syncBrandIcons();
   });
-}
-
-export function generateId() {
-  return Math.random().toString(36).substring(2, 11);
 }
 
 // Briefly swap a button's label, then restore the original text
