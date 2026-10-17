@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request a Tool - UtilDeck</title>
+  <meta name="description" content="Ask for a tool you need on UtilDeck.">
+  <link rel="icon" type="image/png" href="../assets/icon-64.png">
+  <link rel="apple-touch-icon" href="../assets/icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/icon-64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Request a tool</h2>
+      <p class="tool-description">
+        Can't find what you need? Tell us the tool you'd like. We read every request and use them to decide what to build next.
+      </p>
+
+      <form id="requestForm" class="request-form" novalidate>
+        <div class="field">
+          <label for="toolName">Tool name or what it does <span class="required">*</span></label>
+          <input type="text" id="toolName" class="text-input" maxlength="100" placeholder="e.g. Markdown table maker" required>
+        </div>
+
+        <div class="field">
+          <label for="details">Details <span class="optional">(optional)</span></label>
+          <textarea id="details" class="output-box" maxlength="1000" placeholder="What should it do? Any example input or output?" style="min-height: 140px;"></textarea>
+          <p class="counter" id="detailsCount">0 / 1000</p>
+        </div>
+
+        <div class="field">
+          <label for="email">Email to tell you when it's ready <span class="optional">(optional)</span></label>
+          <input type="email" id="email" class="text-input" maxlength="200" placeholder="you@example.com" autocomplete="email">
+        </div>
+
+        <div class="control-row" style="justify-content: flex-end; margin-top: 1rem;">
+          <button type="submit" id="submitBtn" class="btn btn-primary">Send request</button>
+        </div>
+        <p id="requestStatus" class="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ by <strong>Aryash</strong> | <a href="https://x.com/Aaryash747" target="_blank">@Aaryash747</a> | <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a></p>
+  </footer>
+
+  <script type="module">
+    import { initTheme } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { REQUESTS_API, NOTES_UNAVAILABLE } from '../scripts/config.js';
+
+    initNav();
+    initTheme(document.getElementById('themeToggle'));
+
+    const form = document.getElementById('requestForm');
+    const toolName = document.getElementById('toolName');
+    const details = document.getElementById('details');
+    const detailsCount = document.getElementById('detailsCount');
+    const email = document.getElementById('email');
+    const submitBtn = document.getElementById('submitBtn');
+    const status = document.getElementById('requestStatus');
+
+    // Arrives from an empty search: /pages/request.html?tool=whatever+was+typed
+    toolName.value = new URLSearchParams(location.search).get('tool') || '';
+
+    const setStatus = (message, isError = false) => {
+      status.textContent = message;
+      status.classList.toggle('error', isError);
+    };
+
+    details.addEventListener('input', () => {
+      detailsCount.textContent = `${details.value.length} / 1000`;
+    });
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (toolName.value.trim().length < 2) {
+        setStatus('Please give the tool name.', true);
+        toolName.focus();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      setStatus('Sending…');
+      try {
+        const response = await fetch(REQUESTS_API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            tool: toolName.value,
+            details: details.value,
+            email: email.value,
+          }),
+        });
+        const data = await response.json().catch(() => null);
+        if (!data) throw new Error(NOTES_UNAVAILABLE);
+        if (!response.ok) throw new Error(data.error || 'Could not send the request.');
+
+        form.reset();
+        detailsCount.textContent = '0 / 1000';
+        setStatus('Thanks! Your request was sent.');
+      } catch (error) {
+        const unreachable = error instanceof TypeError;
+        setStatus(unreachable ? 'Could not reach the server. Check your connection.' : error.message, true);
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

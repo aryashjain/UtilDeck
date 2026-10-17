@@ -2,6 +2,9 @@
 const NOTE_TTL_SECONDS = 3 * 60 * 60; // 3 hours
 const MAX_CONTENT_LENGTH = 200000; // characters
 const NOTE_ID_PATTERN = /^\/api\/notes\/[a-z0-9]+$/;
+const REQUEST_DETAILS_LENGTH = 1000; // characters
+// Tool requests are stored in the NOTES namespace under this prefix. Note ids never contain ':', so they can't collide.
+const REQUEST_PREFIX = 'request:';
 
 export default {
   async fetch(request, env) {
@@ -21,6 +24,10 @@ export default {
 
     if (path === '/api/notes' && request.method === 'POST') {
       return handleCreateNote(request, env, corsHeaders);
+    }
+
+    if (path === '/api/requests' && request.method === 'POST') {
+      return handleCreateRequest(request, env, corsHeaders);
     }
 
     if (NOTE_ID_PATTERN.test(path) && request.method === 'GET') {
@@ -77,6 +84,37 @@ async function handleCreateNote(request, env, corsHeaders) {
   await env.NOTES.put(id, JSON.stringify(note), { expirationTtl: NOTE_TTL_SECONDS });
 
   return json({ id, expiresAt }, 200, corsHeaders);
+}
+
+// Stores a "request a tool" submission. Requests are kept (no expiry) so they can be reviewed later
+// with: npx wrangler kv key list --binding NOTES --prefix request:
+async function handleCreateRequest(request, env, corsHeaders) {
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return json({ error: 'Request body must be JSON' }, 400, corsHeaders);
+  }
+
+  const tool = String(body.tool ?? '').trim();
+  const details = String(body.details ?? '').trim();
+  const email = String(body.email ?? '').trim();
+
+  if (tool.length < 2 || tool.length > 100) {
+    return json({ error: 'Please give the tool name (2 to 100 characters).' }, 400, corsHeaders);
+  }
+  if (details.length > REQUEST_DETAILS_LENGTH) {
+    return json({ error: 'The description is too long (max 1,000 characters).' }, 413, corsHeaders);
+  }
+  if (email && (email.length > 200 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) {
+    return json({ error: 'That email address does not look right.' }, 400, corsHeaders);
+  }
+
+  const createdAt = Date.now();
+  const key = `${REQUEST_PREFIX}${createdAt}:${generateId()}`;
+  await env.NOTES.put(key, JSON.stringify({ tool, details, email: email || null, createdAt }));
+
+  return json({ ok: true }, 200, corsHeaders);
 }
 
 async function handleGetNote(request, env, corsHeaders) {

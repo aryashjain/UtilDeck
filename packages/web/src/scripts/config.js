@@ -7,3 +7,6 @@ export const NOTE_LIFETIME_HOURS = 3;
 
 export const NOTES_UNAVAILABLE =
   'The notes server did not respond. It is not running at this address. See scripts/config.js.';
+
+// Where "Request a tool" submissions go (same Worker as the notes API)
+export const REQUESTS_API = '/api/requests';

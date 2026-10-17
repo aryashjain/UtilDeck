@@ -14,3 +14,8 @@ binding = "ASSETS"
 binding = "NOTES"
 id = "396ff6507ee64d74909892b56329118e"
 preview_id = "396ff6507ee64d74909892b56329118e"
+
+# Worker logs and invocation logs, as set in the dashboard
+[observability.logs]
+enabled = false
+invocation_logs = true

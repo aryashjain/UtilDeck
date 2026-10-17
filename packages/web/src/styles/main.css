@@ -1374,3 +1374,37 @@ svg {
     flex-direction: row;
   }
 }
+
+/* Request a tool */
+.search-request {
+  color: var(--accent-color);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.search-request:hover {
+  text-decoration: underline;
+}
+
+.request-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 640px;
+}
+
+.required {
+  color: var(--danger-color);
+}
+
+.optional,
+.counter {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.empty-state p {
+  margin-top: 0.75rem;
+}

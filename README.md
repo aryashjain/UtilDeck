@@ -34,6 +34,7 @@ toolkit/
 ### Notepad (Main Tool)
 - 📝 Auto-saving to browser localStorage
 - 🔗 Share links that expire after 3 hours (stored in Cloudflare KV)
+- 💡 Request a tool: when a search finds nothing, or from the nav, send a request
 - 🔐 Optional password protection
 - 📊 Real-time stats (words, characters, reading time)
 - 📥 Export to .txt and .md
@@ -139,6 +140,21 @@ GET /api/notes/:id?password=optional-password
 Response: { "id": "...", "content": "...", "createdAt": ..., "expiresAt": ... }
 
 Errors: 401 when a password is needed (`passwordRequired: true`), 403 for a wrong password, 404 when the note is missing or expired.
+```
+
+### Request a Tool
+```
+POST /api/requests
+Content-Type: application/json
+
+{ "tool": "Markdown table maker", "details": "optional", "email": "optional" }
+
+Response: { "ok": true }
+```
+Requests are stored in the notes namespace under `request:` keys with no expiry. To read them:
+```bash
+npx wrangler kv key list --binding NOTES --prefix request:
+npx wrangler kv key get --binding NOTES "<key name>"
 ```
 
 ### Delete Note

@@ -2,6 +2,7 @@ import { NOTEPAD, searchTools } from './tools.js';
 
 const SITE_ROOT = new URL('../', import.meta.url);
 const MAX_RESULTS = 8;
+const REQUEST_PAGE = 'pages/request.html';
 
 const toUrl = path => new URL(path, SITE_ROOT).href;
 const pathOf = path => new URL(path, SITE_ROOT).pathname;
@@ -19,11 +20,13 @@ export function initNav({ onQuery } = {}) {
   const here = location.pathname;
   const isHome = here === SITE_ROOT.pathname || here === pathOf('index.html');
   const isNotepad = here === pathOf(NOTEPAD.path);
+  const isRequest = here === pathOf(REQUEST_PAGE);
 
   nav.innerHTML = `
     <div class="container nav-inner">
       <a class="nav-link${isHome ? ' active' : ''}" href="${toUrl('index.html')}">🏠 Home</a>
       <a class="nav-link${isNotepad ? ' active' : ''}" href="${toUrl(NOTEPAD.path)}">📋 Notepad</a>
+      <a class="nav-link${isRequest ? ' active' : ''}" href="${toUrl(REQUEST_PAGE)}">💡 Request a tool</a>
       <div class="nav-search">
         <label class="visually-hidden" for="toolSearch">Search tools</label>
         <input type="search" id="toolSearch" role="combobox" placeholder="Search tools…"
@@ -68,7 +71,10 @@ export function initNav({ onQuery } = {}) {
               </span>
             </a>
           </li>`).join('')
-      : `<li class="search-empty">No tools match “${escapeHtml(query)}”</li>`;
+      : `<li class="search-empty">
+          No tools match “${escapeHtml(query)}”.
+          <a class="search-request" href="${toUrl(REQUEST_PAGE)}?tool=${encodeURIComponent(query)}">Request a tool</a>
+        </li>`;
 
     list.hidden = false;
     input.setAttribute('aria-expanded', 'true');

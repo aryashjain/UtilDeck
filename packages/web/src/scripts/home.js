@@ -31,6 +31,8 @@ deckEl.innerHTML = ALL_TOOLS
     </a>`)
   .join('');
 
+const escapeText = text => text.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+
 const sectionId = name => `cat-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 
 // Search text, and which button is picked: null until one is pressed, then 'all' or a section id
@@ -91,7 +93,8 @@ function render() {
   }
 
   emptyEl.hidden = !(trimmed && matchPaths.size === 0);
-  emptyEl.textContent = `No tools match “${trimmed}”. Try a shorter word, like “count” or “json”.`;
+  emptyEl.innerHTML = `No tools match “${escapeText(trimmed)}”. Try a shorter word, like “count” or “json”.
+    <p><a class="search-request" href="pages/request.html?tool=${encodeURIComponent(trimmed)}">Request this tool</a></p>`;
 }
 
 indexEl.addEventListener('click', e => {
