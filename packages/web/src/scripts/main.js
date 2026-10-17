@@ -1,5 +1,5 @@
 import { NOTES_API, NOTES_UNAVAILABLE, NOTE_LIFETIME_HOURS } from './config.js';
-import { copyText, readJson, syncBrandIcons } from './utils.js';
+import { copyText, readJson } from './utils.js';
 
 const NOTEPAD_KEY = 'toolkit_notepad_content';
 const THEME_KEY = 'toolkit_theme';
@@ -22,7 +22,6 @@ function initTheme() {
   } else {
     themeToggle.textContent = '🌙';
   }
-  syncBrandIcons();
 }
 
 // Toggle theme
@@ -31,7 +30,6 @@ themeToggle.addEventListener('click', () => {
   const isDark = document.documentElement.classList.contains('dark-mode');
   localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
   themeToggle.textContent = isDark ? '☀️' : '🌙';
-  syncBrandIcons();
 });
 
 // Load saved notepad content
