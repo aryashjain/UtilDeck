@@ -1442,3 +1442,67 @@ svg {
   color: var(--text-secondary);
   font-size: 0.85rem;
 }
+
+/* SEO guide section under each tool */
+.seo-guide {
+  margin-top: 2.5rem;
+  padding: 1.75rem 1.5rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.9rem;
+}
+
+.seo-guide h2 {
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.guide-steps {
+  margin: 0 0 1.25rem 1.25rem;
+  color: var(--text-secondary);
+}
+
+.guide-steps li {
+  margin-bottom: 0.4rem;
+}
+
+.faq-item {
+  margin-bottom: 0.9rem;
+}
+
+.faq-item h3 {
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.faq-item p {
+  color: var(--text-secondary);
+  font-size: 0.93rem;
+}
+
+.related-title {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 0.95rem;
+}
+
+.related-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.related-tools a {
+  display: inline-block;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.related-tools a:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: radial-gradient(circle at 75% 45%, #2a2a33 0%, #121214 60%, #0a0a0b 100%);
+    color: #f2f2f2;
+    font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 80px; box-sizing: border-box;
+  }
+  .text { width: 620px; }
+  h1 { font-family: 'Cinzel', Georgia, serif; font-size: 104px; font-weight: 700; letter-spacing: 0.04em; margin: 0; line-height: 1; }
+  .tag { font-size: 34px; color: #c9a24a; margin: 12px 0 28px; letter-spacing: 0.02em; }
+  .desc { font-size: 26px; line-height: 1.4; color: #cfcfd6; margin: 0 0 30px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip { font-size: 18px; padding: 8px 16px; border: 1px solid #3b3b44; border-radius: 999px; color: #e5e5ea; }
+  img { width: 440px; height: 440px; border-radius: 44px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
+</style>
+</head>
+<body>
+  <div class="text">
+    <h1>UtilDeck</h1>
+    <div class="tag">Your everyday toolkit</div>
+    <p class="desc">Free text, image and developer tools that run in your browser.</p>
+    <div class="chips">
+      <span class="chip">Word Counter</span><span class="chip">JSON Formatter</span><span class="chip">Find &amp; Replace</span><span class="chip">Image Compressor</span><span class="chip">Password Generator</span>
+    </div>
+  </div>
+  <img src="card.png" alt="">
+</body>
+</html>

@@ -12,8 +12,10 @@
   <meta property="og:title" content="JSON Formatter - Free Online Tool | UtilDeck">
   <meta property="og:description" content="Format, minify and validate JSON. Free, and it runs in your browser.">
   <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/json-formatter.html">
-  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/light-icon180.png">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="JSON Formatter - Free Online Tool | UtilDeck">
   <meta name="twitter:description" content="Format, minify and validate JSON. Free, and it runs in your browser.">
   <title>JSON Formatter - Free Online Tool | UtilDeck</title>
@@ -84,6 +86,13 @@
         </div>
       </div>
     </section>
+    <section class="seo-guide" aria-labelledby="guide-json-formatter">
+      <h2 id="guide-json-formatter">How to use JSON Formatter</h2>
+      <ol class="guide-steps"><li>Paste your JSON into the input box.</li><li>Choose Format to indent it, or Minify to make it one line.</li><li>Read the status line. It shows whether the JSON is valid and where it breaks if not.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>Why is my JSON invalid?</h3><p>The most common causes are trailing commas, single quotes instead of double quotes, and missing quotes around keys.</p></div><div class="faq-item"><h3>Is my JSON uploaded anywhere?</h3><p>No. Formatting and validation run in your browser.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/encoder.html">Encoder</a></li></ul>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -96,6 +105,7 @@
     </div>
   </footer>
 
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "JSON Formatter", "description": "Format, minify and validate JSON.", "url": "https://utildeck.bot747.workers.dev/pages/json-formatter.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why is my JSON invalid?", "acceptedAnswer": {"@type": "Answer", "text": "The most common causes are trailing commas, single quotes instead of double quotes, and missing quotes around keys."}}, {"@type": "Question", "name": "Is my JSON uploaded anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. Formatting and validation run in your browser."}}]}]}</script>
   <script type="module">
     import { initTheme, copyText } from '../scripts/utils.js';
     import { initNav } from '../scripts/nav.js';
