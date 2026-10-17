@@ -17,9 +17,6 @@ export function initTheme(themeToggle) {
 
   if (isDark) {
     document.documentElement.classList.add('dark-mode');
-    themeToggle.textContent = '☀️';
-  } else {
-    themeToggle.textContent = '🌙';
   }
   syncBrandIcons();
 
@@ -27,7 +24,6 @@ export function initTheme(themeToggle) {
     document.documentElement.classList.toggle('dark-mode');
     const isDark = document.documentElement.classList.contains('dark-mode');
     localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
-    themeToggle.textContent = isDark ? '☀️' : '🌙';
     syncBrandIcons();
   });
 }

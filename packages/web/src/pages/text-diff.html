@@ -24,6 +24,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
   <link rel="stylesheet" href="../styles/main.css">
   <style>
     .diff-wrapper {
@@ -118,7 +126,7 @@
           <span class="brand-tagline">Your everyday toolkit</span>
         </div>
       </div>
-      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
     </div>
   </header>
 

@@ -1506,3 +1506,12 @@ svg {
   border-color: var(--accent-color);
   color: var(--accent-color);
 }
+
+/* Theme toggle icon: set in CSS so it is right from the first frame */
+.theme-toggle::before {
+  content: '🌙';
+}
+
+html.dark-mode .theme-toggle::before {
+  content: '☀️';
+}
