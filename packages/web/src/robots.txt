@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /pages/note.html
+
+Sitemap: https://utildeck.bot747.workers.dev/sitemap.xml
