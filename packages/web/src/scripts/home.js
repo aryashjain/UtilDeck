@@ -21,8 +21,9 @@ const SECTIONS = [
 ];
 
 // The hero deck: one card image per tool, in registry order.
-// Each image is named after its page, e.g. pages/word-counter.html -> assets/cards/word-counter.png
-const cardImage = tool => `assets/cards/${tool.path.split('/').pop().replace('.html', '.png')}`;
+// Each image is named after its page, e.g. pages/word-counter.html -> assets/cards/word-counter.png.
+// A tool can reuse another card with a `card` field in tools.js.
+const cardImage = tool => `assets/cards/${tool.card || tool.path.split('/').pop().replace('.html', '.png')}`;
 
 deckEl.innerHTML = ALL_TOOLS
   .map(tool => `
