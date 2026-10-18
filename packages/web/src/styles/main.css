@@ -1515,3 +1515,45 @@ svg {
 html.dark-mode .theme-toggle::before {
   content: '☀️';
 }
+
+/* Deck cards without artwork: a plain text card in the same shape */
+.deck-card-label {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 338 / 471;
+  padding: 1rem;
+  background: linear-gradient(160deg, #262630, #111114);
+  border: 2px solid #5b5d6b;
+  border-radius: 0.7rem;
+  color: #f2f2f2;
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.25;
+}
+
+.deck-card.deck-card-text .deck-card-label {
+  display: flex;
+}
+
+/* Form fields in the tool panels fill their column */
+.control-panel .field select,
+.control-panel .field input {
+  width: 100%;
+}
+
+.field-full {
+  grid-column: 1 / -1;
+}
+
+.stats-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 640px) {
+  .stats-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -27,7 +27,8 @@ const cardImage = tool => `assets/cards/${tool.path.split('/').pop().replace('.h
 deckEl.innerHTML = ALL_TOOLS
   .map(tool => `
     <a class="deck-card" href="${tool.path}" title="${tool.description}">
-      <img src="${cardImage(tool)}" alt="${tool.name} card" width="338" height="471" loading="lazy" draggable="false">
+      <img src="${cardImage(tool)}" alt="${tool.name} card" width="338" height="471" loading="lazy" draggable="false" onerror="this.parentElement.classList.add('deck-card-text')">
+      <span class="deck-card-label">${tool.name}</span>
     </a>`)
   .join('');
 

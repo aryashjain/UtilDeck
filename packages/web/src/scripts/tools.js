@@ -9,6 +9,7 @@ export const CATEGORIES = [
   { id: 'developer', name: 'Developer' },
   { id: 'generate', name: 'Generate' },
   { id: 'image', name: 'Images' },
+  { id: 'fitness', name: 'Fitness' },
 ];
 
 export const NOTEPAD = {
@@ -131,6 +132,22 @@ export const TOOLS = [
     category: 'image',
     description: 'Crop images by dragging a box, with preset aspect ratios.',
     keywords: ['image', 'crop', 'trim', 'aspect ratio', 'photo', 'picture'],
+  },
+  {
+    name: 'Calorie Counter',
+    path: 'pages/calorie-counter.html',
+    icon: '🔥',
+    category: 'fitness',
+    description: 'Estimate your daily calories, protein, carbs and fat from your body stats and activity.',
+    keywords: ['calorie', 'calories', 'calculator', 'macros', 'tdee', 'bmr', 'protein', 'carbs', 'fat', 'diet', 'weight'],
+  },
+  {
+    name: 'What Should I Eat?',
+    path: 'pages/meal-picker.html',
+    icon: '🍽️',
+    category: 'fitness',
+    description: 'Pick a meal by diet, meal time and cuisine, and see its macros.',
+    keywords: ['meal', 'food', 'eat', 'recipe', 'diet', 'vegetarian', 'breakfast', 'lunch', 'dinner', 'snack', 'indian', 'italian', 'chinese', 'mexican', 'japanese', 'macros'],
   },
 ];
 

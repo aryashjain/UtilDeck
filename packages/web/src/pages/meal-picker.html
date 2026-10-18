@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Should I Eat? - Meal Suggestions with Macros | UtilDeck</title>
+  <meta name="description" content="Get a meal suggestion for breakfast, lunch, dinner or a snack. Choose vegetarian or not and a cuisine such as Indian, Italian, Chinese, Mexican or Japanese, and see the macros.">
+  <meta name="keywords" content="what should I eat, meal suggestions, healthy meal ideas, vegetarian meal picker, macros for food, Indian breakfast, calorie meal ideas, free fitness tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/meal-picker.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="What Should I Eat? - Meal Suggestions with Macros | UtilDeck">
+  <meta property="og:description" content="Get a meal suggestion for breakfast, lunch, dinner or a snack. Choose vegetarian or not and a cuisine such as Indian, Italian, Chinese, Mexican or Japanese, and see the macros.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/meal-picker.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What Should I Eat? - Meal Suggestions with Macros | UtilDeck">
+  <meta name="twitter:description" content="Get a meal suggestion for breakfast, lunch, dinner or a snack. Choose vegetarian or not and a cuisine such as Indian, Italian, Chinese, Mexican or Japanese, and see the macros.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>What Should I Eat?</h2>
+      <p class="tool-description">
+        Pick whether you're vegetarian, the meal time and the cuisine. We suggest a dish with its macros. The values are typical-serving estimates, so check the portion you actually eat.
+      </p>
+
+      <form id="pickForm" class="control-panel" novalidate>
+        <div class="field">
+          <label for="diet">Diet</label>
+          <select id="diet" class="text-input">
+            <option value="veg">Vegetarian</option>
+            <option value="non-veg">Non-vegetarian (includes vegetarian)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="meal">Meal time</label>
+          <select id="meal" class="text-input">
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner">Dinner</option>
+            <option value="snack">Snack</option>
+          </select>
+        </div>
+        <div class="field field-full">
+          <label for="cuisine">Cuisine</label>
+          <select id="cuisine" class="text-input">
+            <option value="any">Any cuisine</option>
+          </select>
+        </div>
+        <div class="control-row control-row-full">
+          <button type="submit" class="btn btn-primary">Suggest a meal</button>
+          <button type="button" id="againBtn" class="btn btn-secondary" hidden>Another suggestion</button>
+        </div>
+      </form>
+
+      <p id="pickStatus" class="status" aria-live="polite"></p>
+
+      <article id="suggestion" class="suggestion" hidden>
+        <p class="suggestion-line" id="suggestionLine"></p>
+        <h3 id="dishName"></h3>
+        <p class="tool-description" id="dishServing"></p>
+        <div class="stats-grid stats-4">
+          <div class="stat-card"><div class="stat-label">Calories</div><div class="stat-value" id="kcal">0</div><div class="stat-label">kcal</div></div>
+          <div class="stat-card"><div class="stat-label">Protein</div><div class="stat-value" id="protein">0</div><div class="stat-label">g</div></div>
+          <div class="stat-card"><div class="stat-label">Carbs</div><div class="stat-value" id="carbs">0</div><div class="stat-label">g</div></div>
+          <div class="stat-card"><div class="stat-label">Fat</div><div class="stat-value" id="fat">0</div><div class="stat-label">g</div></div>
+        </div>
+        <p id="targetFit" class="status"></p>
+      </article>
+
+      <h3 class="related-title" id="allTitle" hidden>All matches</h3>
+      <ul class="meal-split" id="allMatches"></ul>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-meal-picker">
+      <h2 id="guide-meal-picker">How to use What Should I Eat?</h2>
+      <ol class="guide-steps"><li>Choose vegetarian or non-vegetarian, the meal time and a cuisine.</li><li>Press Suggest a meal to see one dish with its calories and macros.</li><li>Press Another suggestion for a different dish from the same choices.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>Where do the calorie and macro numbers come from?</h3><p>They are typical-serving estimates for each dish. Real values depend on the recipe and portion size.</p></div><div class="faq-item"><h3>Does it match my calorie target?</h3><p>If you have used the Calorie Counter, the suggestion shows what share of your meal target it covers.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/calorie-counter.html">Calorie Counter</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "What Should I Eat?", "description": "Pick a meal by diet, meal time and cuisine, and see its macros.", "url": "https://utildeck.bot747.workers.dev/pages/meal-picker.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Where do the calorie and macro numbers come from?", "acceptedAnswer": {"@type": "Answer", "text": "They are typical-serving estimates for each dish. Real values depend on the recipe and portion size."}}, {"@type": "Question", "name": "Does it match my calorie target?", "acceptedAnswer": {"@type": "Answer", "text": "If you have used the Calorie Counter, the suggestion shows what share of your meal target it covers."}}]}]}</script>
+  <script type="module">
+    import { initTheme } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { MEAL_SHARE, TARGET_KEY } from '../scripts/fitness.js';
+    import { CUISINES, matchingMeals } from '../scripts/menu.js';
+
+    initNav();
+    initTheme(document.getElementById('themeToggle'));
+
+    const form = document.getElementById('pickForm');
+    const againBtn = document.getElementById('againBtn');
+    const cuisine = document.getElementById('cuisine');
+    const pickStatus = document.getElementById('pickStatus');
+    const suggestion = document.getElementById('suggestion');
+    const allMatches = document.getElementById('allMatches');
+    const allTitle = document.getElementById('allTitle');
+
+    for (const c of CUISINES) cuisine.add(new Option(c, c.toLowerCase()));
+
+    let current = { diet: 'veg', meal: 'breakfast', cuisine: 'any' };
+    let lastPick = null;
+
+    const choices = () => ({
+      diet: document.getElementById('diet').value,
+      meal: document.getElementById('meal').value,
+      cuisine: cuisine.value,
+    });
+    const cap = s => s[0].toUpperCase() + s.slice(1);
+    const cuisineName = v => (v === 'any' ? 'Any cuisine' : cap(v));
+
+    function showDish(dish) {
+      const target = Number(localStorage.getItem(TARGET_KEY));
+      document.getElementById('suggestionLine').textContent =
+        `${cuisineName(current.cuisine === 'any' ? dish.cuisine.toLowerCase() : current.cuisine)} · ${cap(dish.meal)}${dish.diet === 'veg' ? ' · Vegetarian' : ''}`;
+      document.getElementById('dishName').textContent = dish.name;
+      document.getElementById('dishServing').textContent = `Typical serving: ${dish.serving}`;
+      document.getElementById('kcal').textContent = dish.kcal;
+      document.getElementById('protein').textContent = dish.protein;
+      document.getElementById('carbs').textContent = dish.carbs;
+      document.getElementById('fat').textContent = dish.fat;
+
+      const fit = document.getElementById('targetFit');
+      if (target > 0) {
+        const share = Math.round((dish.kcal / (target * MEAL_SHARE[dish.meal])) * 100);
+        fit.textContent = `About ${share}% of your ${cap(dish.meal).toLowerCase()} share of your daily target (${Math.round(target * MEAL_SHARE[dish.meal])} kcal). Set your target in the Calorie Counter.`;
+      } else {
+        fit.textContent = 'Use the Calorie Counter to set your daily target and see how this dish fits.';
+      }
+      suggestion.hidden = false;
+      againBtn.hidden = false;
+    }
+
+    function run() {
+      current = choices();
+      const matches = matchingMeals(current);
+      suggestion.hidden = true;
+      againBtn.hidden = true;
+      allMatches.innerHTML = '';
+      allTitle.hidden = true;
+
+      if (matches.length === 0) {
+        pickStatus.textContent = 'No dishes match that combination yet. Try another cuisine or meal time.';
+        pickStatus.classList.add('error');
+        return;
+      }
+      pickStatus.textContent = '';
+      pickStatus.classList.remove('error');
+
+      // Pick at random, avoiding the same dish twice in a row when there is a choice
+      const pool = matches.length > 1 ? matches.filter(m => m !== lastPick) : matches;
+      lastPick = pool[Math.floor(Math.random() * pool.length)];
+      showDish(lastPick);
+
+      allTitle.hidden = false;
+      allMatches.innerHTML = matches
+        .map(m => `<li><strong>${m.name}</strong> (${cuisineName(m.cuisine.toLowerCase())}): ${m.kcal} kcal, ${m.protein} g protein</li>`)
+        .join('');
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      run();
+    });
+    againBtn.addEventListener('click', run);
+
+  </script>
+</body>
+</html>
