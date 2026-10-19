@@ -98,6 +98,15 @@ export const TOOLS = [
     keywords: ['json', 'compare', 'diff', 'difference', 'changes', 'json diff'],
   },
   {
+    name: 'JSON Mock Generator',
+    path: 'pages/json-mock-generator.html',
+    icon: '{ }',
+    category: 'json',
+    textCard: true,
+    description: 'Generate mock JSON with a chosen number of keys and nesting depth. Copy or download it.',
+    keywords: ['json', 'mock', 'fake', 'random', 'generator', 'sample', 'test data', 'nested', 'keys'],
+  },
+  {
     name: 'Encoder',
     path: 'pages/encoder.html',
     icon: '🔣',

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Mock Generator - Random Test JSON | UtilDeck</title>
+  <meta name="description" content="Generate random mock JSON for testing. Choose the number of keys per object and the nesting depth. Copy or download the result. Free, runs in your browser.">
+  <meta name="keywords" content="json generator, mock json, fake json, random json generator, sample json, test json data, json schema test data, free developer tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/json-mock-generator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="JSON Mock Generator - Random Test JSON | UtilDeck">
+  <meta property="og:description" content="Generate random mock JSON for testing. Choose the number of keys per object and the nesting depth. Copy or download the result. Free, runs in your browser.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/json-mock-generator.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JSON Mock Generator - Random Test JSON | UtilDeck">
+  <meta name="twitter:description" content="Generate random mock JSON for testing. Choose the number of keys per object and the nesting depth. Copy or download the result. Free, runs in your browser.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>JSON Mock Generator</h2>
+      <p class="tool-description">
+        Make a sample JSON document for testing an API, a form or a database. Choose how many keys each object has and how deeply objects are nested. Values are random strings, numbers, booleans and nulls.
+      </p>
+
+      <form id="form" class="control-panel" novalidate>
+        <div class="field">
+          <label for="keys">Keys per object (1 to 20)</label>
+          <input type="number" id="keys" class="text-input" min="1" max="20" value="3">
+        </div>
+        <div class="field">
+          <label for="depth">Nesting depth (1 to 10)</label>
+          <input type="number" id="depth" class="text-input" min="1" max="10" value="2">
+        </div>
+        <div class="control-row control-row-full">
+          <button type="submit" class="btn btn-primary">Generate JSON</button>
+        </div>
+      </form>
+
+      <p id="status" class="status" aria-live="polite"></p>
+
+      <div class="output-header">
+        <h3>JSON</h3>
+        <div class="output-actions">
+          <button id="copyBtn" class="btn btn-secondary">Copy</button>
+          <button id="downloadBtn" class="btn btn-secondary">Download .json</button>
+        </div>
+      </div>
+      <textarea id="output" class="output-box" readonly spellcheck="false" style="min-height: 360px;" placeholder="Your mock JSON will appear here..."></textarea>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-json-mock-generator">
+      <h2 id="guide-json-mock-generator">How to use JSON Mock Generator</h2>
+      <ol class="guide-steps"><li>Set how many keys each object should have.</li><li>Set how deeply objects should be nested.</li><li>Copy the JSON or download it as mock.json.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>What is mock JSON?</h3><p>Sample JSON with made-up values, used to test an API, form or database before real data exists.</p></div><div class="faq-item"><h3>Why is there a limit?</h3><p>Each extra level multiplies the number of objects. The limit keeps the page responsive, and the message tells you how many objects a request would create.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/json-compare.html">JSON Compare</a></li><li><a href="pages/json-formatter.html">JSON Formatter</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "JSON Mock Generator", "description": "Generate mock JSON with a chosen number of keys and nesting depth. Copy or download it.", "url": "https://utildeck.bot747.workers.dev/pages/json-mock-generator.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is mock JSON?", "acceptedAnswer": {"@type": "Answer", "text": "Sample JSON with made-up values, used to test an API, form or database before real data exists."}}, {"@type": "Question", "name": "Why is there a limit?", "acceptedAnswer": {"@type": "Answer", "text": "Each extra level multiplies the number of objects. The limit keeps the page responsive, and the message tells you how many objects a request would create."}}]}]}</script>
+  <script type="module">
+    import { initTheme, copyText } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { generateMockJson } from '../scripts/json-mock.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const keys = document.getElementById('keys'), depth = document.getElementById('depth');
+    const output = document.getElementById('output'), status = document.getElementById('status');
+    const copyBtn = document.getElementById('copyBtn'), downloadBtn = document.getElementById('downloadBtn');
+    let text = '';
+    const generate = () => {
+      try {
+        const doc = generateMockJson({ keys: keys.value, depth: depth.value });
+        text = JSON.stringify(doc, null, 2);
+        output.value = text;
+        status.textContent = `Generated ${(new Blob([text]).size / 1024).toFixed(1)} KB of JSON.`;
+        status.classList.remove('error');
+      } catch (err) {
+        text = ''; output.value = '';
+        status.textContent = err.message; status.classList.add('error');
+      }
+    };
+    document.getElementById('form').addEventListener('submit', e => { e.preventDefault(); generate(); });
+    [keys, depth].forEach(el => el.addEventListener('input', generate));
+    copyBtn.addEventListener('click', () => copyText(text, copyBtn));
+    downloadBtn.addEventListener('click', () => {
+      if (!text) return;
+      const url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
+      const a = document.createElement('a');
+      a.href = url; a.download = 'mock.json';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
+    generate();
+
+  </script>
+</body>
+</html>
