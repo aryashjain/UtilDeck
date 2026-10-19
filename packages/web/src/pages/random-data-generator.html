@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Data Generator - CSV and JSON, up to 1 Million Rows | UtilDeck</title>
+  <meta name="description" content="Make random table data as CSV or JSON: up to 10 columns and 1,000,000 rows. Names, emails, UUIDs, numbers and dates. Runs in your browser.">
+  <meta name="keywords" content="random data generator, fake csv generator, random csv, test data generator, mock data csv, random json rows, free developer tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/random-data-generator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="Random Data Generator - CSV and JSON, up to 1 Million Rows | UtilDeck">
+  <meta property="og:description" content="Make random table data as CSV or JSON: up to 10 columns and 1,000,000 rows. Names, emails, UUIDs, numbers and dates. Runs in your browser.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/random-data-generator.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Random Data Generator - CSV and JSON, up to 1 Million Rows | UtilDeck">
+  <meta name="twitter:description" content="Make random table data as CSV or JSON: up to 10 columns and 1,000,000 rows. Names, emails, UUIDs, numbers and dates. Runs in your browser.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Random Data Generator</h2>
+      <p class="tool-description">Make random table data: up to 10 columns and 1,000,000 rows, as CSV or JSON. Pick a column type for each column. Preview the first rows, then download the full file.</p>
+      <form id="form" class="control-panel" novalidate>
+        <div class="field"><label for="cols">Columns (1 to 10)</label><input type="number" id="cols" class="text-input" min="1" max="10" value="3"></div>
+        <div class="field"><label for="rows">Rows (1 to 1,000,000)</label><input type="number" id="rows" class="text-input" min="1" max="1000000" value="100"></div>
+        <div class="field"><label for="format">File format</label><select id="format" class="text-input"><option value="csv">CSV</option><option value="json">JSON</option></select></div>
+        <div class="field"><label class="checkbox-option" style="margin-top: 1.7rem;"><input type="checkbox" id="header" checked> Include column names (CSV)</label></div>
+        <div class="field field-full"><label>Column types</label><div id="colTypes" class="values-grid"></div></div>
+      </form>
+      <p id="status" class="status" aria-live="polite"></p>
+      <div class="control-row">
+        <button id="previewBtn" class="btn btn-primary">Preview</button>
+        <button id="downloadBtn" class="btn btn-primary">Download full file</button>
+        <button id="copyBtn" class="btn btn-secondary">Copy (up to 10,000 rows)</button>
+      </div>
+      <h3 class="related-title">Preview (first 20 rows)</h3>
+      <div class="diff-table-wrap"><table class="diff-table"><thead id="previewHead"></thead><tbody id="previewBody"></tbody></table></div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-random-data-generator">
+      <h2 id="guide-random-data-generator">How to use Random Data Generator</h2>
+      <ol class="guide-steps"><li>Choose the number of columns, up to 10.</li><li>Pick a type for each column and the number of rows, up to 1,000,000.</li><li>Preview, then download the CSV or JSON file.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>How big a file can I make?</h3><p>Up to 1,000,000 rows and 10 columns. Large files take longer, and copy works up to 10,000 rows.</p></div><div class="faq-item"><h3>Is this data real?</h3><p>No. Names, emails and phone numbers are made up. Phones use the 555 range, and emails use example.com.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/generators.html">Generators</a></li><li><a href="pages/email-generator.html">Email Generator</a></li><li><a href="pages/password-generator.html">Password Generator</a></li><li><a href="pages/random-name-picker.html">Random Name Picker</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Random Data Generator", "description": "Random table data as CSV or JSON: up to 10 columns and 1,000,000 rows.", "url": "https://utildeck.bot747.workers.dev/pages/random-data-generator.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How big a file can I make?", "acceptedAnswer": {"@type": "Answer", "text": "Up to 1,000,000 rows and 10 columns. Large files take longer, and copy works up to 10,000 rows."}}, {"@type": "Question", "name": "Is this data real?", "acceptedAnswer": {"@type": "Answer", "text": "No. Names, emails and phone numbers are made up. Phones use the 555 range, and emails use example.com."}}]}]}</script>
+  <script type="module">
+    import { initTheme, copyText } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { COLUMN_TYPES, MAX_COLUMNS, MAX_ROWS, MAX_COPY_ROWS, validateTable, tableChunks, sampleRows } from '../scripts/data-tools.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const $ = id => document.getElementById(id);
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    const TYPE_OPTIONS = Object.entries(COLUMN_TYPES).map(([k, v]) => `<option value="${k}">${esc(v.label)}</option>`).join('');
+    let copyText_ = '';
+
+    function buildColumnPickers() {
+      const n = Math.min(MAX_COLUMNS, Math.max(1, Number($('cols').value) || 1));
+      const current = [...document.querySelectorAll('#colTypes select')].map(s => s.value);
+      const defaults = ['uuid', 'firstName', 'email', 'integer', 'boolean', 'date', 'word', 'phone', 'decimal', 'lastName'];
+      $('colTypes').innerHTML = Array.from({ length: n }, (_, i) => {
+        const value = current[i] || defaults[i];
+        return `<div class="field"><label>Column ${i + 1}</label><select class="text-input">${TYPE_OPTIONS}</select></div>`;
+      }).join('');
+      [...document.querySelectorAll('#colTypes select')].forEach((s, i) => { s.value = current[i] || defaults[i]; });
+    }
+    const types = () => [...document.querySelectorAll('#colTypes select')].map(s => s.value);
+
+    function check() {
+      try { return validateTable({ types: types(), rows: $('rows').value }); }
+      catch (err) { $('status').textContent = err.message; $('status').classList.add('error'); return null; }
+    }
+
+    function preview() {
+      const n = check();
+      if (n === null) return;
+      const t = types();
+      $('previewHead').innerHTML = '<tr>' + t.map(k => `<th>${esc(COLUMN_TYPES[k].label)}</th>`).join('') + '</tr>';
+      $('previewBody').innerHTML = sampleRows(t, Math.min(20, n)).map(r => '<tr>' + r.map(c => `<td>${esc(c)}</td>`).join('') + '</tr>').join('');
+      $('status').textContent = `Preview of ${Math.min(20, n)} of ${n.toLocaleString()} rows. Each preview is new random data.`;
+      $('status').classList.remove('error');
+    }
+
+    async function download() {
+      const n = check();
+      if (n === null) return;
+      const parts = [];
+      const it = tableChunks({ types: types(), rows: n, format: $('format').value, header: $('header').checked });
+      let done = 0;
+      for (const chunk of it) {
+        parts.push(chunk);
+        done += chunk.length;
+        $('status').textContent = `Building the file… ${n.toLocaleString()} rows requested.`;
+        await new Promise(r => setTimeout(r, 0));
+      }
+      const type = $('format').value === 'csv' ? 'text/csv' : 'application/json';
+      const url = URL.createObjectURL(new Blob(parts, { type }));
+      const a = document.createElement('a');
+      a.href = url; a.download = `random-data-${n}.${$('format').value}`;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+      $('status').textContent = `Downloaded ${n.toLocaleString()} rows.`; $('status').classList.remove('error');
+    }
+
+    function copyFull() {
+      const n = check();
+      if (n === null) return;
+      if (n > MAX_COPY_ROWS) { $('status').textContent = `Copy works up to ${MAX_COPY_ROWS.toLocaleString()} rows. Use Download for more.`; $('status').classList.add('error'); return; }
+      const text = [...tableChunks({ types: types(), rows: n, format: $('format').value, header: $('header').checked })].join('');
+      copyText(text, $('copyBtn'));
+    }
+
+    $('cols').addEventListener('input', buildColumnPickers);
+    $('form').addEventListener('submit', e => { e.preventDefault(); preview(); });
+    ['rows', 'format', 'header'].forEach(id => $(id).addEventListener('input', () => { check(); }));
+    $('colTypes').addEventListener('change', preview);
+    $('previewBtn').addEventListener('click', preview);
+    $('downloadBtn').addEventListener('click', download);
+    $('copyBtn').addEventListener('click', copyFull);
+    buildColumnPickers();
+    preview();
+
+  </script>
+</body>
+</html>

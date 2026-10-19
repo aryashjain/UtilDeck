@@ -390,6 +390,33 @@ export const TOOLS = [
     description: 'Remove a solid-colour background and download a transparent PNG.',
     keywords: ['background', 'remove background', 'transparent', 'png', 'cutout', 'logo', 'white background'],
   },
+  {
+    name: 'UUID Generator',
+    path: 'pages/uuid-generator.html',
+    icon: '🆔',
+    category: 'generate',
+    textCard: true,
+    description: 'Bulk random version 4 UUIDs, up to 1,000,000, with copy and download.',
+    keywords: ['uuid', 'guid', 'generator', 'random', 'bulk', 'identifier', 'v4'],
+  },
+  {
+    name: 'URL Parser and Builder',
+    path: 'pages/url-tools.html',
+    icon: '🔗',
+    category: 'developer',
+    textCard: true,
+    description: 'Split a link into its parts, edit query parameters, and rebuild the link.',
+    keywords: ['url', 'link', 'parser', 'builder', 'query string', 'parameters', 'decode', 'encode', 'href'],
+  },
+  {
+    name: 'Random Data Generator',
+    path: 'pages/random-data-generator.html',
+    icon: '🧪',
+    category: 'generate',
+    textCard: true,
+    description: 'Random table data as CSV or JSON: up to 10 columns and 1,000,000 rows.',
+    keywords: ['random data', 'csv', 'json', 'test data', 'mock data', 'fake data', 'table', 'rows', 'columns', 'generator'],
+  },
 ];
 
 const CATEGORY_NAMES = Object.fromEntries(CATEGORIES.map(c => [c.id, c.name]));
