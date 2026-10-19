@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Background Remover - Remove Plain Backgrounds | UtilDeck</title>
+  <meta name="description" content="Remove a plain or solid-colour background from an image and download a transparent PNG. Runs in your browser; images are not uploaded. Free.">
+  <meta name="keywords" content="background remover, remove background, transparent background, remove white background, png transparent, free image tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/background-remover.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="Background Remover - Remove Plain Backgrounds | UtilDeck">
+  <meta property="og:description" content="Remove a plain or solid-colour background from an image and download a transparent PNG. Runs in your browser; images are not uploaded. Free.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/background-remover.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Background Remover - Remove Plain Backgrounds | UtilDeck">
+  <meta name="twitter:description" content="Remove a plain or solid-colour background from an image and download a transparent PNG. Runs in your browser; images are not uploaded. Free.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Background Remover</h2>
+      <p class="tool-description">Remove a plain, solid-colour background, such as a white or flat-coloured backdrop around a logo or product. The result is a PNG with a transparent background. Works in your browser; the picture is never uploaded. It does not handle busy photo backgrounds.</p>
+      <label id="dropZone" class="drop-zone" tabindex="0">
+        <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp" hidden>
+        <span class="drop-zone-title">Drop an image here, or click to choose one</span>
+        <span class="drop-zone-hint">PNG, JPEG or WebP. Large images are reduced to 1600 pixels.</span>
+      </label>
+      <div id="workspace" hidden>
+        <div class="control-panel">
+          <div class="field field-full">
+            <label for="tolerance">Tolerance: <strong id="toleranceValue">30</strong> (higher removes more similar colours)</label>
+            <input type="range" id="tolerance" min="0" max="100" value="30">
+          </div>
+        </div>
+        <p id="status" class="status" aria-live="polite"></p>
+        <div class="checker-wrap"><canvas id="out"></canvas></div>
+        <div class="control-row" style="margin-top: 1rem;">
+          <button id="downloadBtn" class="btn btn-primary">Download PNG</button>
+          <button id="replaceBtn" class="btn btn-secondary">Choose another image</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-background-remover">
+      <h2 id="guide-background-remover">How to use Background Remover</h2>
+      <ol class="guide-steps"><li>Drop an image with a plain background.</li><li>Adjust the tolerance until only the background is transparent.</li><li>Download the PNG.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>Why does it leave some background behind?</h3><p>It removes one solid colour, taken from the edges. Busy or shaded backgrounds need an AI-based remover.</p></div><div class="faq-item"><h3>Is my image uploaded?</h3><p>No. Everything happens in your browser, and the PNG is made on your device.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/image-compressor.html">Image Compressor</a></li><li><a href="pages/image-cropper.html">Image Cropper</a></li><li><a href="pages/favicon-generator.html">Favicon Generator</a></li><li><a href="pages/svg-optimiser.html">SVG Optimiser</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Background Remover", "description": "Remove a solid-colour background and download a transparent PNG.", "url": "https://utildeck.bot747.workers.dev/pages/background-remover.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why does it leave some background behind?", "acceptedAnswer": {"@type": "Answer", "text": "It removes one solid colour, taken from the edges. Busy or shaded backgrounds need an AI-based remover."}}, {"@type": "Question", "name": "Is my image uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. Everything happens in your browser, and the PNG is made on your device."}}]}]}</script>
+  <script type="module">
+    import { initTheme } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { removeBackground } from '../scripts/background.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const $ = id => document.getElementById(id);
+    const MAX = 1600;
+    let source = null;   // ImageData of the reduced original
+    let pending = 0;
+    const dz = $('dropZone');
+
+    function loadFile(file) {
+      if (!file || !file.type.startsWith('image/')) { $('status').textContent = 'Please choose a PNG, JPEG or WebP image.'; $('status').classList.add('error'); return; }
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        const scale = Math.min(1, MAX / Math.max(img.naturalWidth, img.naturalHeight));
+        const c = document.createElement('canvas');
+        c.width = Math.round(img.naturalWidth * scale); c.height = Math.round(img.naturalHeight * scale);
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0, c.width, c.height);
+        source = ctx.getImageData(0, 0, c.width, c.height);
+        URL.revokeObjectURL(url);
+        dz.hidden = true; $('workspace').hidden = false;
+        update();
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); $('status').textContent = 'That file could not be read as an image.'; $('status').classList.add('error'); };
+      img.src = url;
+    }
+
+    function update() {
+      if (!source) return;
+      const id = ++pending;
+      const t = Number($('tolerance').value);
+      $('toleranceValue').textContent = t;
+      // Yield to the browser so the slider stays responsive while the image is processed
+      setTimeout(() => {
+        if (id !== pending) return;
+        const result = removeBackground(source, t);
+        const canvas = $('out');
+        canvas.width = result.width; canvas.height = result.height;
+        canvas.getContext('2d').putImageData(new ImageData(result.data, result.width, result.height), 0, 0);
+        const pct = Math.round((result.removed / (result.width * result.height)) * 100);
+        $('status').textContent = `Removed about ${pct}% of the picture as background (colour ${result.colour.r}, ${result.colour.g}, ${result.colour.b}).`;
+        $('status').classList.remove('error');
+      }, 0);
+    }
+
+    $('fileInput').addEventListener('change', () => loadFile($('fileInput').files[0]));
+    $('tolerance').addEventListener('input', update);
+    $('replaceBtn').addEventListener('click', () => { $('workspace').hidden = true; dz.hidden = false; $('fileInput').value = ''; $('fileInput').click(); });
+    $('downloadBtn').addEventListener('click', () => {
+      $('out').toBlob(blob => {
+        if (!blob) return;
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = 'no-background.png';
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }, 'image/png');
+    });
+    dz.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('fileInput').click(); } });
+    dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('dragging'); });
+    dz.addEventListener('dragleave', () => dz.classList.remove('dragging'));
+    dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('dragging'); loadFile(e.dataTransfer.files[0]); });
+
+  </script>
+</body>
+</html>

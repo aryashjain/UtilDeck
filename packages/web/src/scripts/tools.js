@@ -363,6 +363,33 @@ export const TOOLS = [
     description: 'One image into favicon.ico, PNG favicons, the Apple touch icon and manifest.json.',
     keywords: ['favicon', 'favicon generator', 'ico', 'icon', 'apple touch icon', 'manifest', 'pwa', 'app icon', 'website icon'],
   },
+  {
+    name: 'Code Formatter and Minifier',
+    path: 'pages/code-formatter.html',
+    icon: '{ }',
+    category: 'developer',
+    textCard: true,
+    description: 'Format or minify HTML, CSS and JavaScript. Runs in your browser.',
+    keywords: ['code', 'formatter', 'beautify', 'minify', 'minifier', 'html', 'css', 'javascript', 'js', 'pretty print'],
+  },
+  {
+    name: 'SVG Optimiser',
+    path: 'pages/svg-optimiser.html',
+    icon: '✂',
+    category: 'image',
+    textCard: true,
+    description: 'Make SVG files smaller by removing unneeded data, with a live preview.',
+    keywords: ['svg', 'optimiser', 'optimizer', 'svgo', 'compress', 'minify', 'icon', 'vector'],
+  },
+  {
+    name: 'Background Remover',
+    path: 'pages/background-remover.html',
+    icon: '🖼',
+    category: 'image',
+    textCard: true,
+    description: 'Remove a solid-colour background and download a transparent PNG.',
+    keywords: ['background', 'remove background', 'transparent', 'png', 'cutout', 'logo', 'white background'],
+  },
 ];
 
 const CATEGORY_NAMES = Object.fromEntries(CATEGORIES.map(c => [c.id, c.name]));

@@ -1729,3 +1729,26 @@ html.dark-mode .theme-toggle::before {
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-size: 0.85rem;
 }
+
+/* Background remover: transparency shown as a checkerboard */
+.checker-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-color);
+  background-color: #d9d9d9;
+  background-image:
+    linear-gradient(45deg, #bdbdbd 25%, transparent 25%),
+    linear-gradient(-45deg, #bdbdbd 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #bdbdbd 75%),
+    linear-gradient(-45deg, transparent 75%, #bdbdbd 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+  overflow: auto;
+}
+
+.checker-wrap canvas {
+  max-width: 100%;
+  height: auto;
+}

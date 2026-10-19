@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Formatter and Minifier - HTML, CSS, JavaScript | UtilDeck</title>
+  <meta name="description" content="Format or minify HTML, CSS and JavaScript in your browser. Makes code readable, or smaller for production. Free, nothing uploaded.">
+  <meta name="keywords" content="code formatter, html formatter, css beautifier, javascript beautifier, minify javascript, minify css, minify html, free developer tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/code-formatter.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="Code Formatter and Minifier - HTML, CSS, JavaScript | UtilDeck">
+  <meta property="og:description" content="Format or minify HTML, CSS and JavaScript in your browser. Makes code readable, or smaller for production. Free, nothing uploaded.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/code-formatter.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Code Formatter and Minifier - HTML, CSS, JavaScript | UtilDeck">
+  <meta name="twitter:description" content="Format or minify HTML, CSS and JavaScript in your browser. Makes code readable, or smaller for production. Free, nothing uploaded.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <script src="../assets/vendor/code-tools.min.js"></script>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Code Formatter and Minifier</h2>
+      <p class="tool-description">Format HTML, CSS or JavaScript so it is easy to read, or minify it to make it smaller. Runs in your browser; nothing is sent anywhere.</p>
+      <form id="form" class="control-panel" novalidate>
+        <div class="field">
+          <label for="lang">Language</label>
+          <select id="lang" class="text-input"><option value="html">HTML</option><option value="css">CSS</option><option value="js">JavaScript</option></select>
+        </div>
+        <div class="field">
+          <label for="mode">Action</label>
+          <select id="mode" class="text-input"><option value="format">Format (make readable)</option><option value="minify">Minify (make smaller)</option></select>
+        </div>
+      </form>
+      <div class="split-layout" style="height: auto;">
+        <div class="split-input"><div class="split-input-pair"><label for="input">Input</label>
+          <textarea id="input" class="output-box" style="min-height: 320px;" spellcheck="false">&lt;div class="card"&gt;&lt;p&gt;Hello&lt;/p&gt;&lt;/div&gt;</textarea></div></div>
+        <div class="split-input"><div class="split-input-pair"><label for="output">Output</label>
+          <textarea id="output" class="output-box" style="min-height: 320px;" readonly spellcheck="false"></textarea></div></div>
+      </div>
+      <p id="stats" class="status" aria-live="polite"></p>
+      <p id="status" class="status" aria-live="polite"></p>
+      <div class="control-row">
+        <button id="copyBtn" class="btn btn-secondary">Copy output</button>
+        <button id="downloadBtn" class="btn btn-secondary">Download</button>
+      </div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-code-formatter">
+      <h2 id="guide-code-formatter">How to use Code Formatter and Minifier</h2>
+      <ol class="guide-steps"><li>Paste HTML, CSS or JavaScript.</li><li>Choose Format to make it readable, or Minify to make it smaller.</li><li>Copy the output or download it.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>Does this run my code?</h3><p>No. It only reformats or shrinks the text. Nothing is executed or sent anywhere.</p></div><div class="faq-item"><h3>Why minify code?</h3><p>Smaller files load faster. Keep the readable version for development and minify for production.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/encoder.html">Encoder</a></li><li><a href="pages/regex-tester.html">Regex Tester</a></li><li><a href="pages/hash-generator.html">Hash Generator</a></li><li><a href="pages/markdown-preview.html">Markdown Preview</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Code Formatter and Minifier", "description": "Format or minify HTML, CSS and JavaScript. Runs in your browser.", "url": "https://utildeck.bot747.workers.dev/pages/code-formatter.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does this run my code?", "acceptedAnswer": {"@type": "Answer", "text": "No. It only reformats or shrinks the text. Nothing is executed or sent anywhere."}}, {"@type": "Question", "name": "Why minify code?", "acceptedAnswer": {"@type": "Answer", "text": "Smaller files load faster. Keep the readable version for development and minify for production."}}]}]}</script>
+  <script type="module">
+    import { initTheme, copyText } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const $ = id => document.getElementById(id);
+    const EXT = { html: 'html', css: 'css', js: 'js' };
+    let run = 0, latest = '';
+    const bytes = s => new Blob([s]).size;
+    async function update() {
+      const id = ++run;
+      const lang = $('lang').value, mode = $('mode').value, src = $('input').value;
+      if (!src.trim()) { $('output').value = ''; latest = ''; $('stats').textContent = ''; $('status').textContent = ''; return; }
+      try {
+        const tools = window.CodeTools;
+        let out;
+        if (mode === 'format') out = tools.beautify[lang](src);
+        else out = await tools.minify[lang](src);
+        if (id !== run) return; // a newer change has started
+        out = String(out);
+        $('output').value = out; latest = out;
+        const before = bytes(src), after = bytes(out);
+        const saved = before > 0 ? Math.round((1 - after / before) * 100) : 0;
+        $('stats').textContent = `${before} bytes in, ${after} bytes out${mode === 'minify' ? ` (${saved}% smaller)` : ''}.`;
+        $('status').textContent = ''; $('status').classList.remove('error');
+      } catch (err) {
+        if (id !== run) return;
+        $('output').value = ''; latest = '';
+        $('stats').textContent = '';
+        $('status').textContent = 'This code could not be processed: ' + (err && err.message ? err.message : 'check the syntax.');
+        $('status').classList.add('error');
+      }
+    }
+    ['input', 'lang', 'mode'].forEach(id => $(id).addEventListener('input', update));
+    ['lang', 'mode'].forEach(id => $(id).addEventListener('change', update));
+    $('copyBtn').addEventListener('click', () => copyText(latest, $('copyBtn')));
+    $('downloadBtn').addEventListener('click', () => {
+      if (!latest) return;
+      const url = URL.createObjectURL(new Blob([latest], { type: 'text/plain' }));
+      const a = document.createElement('a');
+      a.href = url; a.download = `${$('mode').value}d.${EXT[$('lang').value]}`;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
+    update();
+
+  </script>
+</body>
+</html>

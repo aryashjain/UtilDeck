@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Optimiser - Make SVG Files Smaller | UtilDeck</title>
+  <meta name="description" content="Make SVG files smaller by removing comments, metadata and unused data, with a live preview. Runs in your browser. Free.">
+  <meta name="keywords" content="svg optimizer, svg optimiser, compress svg, svgo online, reduce svg size, clean svg code, free image tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/svg-optimiser.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="SVG Optimiser - Make SVG Files Smaller | UtilDeck">
+  <meta property="og:description" content="Make SVG files smaller by removing comments, metadata and unused data, with a live preview. Runs in your browser. Free.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/svg-optimiser.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SVG Optimiser - Make SVG Files Smaller | UtilDeck">
+  <meta name="twitter:description" content="Make SVG files smaller by removing comments, metadata and unused data, with a live preview. Runs in your browser. Free.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <script src="../assets/vendor/code-tools.min.js"></script>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>SVG Optimiser</h2>
+      <p class="tool-description">Remove the extra data that design tools leave in SVG files, such as comments, metadata and hidden groups. The picture looks the same, and the file is smaller. Runs in your browser.</p>
+      <label id="dropZone" class="drop-zone" tabindex="0">
+        <input type="file" id="fileInput" accept="image/svg+xml,.svg" hidden>
+        <span class="drop-zone-title">Drop an SVG here, or click to choose one</span>
+        <span class="drop-zone-hint">Or paste SVG code in the box below</span>
+      </label>
+      <div class="split-layout" style="height: auto; margin-top: 1rem;">
+        <div class="split-input"><div class="split-input-pair"><label for="input">Your SVG</label>
+          <textarea id="input" class="output-box" style="min-height: 260px;" spellcheck="false" placeholder="&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;...&lt;/svg&gt;"></textarea></div></div>
+        <div class="split-input"><div class="split-input-pair"><label for="output">Optimised SVG</label>
+          <textarea id="output" class="output-box" style="min-height: 260px;" readonly spellcheck="false"></textarea></div></div>
+      </div>
+      <p id="stats" class="status" aria-live="polite"></p>
+      <p id="status" class="status" aria-live="polite"></p>
+      <h3 class="related-title">Preview</h3>
+      <div class="qr-wrap" style="background: #ffffff;"><img id="preview" alt="Optimised SVG preview" width="200" height="200" hidden></div>
+      <div class="control-row" style="margin-top: 1rem;">
+        <button id="copyBtn" class="btn btn-secondary">Copy</button>
+        <button id="downloadBtn" class="btn btn-primary">Download .svg</button>
+      </div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-svg-optimiser">
+      <h2 id="guide-svg-optimiser">How to use SVG Optimiser</h2>
+      <ol class="guide-steps"><li>Paste SVG code or drop an SVG file.</li><li>Read how much smaller the optimised version is.</li><li>Check the preview, then download the .svg.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>Will the picture change?</h3><p>The shapes and colours stay the same. Only unneeded data such as comments and metadata is removed.</p></div><div class="faq-item"><h3>Is my SVG uploaded?</h3><p>No. The optimisation runs in your browser.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/image-compressor.html">Image Compressor</a></li><li><a href="pages/image-cropper.html">Image Cropper</a></li><li><a href="pages/favicon-generator.html">Favicon Generator</a></li><li><a href="pages/background-remover.html">Background Remover</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "SVG Optimiser", "description": "Make SVG files smaller by removing unneeded data, with a live preview.", "url": "https://utildeck.bot747.workers.dev/pages/svg-optimiser.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Will the picture change?", "acceptedAnswer": {"@type": "Answer", "text": "The shapes and colours stay the same. Only unneeded data such as comments and metadata is removed."}}, {"@type": "Question", "name": "Is my SVG uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. The optimisation runs in your browser."}}]}]}</script>
+  <script type="module">
+    import { initTheme, copyText } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const $ = id => document.getElementById(id);
+    const bytes = s => new Blob([s]).size;
+    let latest = '', previewUrl = null;
+    function optimise(src) {
+      if (!src.trim()) { $('output').value = ''; latest = ''; $('stats').textContent = ''; $('preview').hidden = true; return; }
+      if (!/<svg[\s>]/i.test(src)) { fail('That does not look like SVG. It should contain an <svg> element.'); return; }
+      try {
+        const out = window.CodeTools.svgo(src);
+        latest = out;
+        $('output').value = out;
+        const saved = Math.round((1 - bytes(out) / bytes(src)) * 100);
+        $('stats').textContent = `${bytes(src)} bytes, optimised to ${bytes(out)} bytes (${saved}% smaller).`;
+        $('status').textContent = ''; $('status').classList.remove('error');
+        if (previewUrl) URL.revokeObjectURL(previewUrl);
+        previewUrl = URL.createObjectURL(new Blob([out], { type: 'image/svg+xml' }));
+        $('preview').src = previewUrl; $('preview').hidden = false;
+      } catch (err) { fail('This SVG could not be optimised: ' + err.message); }
+    }
+    function fail(msg) {
+      $('output').value = ''; latest = ''; $('stats').textContent = '';
+      $('status').textContent = msg; $('status').classList.add('error'); $('preview').hidden = true;
+    }
+    function loadFile(file) {
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => { $('input').value = String(reader.result); optimise($('input').value); };
+      reader.readAsText(file);
+    }
+    $('input').addEventListener('input', () => optimise($('input').value));
+    $('fileInput').addEventListener('change', () => loadFile($('fileInput').files[0]));
+    const dz = $('dropZone');
+    dz.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('fileInput').click(); } });
+    dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('dragging'); });
+    dz.addEventListener('dragleave', () => dz.classList.remove('dragging'));
+    dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('dragging'); loadFile(e.dataTransfer.files[0]); });
+    $('copyBtn').addEventListener('click', () => copyText(latest, $('copyBtn')));
+    $('downloadBtn').addEventListener('click', () => {
+      if (!latest) return;
+      const url = URL.createObjectURL(new Blob([latest], { type: 'image/svg+xml' }));
+      const a = document.createElement('a');
+      a.href = url; a.download = 'optimised.svg';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
+
+  </script>
+</body>
+</html>
