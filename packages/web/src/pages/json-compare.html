@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Compare - Find Differences Between JSON | UtilDeck</title>
+  <meta name="description" content="Compare two JSON documents. See every value that differs, with its exact path, and the changed lines. Free, runs in your browser.">
+  <meta name="keywords" content="json compare, json diff, compare json, json difference, json checker, find json changes, free developer tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/json-compare.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="JSON Compare - Find Differences Between JSON | UtilDeck">
+  <meta property="og:description" content="Compare two JSON documents. See every value that differs, with its exact path, and the changed lines. Free, runs in your browser.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/json-compare.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JSON Compare - Find Differences Between JSON | UtilDeck">
+  <meta name="twitter:description" content="Compare two JSON documents. See every value that differs, with its exact path, and the changed lines. Free, runs in your browser.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>JSON Compare</h2>
+      <p class="tool-description">
+        Paste two JSON documents. We list every value that differs, with its exact path (such as <code>$.user.tags[1]</code>), and show the changed lines of the formatted JSON. Key order doesn't count as a difference.
+      </p>
+
+      <div class="split-layout" style="height: auto;">
+        <div class="split-input">
+          <div class="split-input-pair">
+            <label for="left">Original JSON</label>
+            <textarea id="left" class="output-box" style="min-height: 200px; height: 200px;" spellcheck="false" placeholder='{"name": "Ana", "tags": ["a", "b"]}'></textarea>
+          </div>
+        </div>
+        <div class="split-input">
+          <div class="split-input-pair">
+            <label for="right">Changed JSON</label>
+            <textarea id="right" class="output-box" style="min-height: 200px; height: 200px;" spellcheck="false" placeholder='{"name": "Ana", "tags": ["a", "c"]}'></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="control-row" style="margin-top: 1rem;">
+        <button id="compareBtn" class="btn btn-primary">Compare</button>
+      </div>
+      <p id="status" class="status" aria-live="polite"></p>
+
+      <section id="differences" hidden>
+        <h3 class="related-title">Values that differ</h3>
+        <div class="diff-table-wrap">
+          <table class="diff-table">
+            <thead><tr><th>Path</th><th>Change</th><th>Original</th><th>Changed</th></tr></thead>
+            <tbody id="diffRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="lineSection" hidden>
+        <h3 class="related-title">Changed lines (formatted, keys sorted)</h3>
+        <pre class="line-diff" id="lineDiff"></pre>
+      </section>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-json-compare">
+      <h2 id="guide-json-compare">How to use JSON Compare</h2>
+      <ol class="guide-steps"><li>Paste the original JSON in the left box and the changed JSON in the right box.</li><li>Read the list of values that differ, with the exact path of each one.</li><li>Use the changed lines below to see the difference in the formatted JSON.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>How do I compare two JSON files?</h3><p>Open both files, copy their contents, and paste one into each box. The differences appear as you type.</p></div><div class="faq-item"><h3>Does the order of keys matter?</h3><p>No. Keys are compared by name, and the changed-lines view sorts keys so reordering alone is not reported.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/encoder.html">Encoder</a></li><li><a href="pages/json-formatter.html">JSON Formatter</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "JSON Compare", "description": "Compare two JSON documents. See each changed value by path and the changed lines.", "url": "https://utildeck.bot747.workers.dev/pages/json-compare.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I compare two JSON files?", "acceptedAnswer": {"@type": "Answer", "text": "Open both files, copy their contents, and paste one into each box. The differences appear as you type."}}, {"@type": "Question", "name": "Does the order of keys matter?", "acceptedAnswer": {"@type": "Answer", "text": "No. Keys are compared by name, and the changed-lines view sorts keys so reordering alone is not reported."}}]}]}</script>
+  <script type="module">
+    import { initTheme } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { diffJson, canonicalLines, lineDiff, parsePair } from '../scripts/json-compare.js';
+
+    initNav();
+    initTheme(document.getElementById('themeToggle'));
+
+    const left = document.getElementById('left');
+    const right = document.getElementById('right');
+    const status = document.getElementById('status');
+    const differences = document.getElementById('differences');
+    const diffRows = document.getElementById('diffRows');
+    const lineSection = document.getElementById('lineSection');
+    const lineDiffEl = document.getElementById('lineDiff');
+
+    const MAX_LINES = 2000;
+    const snippet = value => {
+      if (value === undefined) return '(missing)';
+      const text = JSON.stringify(value);
+      return text.length > 120 ? text.slice(0, 117) + '...' : text;
+    };
+    const escapeHtml = text => text.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+
+    function compare() {
+      if (!left.value.trim() && !right.value.trim()) {
+        status.textContent = 'Paste two JSON documents to compare.';
+        status.classList.remove('error');
+        differences.hidden = true;
+        lineSection.hidden = true;
+        return;
+      }
+
+      const pair = parsePair(left.value, right.value);
+      if (pair.error) {
+        status.textContent = `The ${pair.side === 'left' ? 'original' : 'changed'} JSON is not valid: ${pair.error}`;
+        status.classList.add('error');
+        differences.hidden = true;
+        lineSection.hidden = true;
+        return;
+      }
+
+      const diffs = diffJson(pair.left, pair.right);
+      if (diffs.length === 0) {
+        status.textContent = 'The two JSON documents are identical.';
+        status.classList.remove('error');
+      } else {
+        status.textContent = `${diffs.length} difference${diffs.length === 1 ? '' : 's'} found.`;
+        status.classList.remove('error');
+      }
+
+      diffRows.innerHTML = diffs.map(d => `
+        <tr class="row-${d.kind}">
+          <td><code>${escapeHtml(d.path)}</code></td>
+          <td>${d.kind}</td>
+          <td><code>${escapeHtml(snippet(d.left))}</code></td>
+          <td><code>${escapeHtml(snippet(d.right))}</code></td>
+        </tr>`).join('');
+      differences.hidden = diffs.length === 0;
+
+      const leftLines = canonicalLines(pair.left);
+      const rightLines = canonicalLines(pair.right);
+      if (leftLines.length > MAX_LINES || rightLines.length > MAX_LINES) {
+        lineDiffEl.textContent = `Line view is limited to ${MAX_LINES} lines per document. The value list above is complete.`;
+      } else {
+        const ops = lineDiff(leftLines, rightLines);
+        const changed = ops.filter(o => o.type !== 'same');
+        lineDiffEl.innerHTML = changed.length === 0
+          ? 'No line differences.'
+          : ops.filter(o => o.type !== 'same')
+              .map(o => `<span class="line-${o.type}">${o.type === 'added' ? '+' : '-'} ${escapeHtml(o.text)}</span>`)
+              .join('');
+      }
+      lineSection.hidden = false;
+    }
+
+    document.getElementById('compareBtn').addEventListener('click', compare);
+    left.addEventListener('input', compare);
+    right.addEventListener('input', compare);
+
+  </script>
+</body>
+</html>

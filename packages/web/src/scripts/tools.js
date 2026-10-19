@@ -86,6 +86,14 @@ export const TOOLS = [
     keywords: ['compare', 'difference', 'changes', 'diff'],
   },
   {
+    name: 'JSON Compare',
+    path: 'pages/json-compare.html',
+    icon: '⚖️',
+    category: 'developer',
+    description: 'Compare two JSON documents. See each changed value by path and the changed lines.',
+    keywords: ['json', 'compare', 'diff', 'difference', 'changes', 'json diff'],
+  },
+  {
     name: 'Encoder',
     path: 'pages/encoder.html',
     icon: '🔣',
