@@ -70,13 +70,23 @@ export function lineDiff(a, b) {
   return ops;
 }
 
-// Parses both texts. Returns { left, right } values, or { error, side } if either is not valid JSON.
+// Points at the likely cause of an invalid JSON text: a colon with no value after it (the most common slip).
+// Returns { line, snippet, hint } or null when nothing obvious is found.
+export function locateError(text) {
+  const match = /:\s*(?=[,}\]])/.exec(text);
+  if (!match) return null;
+  const line = text.slice(0, match.index).split('\n').length;
+  const snippet = text.split('\n')[line - 1].trim();
+  return { line, snippet, hint: 'A value is missing after this colon.' };
+}
+
+// Parses both texts. Returns { left, right } values, or { error, side, line, snippet, hint } if either is not valid JSON.
 export function parsePair(leftText, rightText) {
   const parse = (text, side) => {
     try {
       return { value: JSON.parse(text) };
     } catch (err) {
-      return { error: err.message, side };
+      return { error: err.message, side, ...(locateError(text) || {}) };
     }
   };
   const l = parse(leftText, 'left');

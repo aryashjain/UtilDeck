@@ -148,7 +148,10 @@
 
       const pair = parsePair(left.value, right.value);
       if (pair.error) {
-        status.textContent = `The ${pair.side === 'left' ? 'original' : 'changed'} JSON is not valid: ${pair.error}`;
+        const which = pair.side === 'left' ? 'Original' : 'Changed';
+        const where = pair.line ? ` on line ${pair.line}` : '';
+        const detail = pair.hint ? ` ${pair.hint} Check: ${pair.snippet}` : ` ${pair.error}`;
+        status.textContent = `${which} JSON is not valid${where}.${detail}`;
         status.classList.add('error');
         differences.hidden = true;
         lineSection.hidden = true;
