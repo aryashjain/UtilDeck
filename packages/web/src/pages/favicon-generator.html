@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favicon Generator - ICO, PNG and Manifest from One Image | UtilDeck</title>
+  <meta name="description" content="Make favicon.ico, PNG favicons, the Apple touch icon, app icons and manifest.json from one image. Processed in your browser. Free.">
+  <meta name="keywords" content="favicon generator, favicon maker, ico generator, apple touch icon generator, manifest icons, favicon from image, free web tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/favicon-generator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="Favicon Generator - ICO, PNG and Manifest from One Image | UtilDeck">
+  <meta property="og:description" content="Make favicon.ico, PNG favicons, the Apple touch icon, app icons and manifest.json from one image. Processed in your browser. Free.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/favicon-generator.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Favicon Generator - ICO, PNG and Manifest from One Image | UtilDeck">
+  <meta name="twitter:description" content="Make favicon.ico, PNG favicons, the Apple touch icon, app icons and manifest.json from one image. Processed in your browser. Free.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Favicon Generator</h2>
+      <p class="tool-description">
+        Drop one square image (512 by 512 or larger works best). Get every icon a website needs: favicon.ico, PNG icons, the Apple touch icon, Android and app icons, and a manifest. Images are processed in your browser and never uploaded.
+      </p>
+
+      <label id="dropZone" class="drop-zone" tabindex="0">
+        <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp,image/svg+xml" hidden>
+        <span class="drop-zone-title">Drop an image here, or click to choose one</span>
+        <span class="drop-zone-hint">PNG, JPEG, WebP or SVG. Non-square images are cropped from the centre.</span>
+      </label>
+
+      <p id="status" class="status" aria-live="polite"></p>
+
+      <div id="workspace" hidden>
+        <div class="control-panel">
+          <div class="field">
+            <label for="appName">App name (for the manifest)</label>
+            <input type="text" id="appName" class="text-input" value="My Site" maxlength="60">
+          </div>
+          <div class="field">
+            <label for="shortName">Short name (for the manifest)</label>
+            <input type="text" id="shortName" class="text-input" value="Site" maxlength="20">
+          </div>
+          <div class="field">
+            <label for="themeColor">Theme colour</label>
+            <input type="color" id="themeColor" class="text-input" value="#4f46e5" style="height: 44px; padding: 4px;">
+          </div>
+        </div>
+
+        <h3 class="related-title">Files</h3>
+        <div id="fileGrid" class="favicon-grid"></div>
+
+        <div class="control-row" style="margin-top: 1rem;">
+          <button id="icoBtn" class="btn btn-primary">Download favicon.ico</button>
+          <button id="manifestBtn" class="btn btn-secondary">Download manifest.json</button>
+          <button id="copyTagsBtn" class="btn btn-secondary">Copy HTML tags</button>
+        </div>
+        <p class="tool-description">Put the files in the root folder of your site. The HTML tags go inside the head of each page.</p>
+      </div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-favicon-generator">
+      <h2 id="guide-favicon-generator">How to use Favicon Generator</h2>
+      <ol class="guide-steps"><li>Drop a square image, ideally 512 by 512 pixels or more.</li><li>Check the icon sizes, then download the ones you need or favicon.ico.</li><li>Put the files in your site&#x27;s root folder and paste the HTML tags into each page&#x27;s head.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>Which favicon files do I need?</h3><p>favicon.ico for older browsers, 32 and 16 pixel PNGs for tabs, a 180 pixel Apple touch icon, and 192 and 512 pixel icons with a manifest for installable apps.</p></div><div class="faq-item"><h3>Is my image uploaded?</h3><p>No. Icons are made in your browser, so the image never leaves your device.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/image-compressor.html">Image Compressor</a></li><li><a href="pages/image-cropper.html">Image Cropper</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Favicon Generator", "description": "One image into favicon.ico, PNG favicons, the Apple touch icon and manifest.json.", "url": "https://utildeck.bot747.workers.dev/pages/favicon-generator.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Which favicon files do I need?", "acceptedAnswer": {"@type": "Answer", "text": "favicon.ico for older browsers, 32 and 16 pixel PNGs for tabs, a 180 pixel Apple touch icon, and 192 and 512 pixel icons with a manifest for installable apps."}}, {"@type": "Question", "name": "Is my image uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. Icons are made in your browser, so the image never leaves your device."}}]}]}</script>
+  <script type="module">
+    import { initTheme, copyText } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { FAVICON_SIZES, ICO_SIZES, buildIco, manifestJson, headTags } from '../scripts/favicon.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const $ = id => document.getElementById(id);
+    const dropZone = $('dropZone'), fileInput = $('fileInput'), status = $('status');
+    const grid = $('fileGrid');
+    let frames = {};   // size -> Uint8Array (PNG bytes)
+    let previews = {}; // size -> object URL
+
+    const fileName = size => size === 180 ? 'apple-touch-icon.png' : `favicon-${size}.png`;
+
+    function renderToPng(img, size) {
+      const canvas = document.createElement('canvas');
+      canvas.width = size; canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      const side = Math.min(img.naturalWidth, img.naturalHeight);
+      const sx = (img.naturalWidth - side) / 2, sy = (img.naturalHeight - side) / 2;
+      ctx.drawImage(img, sx, sy, side, side, 0, 0, size, size);
+      return new Promise((resolve, reject) => canvas.toBlob(b => (b ? resolve(b) : reject(new Error('Could not encode the image.'))), 'image/png'));
+    }
+
+    async function generate(file) {
+      if (!file || !file.type.startsWith('image/')) {
+        status.textContent = 'Please choose a PNG, JPEG, WebP or SVG image.'; status.classList.add('error'); return;
+      }
+      status.textContent = 'Making icons…'; status.classList.remove('error');
+      const url = URL.createObjectURL(file);
+      try {
+        const img = await new Promise((resolve, reject) => {
+          const i = new Image();
+          i.onload = () => resolve(i);
+          i.onerror = () => reject(new Error('That file could not be read as an image.'));
+          i.src = url;
+        });
+        frames = {}; previews = {};
+        for (const size of FAVICON_SIZES) {
+          const blob = await renderToPng(img, size);
+          frames[size] = new Uint8Array(await blob.arrayBuffer());
+          previews[size] = URL.createObjectURL(blob);
+        }
+        drawGrid();
+        $('workspace').hidden = false;
+        dropZone.hidden = true;
+        status.textContent = `Made ${FAVICON_SIZES.length} icon sizes. Check them below, then download.`;
+      } catch (err) {
+        status.textContent = err.message; status.classList.add('error');
+      } finally {
+        URL.revokeObjectURL(url);
+      }
+    }
+
+    function drawGrid() {
+      grid.innerHTML = FAVICON_SIZES.map(size => `
+        <div class="favicon-card">
+          <img src="${previews[size]}" alt="${size} by ${size} icon" width="${Math.min(size, 96)}" height="${Math.min(size, 96)}">
+          <p class="favicon-name">${fileName(size)}</p>
+          <p class="counter">${size} × ${size}</p>
+          <button class="btn btn-secondary" data-size="${size}">Download</button>
+        </div>`).join('');
+    }
+
+    function download(blob, name) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = name;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    grid.addEventListener('click', e => {
+      const size = Number(e.target.dataset.size);
+      if (!size) return;
+      download(new Blob([frames[size]], { type: 'image/png' }), fileName(size));
+    });
+
+    $('icoBtn').addEventListener('click', () => {
+      const ico = buildIco(ICO_SIZES.map(size => ({ size, png: frames[size] })));
+      download(new Blob([ico], { type: 'image/x-icon' }), 'favicon.ico');
+    });
+
+    $('manifestBtn').addEventListener('click', () => {
+      const json = manifestJson({ name: $('appName').value || 'My Site', shortName: $('shortName').value || 'Site', themeColor: $('themeColor').value });
+      download(new Blob([json], { type: 'application/manifest+json' }), 'manifest.json');
+    });
+
+    $('copyTagsBtn').addEventListener('click', () => copyText(headTags('/'), $('copyTagsBtn')));
+
+    fileInput.addEventListener('change', () => generate(fileInput.files[0]));
+    dropZone.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); } });
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragging'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragging'));
+    dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('dragging'); generate(e.dataTransfer.files[0]); });
+
+  </script>
+</body>
+</html>

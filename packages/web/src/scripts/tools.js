@@ -354,6 +354,15 @@ export const TOOLS = [
     description: 'Focus and break timer with a sound at each change, for focused work.',
     keywords: ['pomodoro', 'timer', 'focus', 'break', 'productivity', 'study', '25 minutes'],
   },
+  {
+    name: 'Favicon Generator',
+    path: 'pages/favicon-generator.html',
+    icon: '🌐',
+    category: 'image',
+    textCard: true,
+    description: 'One image into favicon.ico, PNG favicons, the Apple touch icon and manifest.json.',
+    keywords: ['favicon', 'favicon generator', 'ico', 'icon', 'apple touch icon', 'manifest', 'pwa', 'app icon', 'website icon'],
+  },
 ];
 
 const CATEGORY_NAMES = Object.fromEntries(CATEGORIES.map(c => [c.id, c.name]));

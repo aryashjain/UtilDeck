@@ -1700,3 +1700,32 @@ html.dark-mode .theme-toggle::before {
 .pomodoro { text-align: center; padding: 1.5rem 0; }
 .pomo-phase { font-size: 1.1rem; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; }
 .pomo-clock { font-size: clamp(3.5rem, 12vw, 6rem); font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.1; margin: 0.5rem 0; color: var(--accent-color); }
+
+/* Favicon generator */
+.favicon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 1rem;
+}
+
+.favicon-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 1rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  text-align: center;
+}
+
+.favicon-card img {
+  background: repeating-conic-gradient(var(--bg-secondary) 0% 25%, var(--bg-primary) 0% 50%) 50% / 16px 16px;
+  border-radius: 0.25rem;
+}
+
+.favicon-name {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.85rem;
+}
