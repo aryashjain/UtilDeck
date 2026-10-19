@@ -27,10 +27,11 @@ const cardImage = tool => `assets/cards/${tool.card ? `${tool.card}.png` : tool.
 
 deckEl.innerHTML = ALL_TOOLS
   .map(tool => {
-    // Tools without their own artwork get a text card that shows the tool's own name
+    // Tools without their own artwork use the shared text card template, so every card has the same shape
     if (tool.textCard) {
       return `
     <a class="deck-card deck-card-text" href="${tool.path}" title="${tool.description}">
+      <span class="deck-medallion deck-medallion-text"><span class="deck-icon" aria-hidden="true">${tool.icon}</span></span>
       <span class="deck-card-label">${tool.name}</span>
     </a>`;
     }
