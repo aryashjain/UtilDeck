@@ -10,6 +10,7 @@ export const CATEGORIES = [
   { id: 'generate', name: 'Generate' },
   { id: 'image', name: 'Images' },
   { id: 'fitness', name: 'Fitness' },
+  { id: 'json', name: 'JSON' },
 ];
 
 export const NOTEPAD = {
@@ -89,7 +90,7 @@ export const TOOLS = [
     name: 'JSON Compare',
     path: 'pages/json-compare.html',
     icon: '⚖️',
-    category: 'developer',
+    category: 'json',
     description: 'Compare two JSON documents. See each changed value by path and the changed lines.',
     keywords: ['json', 'compare', 'diff', 'difference', 'changes', 'json diff'],
   },
@@ -105,7 +106,7 @@ export const TOOLS = [
     name: 'JSON Formatter',
     path: 'pages/json-formatter.html',
     icon: '{}',
-    category: 'developer',
+    category: 'json',
     description: 'Format, minify and validate JSON.',
     keywords: ['json', 'pretty print', 'beautify', 'minify', 'validate', 'lint'],
   },

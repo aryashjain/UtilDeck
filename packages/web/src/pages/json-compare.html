@@ -83,6 +83,7 @@
           <button id="copyReportBtn" class="btn btn-secondary">Copy report</button>
         </div>
         <h3 class="related-title">Values that differ</h3>
+        <div id="keyList" class="key-panel"></div>
         <div class="diff-table-wrap">
           <table class="diff-table">
             <thead><tr><th>Path</th><th>Change</th><th>Original</th><th>Changed</th></tr></thead>
@@ -165,11 +166,12 @@
 
       const diffs = diffJson(pair.left, pair.right);
       const s = summarize(diffs);
+      currentDiffs = diffs;
       summaryEl.innerHTML = `
-        <span class="summary-chip"><strong>${s.total}</strong> total</span>
-        <span class="summary-chip added"><strong>${s.added}</strong> added</span>
-        <span class="summary-chip removed"><strong>${s.removed}</strong> removed</span>
-        <span class="summary-chip changed"><strong>${s.changed}</strong> modified</span>`;
+        <button type="button" class="summary-chip" data-kind="all" aria-pressed="${filterKind === 'all'}"><strong>${s.total}</strong> total</button>
+        <button type="button" class="summary-chip added" data-kind="added" aria-pressed="${filterKind === 'added'}"><strong>${s.added}</strong> added</button>
+        <button type="button" class="summary-chip removed" data-kind="removed" aria-pressed="${filterKind === 'removed'}"><strong>${s.removed}</strong> removed</button>
+        <button type="button" class="summary-chip changed" data-kind="changed" aria-pressed="${filterKind === 'changed'}"><strong>${s.changed}</strong> modified</button>`;
       lastReport = formatReport(diffs);
       if (diffs.length === 0) {
         status.textContent = 'The two JSON documents are identical.';
@@ -179,13 +181,7 @@
         status.classList.remove('error');
       }
 
-      diffRows.innerHTML = diffs.map(d => `
-        <tr class="row-${d.kind}">
-          <td><code>${escapeHtml(d.path)}</code></td>
-          <td>${d.kind}</td>
-          <td><code>${escapeHtml(snippet(d.left))}</code></td>
-          <td><code>${escapeHtml(snippet(d.right))}</code></td>
-        </tr>`).join('');
+      renderRows();
       differences.hidden = diffs.length === 0;
 
       const leftLines = canonicalLines(pair.left);
@@ -206,7 +202,44 @@
 
     const summaryEl = document.getElementById('summary');
     const copyReportBtn = document.getElementById('copyReportBtn');
+    const keyList = document.getElementById('keyList');
     let lastReport = '';
+    let currentDiffs = [];
+    let filterKind = 'all';
+
+    const LABELS = { added: 'Added keys', removed: 'Removed keys', changed: 'Modified keys' };
+
+    // Shows the rows for the chosen kind, and lists their paths below the table
+    function renderRows() {
+      const shown = filterKind === 'all' ? currentDiffs : currentDiffs.filter(d => d.kind === filterKind);
+      diffRows.innerHTML = shown.map(d => `
+        <tr class="row-${d.kind}">
+          <td><code>${escapeHtml(d.path)}</code></td>
+          <td>${d.kind === 'changed' ? 'modified' : d.kind}</td>
+          <td><code>${escapeHtml(snippet(d.left))}</code></td>
+          <td><code>${escapeHtml(snippet(d.right))}</code></td>
+        </tr>`).join('');
+      if (filterKind === 'all') {
+        keyList.innerHTML = '';
+      } else {
+        keyList.innerHTML = `<h4>${LABELS[filterKind]} (${shown.length})</h4>` +
+          (shown.length
+            ? `<ul class="key-list">${shown.map(d => `<li><code>${escapeHtml(d.path)}</code></li>`).join('')}</ul>`
+            : '<p class="tool-description">None.</p>');
+      }
+      summaryEl.querySelectorAll('.summary-chip').forEach(b => {
+        b.setAttribute('aria-pressed', String(b.dataset.kind === filterKind));
+      });
+    }
+
+    // Clicking a count shows only those differences. Clicking it again shows everything.
+    summaryEl.addEventListener('click', e => {
+      const chip = e.target.closest('.summary-chip');
+      if (!chip) return;
+      const kind = chip.dataset.kind;
+      filterKind = filterKind === kind ? 'all' : kind;
+      renderRows();
+    });
 
     document.getElementById('compareBtn').addEventListener('click', compare);
     copyReportBtn.addEventListener('click', () => copyText(lastReport, copyReportBtn));

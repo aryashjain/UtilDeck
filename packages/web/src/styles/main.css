@@ -1627,3 +1627,26 @@ html.dark-mode .theme-toggle::before {
 .summary-chip.added { border-color: #22a55a; }
 .summary-chip.removed { border-color: var(--danger-color); }
 .summary-chip.changed { border-color: #d99a1e; }
+
+/* JSON compare: click a count to list its keys */
+button.summary-chip {
+  background: var(--bg-secondary);
+  font: inherit;
+  cursor: pointer;
+}
+
+button.summary-chip:hover,
+button.summary-chip[aria-pressed="true"] {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.key-panel h4 {
+  margin: 0.25rem 0 0.5rem;
+  font-size: 0.95rem;
+}
+
+.key-list {
+  margin: 0 0 1rem 1.25rem;
+  line-height: 1.8;
+}
