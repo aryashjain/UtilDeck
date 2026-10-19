@@ -138,7 +138,7 @@ export const TOOLS = [
     icon: '✉️',
     category: 'generate',
     textCard: true,
-    description: 'Make 1 to 10,000 random test email addresses. Copy them or download CSV or XLS.',
+    description: 'Make 1 to 50,000 random test email addresses. Copy them or download CSV or XLS.',
     keywords: ['email', 'emails', 'random email', 'fake email', 'test email', 'csv', 'xls', 'excel', 'list', 'generator'],
   },
   {

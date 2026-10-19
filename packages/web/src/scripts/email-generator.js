@@ -1,6 +1,6 @@
 // Random test email addresses. Defaults to example.com, a domain reserved for documentation and testing.
 
-export const MAX_COUNT = 10000;
+export const MAX_COUNT = 50000;
 
 const FIRST_NAMES = ['ava','liam','noah','emma','olivia','mia','ethan','lucas','amelia','sofia','aarav','isha','kabir','ananya','rohan','priya','arjun','meera','leo','zara','yuki','hiro','mei','chen','omar','layla','diego','lucia','pedro','elena','ivan','anya','sam','alex','jordan','taylor','riley','casey','morgan'];
 const LAST_NAMES = ['smith','patel','garcia','kim','nguyen','khan','silva','rossi','mueller','tanaka','singh','lopez','brown','wilson','martin','rao','das','ali','novak','moreau','costa','park','chen','hughes','walker','young','king','reed','cole','ford'];
