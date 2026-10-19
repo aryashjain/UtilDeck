@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Tester Online: Send HTTP Requests Free | UtilDeck</title>
+  <meta name="description" content="Send GET, POST, PUT, PATCH and DELETE requests and see the status, headers, timing and response. Free API tester in your browser.">
+  <meta name="keywords" content="api tester, http request tester, rest api tester, online api client, send http request, free developer tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/api-tester.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="API Tester Online: Send HTTP Requests Free | UtilDeck">
+  <meta property="og:description" content="Send GET, POST, PUT, PATCH and DELETE requests and see the status, headers, timing and response. Free API tester in your browser.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/api-tester.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="API Tester Online: Send HTTP Requests Free | UtilDeck">
+  <meta name="twitter:description" content="Send GET, POST, PUT, PATCH and DELETE requests and see the status, headers, timing and response. Free API tester in your browser.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>API Tester</h2>
+      <p class="tool-description">Send a request to an API and see the status, headers, timing and response body. Some sites block requests from other websites, which the browser reports as a blocked request.</p>
+      <form id="form" class="control-panel" novalidate>
+        <div class="field"><label for="method">Method</label><select id="method" class="text-input"><option>GET</option><option>POST</option><option>PUT</option><option>PATCH</option><option>DELETE</option><option>HEAD</option></select></div>
+        <div class="field" style="grid-column: span 2;"><label for="url">URL</label><input type="url" id="url" class="text-input" value="https://example.com/" spellcheck="false"></div>
+        <div class="field field-full"><label for="headers">Headers (one per line: Name: value)</label><textarea id="headers" class="output-box" style="min-height: 90px;" spellcheck="false">Accept: text/html</textarea></div>
+        <div class="field field-full"><label for="body">Body (for POST, PUT, PATCH)</label><textarea id="body" class="output-box" style="min-height: 100px;" spellcheck="false"></textarea></div>
+        <div class="control-row control-row-full"><button type="submit" id="sendBtn" class="btn btn-primary">Send request</button></div>
+      </form>
+      <p id="status" class="status" aria-live="polite"></p>
+      <div id="result" class="result-box"></div>
+      <h3 class="related-title">Response headers</h3>
+      <pre id="resHeaders" class="line-diff"></pre>
+      <h3 class="related-title">Response body</h3>
+      <pre id="resBody" class="line-diff" style="max-height: 420px; overflow: auto;"></pre>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-api-tester">
+      <h2 id="guide-api-tester">How to use API Tester</h2>
+      <ol class="guide-steps"><li>Choose a method and enter the URL.</li><li>Add headers and a body if needed, then send the request.</li><li>Read the status, time, headers and response.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>Why does a request fail?</h3><p>Some servers block requests from other websites, which the browser reports as a failed request.</p></div><div class="faq-item"><h3>Are my requests sent through a server?</h3><p>No. The request goes straight from your browser to the URL you enter.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="encoder.html">Encoder</a></li><li><a href="regex-tester.html">Regex Tester</a></li><li><a href="hash-generator.html">Hash Generator</a></li><li><a href="markdown-preview.html">Markdown Preview</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+        <a href="https://aryashjain.github.io/Portfolio/" target="_blank" rel="noopener">Portfolio</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "API Tester", "description": "Send GET, POST, PUT and DELETE requests and see the response.", "url": "https://utildeck.bot747.workers.dev/pages/api-tester.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why does a request fail?", "acceptedAnswer": {"@type": "Answer", "text": "Some servers block requests from other websites, which the browser reports as a failed request."}}, {"@type": "Question", "name": "Are my requests sent through a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. The request goes straight from your browser to the URL you enter."}}]}]}</script>
+  <script type="module">
+    import { initTheme, copyText } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { buildRequest } from '../scripts/dev-tools.js';
+    const $ = id => document.getElementById(id);
+    initNav(); initTheme($('themeToggle'));
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    const fail = m => { $('status').textContent = m; $('status').classList.add('error'); };
+    const ok = m => { $('status').textContent = m; $('status').classList.remove('error'); };
+    const card = (l, v) => `<div class="stat-card wide"><div class="stat-label">${esc(l)}</div><div class="stat-value small">${esc(v)}</div></div>`;
+    const dl = (text, name, type) => { const url = URL.createObjectURL(new Blob([text], { type })); const a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 2000); };
+    $('form').addEventListener('submit', async e => {
+      e.preventDefault();
+      let req;
+      try { req = buildRequest({ method: $('method').value, url: $('url').value, headers: $('headers').value, body: $('body').value }); }
+      catch (err) { return fail(err.message); }
+      $('sendBtn').disabled = true; ok('Sending…');
+      const started = performance.now();
+      try {
+        const res = await fetch(req.url, req.init);
+        const ms = Math.round(performance.now() - started);
+        const text = await res.text();
+        $('result').innerHTML = card('Status', `${res.status} ${res.statusText}`) + card('Time', `${ms} ms`) + card('Size', `${text.length.toLocaleString()} characters`);
+        $('resHeaders').textContent = [...res.headers].map(([k, v]) => `${k}: ${v}`).join('\n');
+        $('resBody').textContent = text.length > 50000 ? text.slice(0, 50000) + '\n… (first 50,000 characters)' : text;
+        ok(res.ok ? 'Request succeeded.' : 'The server replied with an error status.');
+      } catch (err) {
+        $('result').innerHTML = ''; $('resHeaders').textContent = ''; $('resBody').textContent = '';
+        fail('The request did not get a response. The server may be down, or it may block requests from other websites (CORS). Check the URL.');
+      } finally { $('sendBtn').disabled = false; }
+    });
+
+  </script>
+</body>
+</html>

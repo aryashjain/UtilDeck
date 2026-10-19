@@ -1757,3 +1757,27 @@ html.dark-mode .theme-toggle::before {
 .param-row {
   margin-bottom: 0.5rem;
 }
+
+/* PDF tools file list */
+.file-list {
+  list-style: none;
+  margin: 0.75rem 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.file-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.6rem;
+  background: var(--bg-primary);
+}
+
+.file-name {
+  flex: 1 1 200px;
+  word-break: break-all;
+}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compress PDF Online Free: Make PDF Files Smaller | UtilDeck</title>
+  <meta name="description" content="Make a PDF smaller by re-drawing pages as images at the quality you choose. Free, runs in your browser. Pages become pictures.">
+  <meta name="keywords" content="compress pdf, reduce pdf size, make pdf smaller, compress pdf online free, shrink pdf">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/compress-pdf.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="Compress PDF Online Free: Make PDF Files Smaller | UtilDeck">
+  <meta property="og:description" content="Make a PDF smaller by re-drawing pages as images at the quality you choose. Free, runs in your browser. Pages become pictures.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/compress-pdf.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Compress PDF Online Free: Make PDF Files Smaller | UtilDeck">
+  <meta name="twitter:description" content="Make a PDF smaller by re-drawing pages as images at the quality you choose. Free, runs in your browser. Pages become pictures.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Compress PDF</h2>
+      <p class="tool-description">Make a PDF smaller by drawing each page as an image at the quality you choose. Pages become pictures, so their text cannot be selected or searched afterwards.</p>
+      <label id="dropZone" class="drop-zone" tabindex="0">
+        <input type="file" id="fileInput" accept="application/pdf,.pdf" multiple hidden>
+        <span class="drop-zone-title">Drop a PDF here, or click to choose one</span>
+        <span class="drop-zone-hint">Rendered and rebuilt in your browser</span>
+      </label>
+      <p id="info" class="tool-description" aria-live="polite"></p>
+      <div class="control-panel">
+        <div class="field"><label for="quality">Image quality: <strong id="qv">60</strong>%</label><input type="range" id="quality" min="20" max="95" value="60"></div>
+        <div class="field"><label for="scale">Page sharpness</label><select id="scale" class="text-input"><option value="1">Smaller file (1x)</option><option value="1.5" selected>Balanced (1.5x)</option><option value="2">Sharper (2x)</option></select></div>
+      </div>
+      <p id="status" class="status" aria-live="polite"></p>
+      <div class="compare-grid"><figure class="compare-card"><figcaption>Original</figcaption><p id="origMeta" class="compare-meta"></p></figure><figure class="compare-card"><figcaption>Compressed</figcaption><p id="newMeta" class="compare-meta"></p></figure></div>
+      <div class="control-row" style="margin-top: 1rem;"><button id="compressBtn" class="btn btn-primary">Compress and download</button></div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-compress-pdf">
+      <h2 id="guide-compress-pdf">How to use Compress PDF</h2>
+      <ol class="guide-steps"><li>Choose a PDF.</li><li>Set the image quality and page sharpness.</li><li>Download the compressed PDF and check the size.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>Why can I not select the text afterwards?</h3><p>Compression draws each page as a picture, so the text becomes part of the image.</p></div><div class="faq-item"><h3>What if the file gets bigger?</h3><p>Lower the quality or the sharpness. Scanned or image-heavy PDFs shrink the most.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="merge-pdf.html">Merge PDF</a></li><li><a href="split-pdf.html">Split PDF</a></li><li><a href="image-to-pdf.html">Image to PDF</a></li><li><a href="pdf-to-image.html">PDF to Image</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+        <a href="https://aryashjain.github.io/Portfolio/" target="_blank" rel="noopener">Portfolio</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Compress PDF", "description": "Make a PDF smaller by re-drawing its pages at a chosen quality.", "url": "https://utildeck.bot747.workers.dev/pages/compress-pdf.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why can I not select the text afterwards?", "acceptedAnswer": {"@type": "Answer", "text": "Compression draws each page as a picture, so the text becomes part of the image."}}, {"@type": "Question", "name": "What if the file gets bigger?", "acceptedAnswer": {"@type": "Answer", "text": "Lower the quality or the sharpness. Scanned or image-heavy PDFs shrink the most."}}]}]}</script>
+  <script type="module">
+    import { initTheme } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import * as pdfjsLib from '../assets/vendor/pdf.min.mjs';
+    import { PDFDocument } from '../assets/vendor/pdf-lib.esm.min.js';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '../assets/vendor/pdf.worker.min.mjs';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const $ = id => document.getElementById(id);
+    let doc = null, original = null, name = 'document';
+    $('quality').addEventListener('input', () => { $('qv').textContent = $('quality').value; });
+    async function onFiles(files) {
+      const f = [...files][0]; if (!f) return;
+      try {
+        original = new Uint8Array(await f.arrayBuffer());
+        doc = await pdfjsLib.getDocument({ data: original.slice() }).promise;
+        name = f.name.replace(/\.pdf$/i, '');
+        $('info').textContent = `${doc.numPages} page${doc.numPages === 1 ? '' : 's'}`;
+        $('origMeta').textContent = `${doc.numPages} pages · ${fmt(f.size)}`;
+        $('newMeta').textContent = '';
+        ok('');
+      } catch (err) { doc = null; original = null; fail('Could not open that PDF. It may be encrypted or damaged.'); }
+    }
+    const dz = $('dropZone');
+    dz.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('fileInput').click(); } });
+    dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('dragging'); });
+    dz.addEventListener('dragleave', () => dz.classList.remove('dragging'));
+    dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('dragging'); onFiles(e.dataTransfer.files); });
+    $('fileInput').addEventListener('change', () => onFiles($('fileInput').files));
+    function download(bytes, name, type) {
+      const url = URL.createObjectURL(new Blob([bytes], { type }));
+      const a = document.createElement('a'); a.href = url; a.download = name;
+      document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 2000);
+    }
+    const fmt = b => b < 1024 ? b + ' B' : b < 1048576 ? (b / 1024).toFixed(1) + ' KB' : (b / 1048576).toFixed(2) + ' MB';
+    const fail = msg => { $('status').textContent = msg; $('status').classList.add('error'); };
+    const ok = msg => { $('status').textContent = msg; $('status').classList.remove('error'); };
+    $('compressBtn').addEventListener('click', async () => {
+      if (!doc) return fail('Add a PDF first.');
+      try {
+        const out = await PDFDocument.create();
+        const quality = Number($('quality').value) / 100, scale = Number($('scale').value);
+        for (let n = 1; n <= doc.numPages; n++) {
+          ok(`Compressing page ${n} of ${doc.numPages}…`);
+          const page = await doc.getPage(n);
+          const base = page.getViewport({ scale: 1 });
+          const viewport = page.getViewport({ scale });
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.floor(viewport.width); canvas.height = Math.floor(viewport.height);
+          await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+          const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', quality));
+          const img = await out.embedJpg(new Uint8Array(await blob.arrayBuffer()));
+          const pg = out.addPage([base.width, base.height]);
+          pg.drawImage(img, { x: 0, y: 0, width: base.width, height: base.height });
+        }
+        const bytes = await out.save();
+        $('newMeta').textContent = `${doc.numPages} pages · ${fmt(bytes.length)} (${original.length > 0 ? Math.round((1 - bytes.length / original.length) * 100) : 0}% smaller)`;
+        download(bytes, `${name}-compressed.pdf`, 'application/pdf');
+        ok('Done. If the new file is bigger, lower the quality or the sharpness.');
+      } catch (err) { fail('Could not compress: ' + err.message); }
+    });
+
+  </script>
+</body>
+</html>

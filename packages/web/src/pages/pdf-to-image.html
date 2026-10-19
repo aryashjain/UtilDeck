@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF to Image Converter Free: PDF Pages to PNG or JPG | UtilDeck</title>
+  <meta name="description" content="Convert PDF pages to PNG or JPG images at standard, high or very high sharpness. Free, runs in your browser. PDFs are not uploaded.">
+  <meta name="keywords" content="pdf to image, pdf to png, pdf to jpg, convert pdf to image, pdf page to image">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/pdf-to-image.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="PDF to Image Converter Free: PDF Pages to PNG or JPG | UtilDeck">
+  <meta property="og:description" content="Convert PDF pages to PNG or JPG images at standard, high or very high sharpness. Free, runs in your browser. PDFs are not uploaded.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/pdf-to-image.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PDF to Image Converter Free: PDF Pages to PNG or JPG | UtilDeck">
+  <meta name="twitter:description" content="Convert PDF pages to PNG or JPG images at standard, high or very high sharpness. Free, runs in your browser. PDFs are not uploaded.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>PDF to Image</h2>
+      <p class="tool-description">Turn PDF pages into PNG or JPEG images, one file per page. Choose the pages and the sharpness.</p>
+      <label id="dropZone" class="drop-zone" tabindex="0">
+        <input type="file" id="fileInput" accept="application/pdf,.pdf" multiple hidden>
+        <span class="drop-zone-title">Drop a PDF here, or click to choose one</span>
+        <span class="drop-zone-hint">Rendered in your browser; the PDF is never uploaded</span>
+      </label>
+      <p id="info" class="tool-description" aria-live="polite"></p>
+      <div class="control-panel">
+        <div class="field"><label for="ranges">Pages (for example 1-3, 5)</label><input type="text" id="ranges" class="text-input" value="1" spellcheck="false"></div>
+        <div class="field"><label for="scale">Sharpness</label><select id="scale" class="text-input"><option value="1">Standard (1x)</option><option value="2" selected>High (2x)</option><option value="3">Very high (3x)</option></select></div>
+        <div class="field"><label for="fmt">Image format</label><select id="fmt" class="text-input"><option value="png">PNG</option><option value="jpeg">JPEG</option></select></div>
+      </div>
+      <p id="status" class="status" aria-live="polite"></p>
+      <div class="control-row"><button id="renderBtn" class="btn btn-primary">Convert and download</button></div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-pdf-to-image">
+      <h2 id="guide-pdf-to-image">How to use PDF to Image</h2>
+      <ol class="guide-steps"><li>Choose a PDF and the pages to convert.</li><li>Pick a sharpness and PNG or JPEG.</li><li>Download one image per page.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>Why are there several downloads?</h3><p>Each page is saved as its own image file.</p></div><div class="faq-item"><h3>How many pages can I convert at once?</h3><p>Up to 60 pages per run.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="merge-pdf.html">Merge PDF</a></li><li><a href="split-pdf.html">Split PDF</a></li><li><a href="image-to-pdf.html">Image to PDF</a></li><li><a href="compress-pdf.html">Compress PDF</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+        <a href="https://aryashjain.github.io/Portfolio/" target="_blank" rel="noopener">Portfolio</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "PDF to Image", "description": "Convert PDF pages to PNG or JPG images.", "url": "https://utildeck.bot747.workers.dev/pages/pdf-to-image.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why are there several downloads?", "acceptedAnswer": {"@type": "Answer", "text": "Each page is saved as its own image file."}}, {"@type": "Question", "name": "How many pages can I convert at once?", "acceptedAnswer": {"@type": "Answer", "text": "Up to 60 pages per run."}}]}]}</script>
+  <script type="module">
+    import { initTheme } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import * as pdfjsLib from '../assets/vendor/pdf.min.mjs';
+    import { parsePageRanges, MAX_PDF_PAGES_PER_DOWNLOAD } from '../scripts/pdf-tools.js';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '../assets/vendor/pdf.worker.min.mjs';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const $ = id => document.getElementById(id);
+    let doc = null, name = 'document';
+    async function onFiles(files) {
+      const f = [...files][0]; if (!f) return;
+      try {
+        const data = new Uint8Array(await f.arrayBuffer());
+        doc = await pdfjsLib.getDocument({ data }).promise;
+        name = f.name.replace(/\.pdf$/i, '');
+        $('info').textContent = `${f.name} · ${doc.numPages} page${doc.numPages === 1 ? '' : 's'}`;
+        $('ranges').value = doc.numPages === 1 ? '1' : `1-${Math.min(doc.numPages, 3)}`;
+        ok('');
+      } catch (err) { doc = null; $('info').textContent = ''; fail('Could not open that PDF. It may be encrypted or damaged.'); }
+    }
+    const dz = $('dropZone');
+    dz.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('fileInput').click(); } });
+    dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('dragging'); });
+    dz.addEventListener('dragleave', () => dz.classList.remove('dragging'));
+    dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('dragging'); onFiles(e.dataTransfer.files); });
+    $('fileInput').addEventListener('change', () => onFiles($('fileInput').files));
+    function download(bytes, name, type) {
+      const url = URL.createObjectURL(new Blob([bytes], { type }));
+      const a = document.createElement('a'); a.href = url; a.download = name;
+      document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 2000);
+    }
+    const fmt = b => b < 1024 ? b + ' B' : b < 1048576 ? (b / 1024).toFixed(1) + ' KB' : (b / 1048576).toFixed(2) + ' MB';
+    const fail = msg => { $('status').textContent = msg; $('status').classList.add('error'); };
+    const ok = msg => { $('status').textContent = msg; $('status').classList.remove('error'); };
+    $('renderBtn').addEventListener('click', async () => {
+      if (!doc) return fail('Add a PDF first.');
+      try {
+        const pages = parsePageRanges($('ranges').value, doc.numPages);
+        if (pages.length > MAX_PDF_PAGES_PER_DOWNLOAD) return fail(`Convert up to ${MAX_PDF_PAGES_PER_DOWNLOAD} pages at a time.`);
+        const scale = Number($('scale').value), type = $('fmt').value === 'jpeg' ? 'image/jpeg' : 'image/png';
+        const ext = type === 'image/jpeg' ? 'jpg' : 'png';
+        for (let i = 0; i < pages.length; i++) {
+          ok(`Rendering page ${pages[i]} (${i + 1} of ${pages.length})…`);
+          const page = await doc.getPage(pages[i]);
+          const viewport = page.getViewport({ scale });
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.floor(viewport.width); canvas.height = Math.floor(viewport.height);
+          await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+          const blob = await new Promise(r => canvas.toBlob(r, type, 0.92));
+          download(new Uint8Array(await blob.arrayBuffer()), `${name}-page-${pages[i]}.${ext}`, type);
+          await new Promise(r => setTimeout(r, 300));
+        }
+        ok(`Converted ${pages.length} page${pages.length === 1 ? '' : 's'}.`);
+      } catch (err) { fail(err.message); }
+    });
+
+  </script>
+</body>
+</html>

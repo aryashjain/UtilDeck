@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQL Formatter Online: Format and Beautify SQL | UtilDeck</title>
+  <meta name="description" content="Format SQL queries with capital keywords, one clause per line and indented joins. Free SQL beautifier that runs in your browser.">
+  <meta name="keywords" content="sql formatter, sql beautifier, format sql online, sql pretty print, free developer tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/sql-formatter.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="SQL Formatter Online: Format and Beautify SQL | UtilDeck">
+  <meta property="og:description" content="Format SQL queries with capital keywords, one clause per line and indented joins. Free SQL beautifier that runs in your browser.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/sql-formatter.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SQL Formatter Online: Format and Beautify SQL | UtilDeck">
+  <meta name="twitter:description" content="Format SQL queries with capital keywords, one clause per line and indented joins. Free SQL beautifier that runs in your browser.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>SQL Formatter</h2>
+      <p class="tool-description">Make SQL readable: keywords in capitals, one clause per line, and indented joins and conditions. Runs in your browser; your queries are not sent anywhere.</p>
+      <div class="split-layout" style="height: auto;">
+        <div class="split-input"><div class="split-input-pair"><label for="input">Your SQL</label><textarea id="input" class="output-box" style="min-height: 300px;" spellcheck="false">select u.id, u.name, count(o.id) as orders from users u left join orders o on o.user_id = u.id where u.active = 1 and o.total > 10 group by u.id, u.name order by orders desc limit 5;</textarea></div></div>
+        <div class="split-input"><div class="split-input-pair"><label for="output">Formatted</label><textarea id="output" class="output-box" style="min-height: 300px;" readonly spellcheck="false"></textarea></div></div>
+      </div>
+      <p id="status" class="status" aria-live="polite"></p>
+      <div class="control-row"><button id="copyBtn" class="btn btn-secondary">Copy</button><button id="downloadBtn" class="btn btn-secondary">Download .sql</button></div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-sql-formatter">
+      <h2 id="guide-sql-formatter">How to use SQL Formatter</h2>
+      <ol class="guide-steps"><li>Paste your SQL query.</li><li>Read the formatted version, with keywords in capitals and one clause per line.</li><li>Copy or download the result.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>Does this run my query?</h3><p>No. It only rearranges the text. Nothing is run or sent anywhere.</p></div><div class="faq-item"><h3>Which SQL dialects work?</h3><p>Standard SQL keywords work across common databases. Dialect-specific syntax is kept as written.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="encoder.html">Encoder</a></li><li><a href="regex-tester.html">Regex Tester</a></li><li><a href="hash-generator.html">Hash Generator</a></li><li><a href="markdown-preview.html">Markdown Preview</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+        <a href="https://aryashjain.github.io/Portfolio/" target="_blank" rel="noopener">Portfolio</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "SQL Formatter", "description": "Format SQL with capital keywords and one clause per line.", "url": "https://utildeck.bot747.workers.dev/pages/sql-formatter.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does this run my query?", "acceptedAnswer": {"@type": "Answer", "text": "No. It only rearranges the text. Nothing is run or sent anywhere."}}, {"@type": "Question", "name": "Which SQL dialects work?", "acceptedAnswer": {"@type": "Answer", "text": "Standard SQL keywords work across common databases. Dialect-specific syntax is kept as written."}}]}]}</script>
+  <script type="module">
+    import { initTheme, copyText } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { formatSql } from '../scripts/dev-tools.js';
+    const $ = id => document.getElementById(id);
+    initNav(); initTheme($('themeToggle'));
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    const fail = m => { $('status').textContent = m; $('status').classList.add('error'); };
+    const ok = m => { $('status').textContent = m; $('status').classList.remove('error'); };
+    const card = (l, v) => `<div class="stat-card wide"><div class="stat-label">${esc(l)}</div><div class="stat-value small">${esc(v)}</div></div>`;
+    const dl = (text, name, type) => { const url = URL.createObjectURL(new Blob([text], { type })); const a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 2000); };
+    let latest = '';
+    const run = () => { try { latest = formatSql($('input').value); $('output').value = latest; ok('Formatted.'); } catch (err) { latest = ''; $('output').value = ''; fail(err.message); } };
+    $('input').addEventListener('input', run);
+    $('copyBtn').addEventListener('click', () => copyText(latest, $('copyBtn')));
+    $('downloadBtn').addEventListener('click', () => latest && dl(latest, 'formatted.sql', 'application/sql'));
+    run();
+
+  </script>
+</body>
+</html>

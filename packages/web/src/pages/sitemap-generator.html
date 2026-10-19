@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sitemap Generator: Make sitemap.xml Online Free | UtilDeck</title>
+  <meta name="description" content="Paste your page addresses and get a valid sitemap.xml with optional last-modified dates and priorities. Free sitemap generator.">
+  <meta name="keywords" content="sitemap generator, sitemap xml generator, make sitemap online, sitemap maker, free seo tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/sitemap-generator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="Sitemap Generator: Make sitemap.xml Online Free | UtilDeck">
+  <meta property="og:description" content="Paste your page addresses and get a valid sitemap.xml with optional last-modified dates and priorities. Free sitemap generator.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/sitemap-generator.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sitemap Generator: Make sitemap.xml Online Free | UtilDeck">
+  <meta name="twitter:description" content="Paste your page addresses and get a valid sitemap.xml with optional last-modified dates and priorities. Free sitemap generator.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Sitemap Generator</h2>
+      <p class="tool-description">Paste one address per line, choose optional settings, and get a sitemap.xml to upload to your site. Nothing is sent anywhere.</p>
+      <div class="field field-full"><label for="urls">Page addresses (one per line, full https links)</label><textarea id="urls" class="output-box" style="min-height: 180px;" spellcheck="false">https://example.com/
+https://example.com/about
+https://example.com/contact</textarea></div>
+      <form id="form" class="control-panel" novalidate>
+        <div class="field"><label for="lastmod">Last modified date (optional, YYYY-MM-DD)</label><input type="text" id="lastmod" class="text-input" placeholder="2026-10-20"></div>
+        <div class="field"><label for="freq">Change frequency (optional)</label><select id="freq" class="text-input"><option value="">Not set</option><option>always</option><option>hourly</option><option>daily</option><option>weekly</option><option>monthly</option><option>yearly</option><option>never</option></select></div>
+        <div class="field"><label for="prio">Priority (optional, 0.0 to 1.0)</label><input type="text" id="prio" class="text-input" placeholder="0.8"></div>
+      </form>
+      <p id="status" class="status" aria-live="polite"></p>
+      <textarea id="output" class="output-box" readonly style="min-height: 220px;" spellcheck="false"></textarea>
+      <div class="control-row" style="margin-top: 1rem;"><button id="copyBtn" class="btn btn-secondary">Copy</button><button id="downloadBtn" class="btn btn-primary">Download sitemap.xml</button></div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-sitemap-generator">
+      <h2 id="guide-sitemap-generator">How to use Sitemap Generator</h2>
+      <ol class="guide-steps"><li>Paste one full address per line.</li><li>Add an optional last-modified date, change frequency and priority.</li><li>Download sitemap.xml and upload it to your site root.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>Where should sitemap.xml go?</h3><p>At the root of your site, such as https://example.com/sitemap.xml.</p></div><div class="faq-item"><h3>Is there a limit?</h3><p>A sitemap can list up to 50,000 URLs. Split larger sites into several files.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="meta-tag-preview.html">Meta Tag Preview</a></li><li><a href="robots-generator.html">robots.txt Generator</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+        <a href="https://aryashjain.github.io/Portfolio/" target="_blank" rel="noopener">Portfolio</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Sitemap Generator", "description": "Make a valid sitemap.xml from your page addresses.", "url": "https://utildeck.bot747.workers.dev/pages/sitemap-generator.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Where should sitemap.xml go?", "acceptedAnswer": {"@type": "Answer", "text": "At the root of your site, such as https://example.com/sitemap.xml."}}, {"@type": "Question", "name": "Is there a limit?", "acceptedAnswer": {"@type": "Answer", "text": "A sitemap can list up to 50,000 URLs. Split larger sites into several files."}}]}]}</script>
+  <script type="module">
+    import { initTheme, copyText } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { buildSitemap } from '../scripts/seo-tools.js';
+    const $ = id => document.getElementById(id);
+    initNav(); initTheme($('themeToggle'));
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    const fail = m => { $('status').textContent = m; $('status').classList.add('error'); };
+    const ok = m => { $('status').textContent = m; $('status').classList.remove('error'); };
+    const card = (l, v) => `<div class="stat-card wide"><div class="stat-label">${esc(l)}</div><div class="stat-value small">${esc(v)}</div></div>`;
+    const dl = (text, name, type) => { const url = URL.createObjectURL(new Blob([text], { type })); const a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 2000); };
+    let latest = '';
+    const run = () => {
+      try {
+        latest = buildSitemap($('urls').value.split('\n'), { lastmod: $('lastmod').value.trim(), changefreq: $('freq').value, priority: $('prio').value.trim() });
+        $('output').value = latest;
+        const n = latest.split('<url>').length - 1;
+        ok(`Sitemap with ${n} URL${n === 1 ? '' : 's'}. Upload it as sitemap.xml at your site's root.`);
+      } catch (err) { latest = ''; $('output').value = ''; fail(err.message); }
+    };
+    ['urls', 'lastmod', 'freq', 'prio'].forEach(id => $(id).addEventListener('input', run));
+    $('freq').addEventListener('change', run);
+    $('copyBtn').addEventListener('click', () => copyText(latest, $('copyBtn')));
+    $('downloadBtn').addEventListener('click', () => latest && dl(latest, 'sitemap.xml', 'application/xml'));
+    run();
+
+  </script>
+</body>
+</html>

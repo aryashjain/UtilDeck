@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meta Tag Preview: Google and Social Share Preview | UtilDeck</title>
+  <meta name="description" content="Preview how your page title and description look in search results and social shares, and get the tags to paste. Free.">
+  <meta name="keywords" content="meta tag preview, meta description checker, serp preview, open graph preview, title length checker, free seo tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/meta-tag-preview.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="Meta Tag Preview: Google and Social Share Preview | UtilDeck">
+  <meta property="og:description" content="Preview how your page title and description look in search results and social shares, and get the tags to paste. Free.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/meta-tag-preview.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Meta Tag Preview: Google and Social Share Preview | UtilDeck">
+  <meta name="twitter:description" content="Preview how your page title and description look in search results and social shares, and get the tags to paste. Free.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Meta Tag Preview</h2>
+      <p class="tool-description">Check how your page will look in search results and when shared, and get the tags to paste into your page. Warnings show when a title or description is too long.</p>
+      <form id="form" class="control-panel" novalidate>
+        <div class="field field-full"><label for="title">Page title</label><input type="text" id="title" class="text-input" value="Free Word Counter for Writers and Students | UtilDeck" maxlength="200"></div>
+        <div class="field field-full"><label for="desc">Meta description</label><textarea id="desc" class="output-box" style="min-height: 90px;">Count words, characters, sentences and reading time as you type. Free word counter that runs in your browser.</textarea></div>
+        <div class="field"><label for="url">Page address (https)</label><input type="url" id="url" class="text-input" value="https://utildeck.bot747.workers.dev/pages/word-counter.html"></div>
+        <div class="field"><label for="image">Share image address (optional)</label><input type="url" id="image" class="text-input" placeholder="https://.../image.png"></div>
+      </form>
+      <p id="status" class="status" aria-live="polite"></p>
+      <h3 class="related-title">Search result preview</h3>
+      <div class="stat-card wide" style="text-align:left;"><div class="counter" id="gUrl"></div><div id="gTitle" style="color:#8ab4f8;font-size:1.15rem;margin:0.2rem 0;"></div><div id="gDesc" class="tool-description" style="margin:0;"></div></div>
+      <h3 class="related-title">Share card preview</h3>
+      <div class="stat-card wide" style="text-align:left;"><div class="counter" id="sUrl"></div><div id="sTitle" style="font-weight:700;"></div><div id="sDesc" class="tool-description" style="margin:0;"></div></div>
+      <h3 class="related-title">Tags to paste in the head</h3>
+      <textarea id="tags" class="output-box" style="min-height: 180px;" readonly spellcheck="false"></textarea>
+      <div class="control-row"><button id="copyBtn" class="btn btn-secondary">Copy tags</button></div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-meta-tag-preview">
+      <h2 id="guide-meta-tag-preview">How to use Meta Tag Preview</h2>
+      <ol class="guide-steps"><li>Enter the page title and description.</li><li>Check the search and share previews and any warnings.</li><li>Copy the tags into your page head.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>How long should a title be?</h3><p>Search results usually show about 60 characters, so keep titles near that.</p></div><div class="faq-item"><h3>How long should a description be?</h3><p>About 120 to 160 characters. Longer text is cut off in search results.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="sitemap-generator.html">Sitemap Generator</a></li><li><a href="robots-generator.html">robots.txt Generator</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+        <a href="https://aryashjain.github.io/Portfolio/" target="_blank" rel="noopener">Portfolio</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Meta Tag Preview", "description": "See how your title and description look in search and when shared.", "url": "https://utildeck.bot747.workers.dev/pages/meta-tag-preview.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How long should a title be?", "acceptedAnswer": {"@type": "Answer", "text": "Search results usually show about 60 characters, so keep titles near that."}}, {"@type": "Question", "name": "How long should a description be?", "acceptedAnswer": {"@type": "Answer", "text": "About 120 to 160 characters. Longer text is cut off in search results."}}]}]}</script>
+  <script type="module">
+    import { initTheme, copyText } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { metaChecks, metaTags } from '../scripts/seo-tools.js';
+    const $ = id => document.getElementById(id);
+    initNav(); initTheme($('themeToggle'));
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    const fail = m => { $('status').textContent = m; $('status').classList.add('error'); };
+    const ok = m => { $('status').textContent = m; $('status').classList.remove('error'); };
+    const card = (l, v) => `<div class="stat-card wide"><div class="stat-label">${esc(l)}</div><div class="stat-value small">${esc(v)}</div></div>`;
+    const dl = (text, name, type) => { const url = URL.createObjectURL(new Blob([text], { type })); const a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 2000); };
+    const run = () => {
+      const v = { title: $('title').value, description: $('desc').value, url: $('url').value, image: $('image').value };
+      const c = metaChecks(v);
+      $('gTitle').textContent = v.title.slice(0, 60) + (v.title.length > 60 ? '…' : '');
+      $('gDesc').textContent = v.description.slice(0, 160) + (v.description.length > 160 ? '…' : '');
+      $('gUrl').textContent = v.url;
+      $('sTitle').textContent = v.title; $('sDesc').textContent = v.description; $('sUrl').textContent = v.url;
+      $('tags').value = metaTags(v);
+      const notes = c.issues.length ? c.issues.join(' ') : `Title ${c.titleLength} characters, description ${c.descriptionLength} characters. Looks good.`;
+      $('status').textContent = notes; $('status').classList.toggle('error', c.issues.length > 0);
+    };
+    ['title', 'desc', 'url', 'image'].forEach(id => $(id).addEventListener('input', run));
+    $('copyBtn').addEventListener('click', () => copyText($('tags').value, $('copyBtn')));
+    run();
+
+  </script>
+</body>
+</html>

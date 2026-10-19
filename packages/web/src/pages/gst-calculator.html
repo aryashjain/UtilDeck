@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GST Calculator India: CGST, SGST, IGST | UtilDeck</title>
+  <meta name="description" content="Calculate GST on an amount, before or including tax, with CGST and SGST or IGST split. Free GST calculator for India.">
+  <meta name="keywords" content="gst calculator, gst calculator india, cgst sgst calculator, igst calculator, gst inclusive exclusive, free calculator">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/gst-calculator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="GST Calculator India: CGST, SGST, IGST | UtilDeck">
+  <meta property="og:description" content="Calculate GST on an amount, before or including tax, with CGST and SGST or IGST split. Free GST calculator for India.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/gst-calculator.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GST Calculator India: CGST, SGST, IGST | UtilDeck">
+  <meta name="twitter:description" content="Calculate GST on an amount, before or including tax, with CGST and SGST or IGST split. Free GST calculator for India.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>GST Calculator</h2>
+      <p class="tool-description">Work out GST on an amount, with the tax split into CGST and SGST for in-state sales or IGST for interstate sales. Amounts are in rupees; the rates are the standard GST slabs.</p>
+      <form id="form" class="control-panel" novalidate>
+        <div class="field"><label for="amount">Amount (₹)</label><input type="number" id="amount" class="text-input" min="0" step="0.01" value="1000"></div>
+        <div class="field"><label for="rate">GST rate</label><select id="rate" class="text-input"><option value="0">0%</option><option value="3">3%</option><option value="5">5%</option><option value="12">12%</option><option value="18" selected>18%</option><option value="28">28%</option></select></div>
+        <div class="field"><label for="mode">Amount is</label><select id="mode" class="text-input"><option value="exclusive">Before GST (add GST)</option><option value="inclusive">Including GST (remove GST)</option></select></div>
+        <div class="field"><label for="sale">Sale type</label><select id="sale" class="text-input"><option value="intra">Within the state (CGST + SGST)</option><option value="inter">Interstate (IGST)</option></select></div>
+      </form>
+      <p id="status" class="status" aria-live="polite"></p>
+      <div id="result" class="result-box"></div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-gst-calculator">
+      <h2 id="guide-gst-calculator">How to use GST Calculator</h2>
+      <ol class="guide-steps"><li>Enter the amount and choose whether it includes GST.</li><li>Choose the rate and the sale type.</li><li>Read the tax, the split and the total.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>What is the difference between CGST, SGST and IGST?</h3><p>Within a state, GST splits equally into CGST and SGST. Between states, it is charged as IGST.</p></div><div class="faq-item"><h3>Are the rates current?</h3><p>These are the standard GST slabs. Check the latest rates for your goods or services.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="calorie-counter.html">Calorie Counter</a></li><li><a href="bmi-calculator.html">BMI Calculator</a></li><li><a href="water-intake.html">Water Intake</a></li><li><a href="protein-calculator.html">Protein Calculator</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+        <a href="https://aryashjain.github.io/Portfolio/" target="_blank" rel="noopener">Portfolio</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "GST Calculator", "description": "GST on an amount, with CGST and SGST or IGST split (India).", "url": "https://utildeck.bot747.workers.dev/pages/gst-calculator.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the difference between CGST, SGST and IGST?", "acceptedAnswer": {"@type": "Answer", "text": "Within a state, GST splits equally into CGST and SGST. Between states, it is charged as IGST."}}, {"@type": "Question", "name": "Are the rates current?", "acceptedAnswer": {"@type": "Answer", "text": "These are the standard GST slabs. Check the latest rates for your goods or services."}}]}]}</script>
+  <script type="module">
+    import { initTheme, copyText } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { gst } from '../scripts/seo-tools.js';
+    const $ = id => document.getElementById(id);
+    initNav(); initTheme($('themeToggle'));
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    const fail = m => { $('status').textContent = m; $('status').classList.add('error'); };
+    const ok = m => { $('status').textContent = m; $('status').classList.remove('error'); };
+    const card = (l, v) => `<div class="stat-card wide"><div class="stat-label">${esc(l)}</div><div class="stat-value small">${esc(v)}</div></div>`;
+    const dl = (text, name, type) => { const url = URL.createObjectURL(new Blob([text], { type })); const a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 2000); };
+    const money = v => '₹' + Number(v).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const run = () => {
+      try {
+        const r = gst({ amount: $('amount').value, rate: $('rate').value, mode: $('mode').value, interstate: $('sale').value === 'inter' });
+        const split = $('sale').value === 'inter'
+          ? card('IGST', money(r.igst))
+          : card('CGST', money(r.cgst)) + card('SGST', money(r.sgst));
+        $('result').innerHTML = card('Amount before GST', money(r.base)) + card('Total GST', money(r.tax)) + split + card('Amount including GST', money(r.total));
+        ok('GST calculated.');
+      } catch (err) { $('result').innerHTML = ''; fail(err.message); }
+    };
+    ['amount', 'rate', 'mode', 'sale'].forEach(id => $(id).addEventListener('input', run));
+    ['rate', 'mode', 'sale'].forEach(id => $(id).addEventListener('change', run));
+    run();
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image to PDF Converter Free: JPG, PNG, WebP to PDF | UtilDeck</title>
+  <meta name="description" content="Turn JPG, PNG or WebP images into a PDF, one per page, with A4 or Letter sizing. Free, runs in your browser. Images are not uploaded.">
+  <meta name="keywords" content="image to pdf, jpg to pdf, png to pdf, convert images to pdf, photos to pdf">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/image-to-pdf.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="Image to PDF Converter Free: JPG, PNG, WebP to PDF | UtilDeck">
+  <meta property="og:description" content="Turn JPG, PNG or WebP images into a PDF, one per page, with A4 or Letter sizing. Free, runs in your browser. Images are not uploaded.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/image-to-pdf.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Image to PDF Converter Free: JPG, PNG, WebP to PDF | UtilDeck">
+  <meta name="twitter:description" content="Turn JPG, PNG or WebP images into a PDF, one per page, with A4 or Letter sizing. Free, runs in your browser. Images are not uploaded.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Image to PDF</h2>
+      <p class="tool-description">Turn one or more images into a PDF, one image per page. Arrange them, then choose a page size.</p>
+      <label id="dropZone" class="drop-zone" tabindex="0">
+        <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp" multiple hidden>
+        <span class="drop-zone-title">Drop images here, or click to choose them</span>
+        <span class="drop-zone-hint">PNG, JPEG or WebP, in the order shown</span>
+      </label>
+      <ul id="list" class="file-list" aria-label="Files in order"></ul>
+      <div class="control-panel"><div class="field"><label for="preset">Page size</label><select id="preset" class="text-input"><option value="a4">A4</option><option value="letter">US Letter</option><option value="fit">Fit to image</option></select></div></div>
+      <p id="status" class="status" aria-live="polite"></p>
+      <div class="control-row"><button id="makeBtn" class="btn btn-primary">Make PDF and download</button></div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-image-to-pdf">
+      <h2 id="guide-image-to-pdf">How to use Image to PDF</h2>
+      <ol class="guide-steps"><li>Add the images in the order you want them.</li><li>Choose A4, US Letter or fit each page to its image.</li><li>Download the PDF.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>Which image formats work?</h3><p>PNG, JPEG and WebP.</p></div><div class="faq-item"><h3>Why are my photos a different size on the page?</h3><p>A4 and Letter pages keep the page size, and the image is scaled to fit with a margin. Choose fit to image to keep the original size.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="merge-pdf.html">Merge PDF</a></li><li><a href="split-pdf.html">Split PDF</a></li><li><a href="pdf-to-image.html">PDF to Image</a></li><li><a href="compress-pdf.html">Compress PDF</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+        <a href="https://aryashjain.github.io/Portfolio/" target="_blank" rel="noopener">Portfolio</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Image to PDF", "description": "Turn JPG, PNG or WebP images into a PDF, one image per page.", "url": "https://utildeck.bot747.workers.dev/pages/image-to-pdf.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Which image formats work?", "acceptedAnswer": {"@type": "Answer", "text": "PNG, JPEG and WebP."}}, {"@type": "Question", "name": "Why are my photos a different size on the page?", "acceptedAnswer": {"@type": "Answer", "text": "A4 and Letter pages keep the page size, and the image is scaled to fit with a margin. Choose fit to image to keep the original size."}}]}]}</script>
+  <script type="module">
+    import { initTheme } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { PDFDocument } from '../assets/vendor/pdf-lib.esm.min.js';
+    import { moveItem, imagePage } from '../scripts/pdf-tools.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const $ = id => document.getElementById(id);
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    let items = [];
+    function renderList() {
+      $('list').innerHTML = items.map((it, i) => `<li class="file-row"><span class="file-name">${i + 1}. ${esc(it.name)}</span><span class="counter">${fmt(it.size)}</span>
+        <button class="btn btn-secondary" data-act="up" data-i="${i}" aria-label="Move up">↑</button>
+        <button class="btn btn-secondary" data-act="down" data-i="${i}" aria-label="Move down">↓</button>
+        <button class="btn btn-secondary" data-act="remove" data-i="${i}">Remove</button></li>`).join('');
+    }
+    $('list').addEventListener('click', e => {
+      const b = e.target.closest('[data-act]'); if (!b) return;
+      const i = Number(b.dataset.i), act = b.dataset.act;
+      if (act === 'remove') items.splice(i, 1);
+      if (act === 'up') items = moveItem(items, i, i - 1);
+      if (act === 'down') items = moveItem(items, i, i + 1);
+      renderList();
+    });
+    function onFiles(files) {
+      const imgs = [...files].filter(f => /^image\/(png|jpeg|webp)$/.test(f.type));
+      if (imgs.length < [...files].length) fail('Only PNG, JPEG or WebP images can be added.'); else ok('');
+      items.push(...imgs.map(f => ({ name: f.name, size: f.size, file: f })));
+      renderList();
+    }
+    // The browser draws each image to a canvas and reads it back as PNG, so every format works
+    function toPng(file) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => {
+          const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
+          c.getContext('2d').drawImage(img, 0, 0);
+          URL.revokeObjectURL(url);
+          c.toBlob(async b => resolve({ bytes: new Uint8Array(await b.arrayBuffer()), w: img.naturalWidth, h: img.naturalHeight }), 'image/png');
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error(file.name + ' could not be read.')); };
+        img.src = url;
+      });
+    }
+    const dz = $('dropZone');
+    dz.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('fileInput').click(); } });
+    dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('dragging'); });
+    dz.addEventListener('dragleave', () => dz.classList.remove('dragging'));
+    dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('dragging'); onFiles(e.dataTransfer.files); });
+    $('fileInput').addEventListener('change', () => onFiles($('fileInput').files));
+    function download(bytes, name, type) {
+      const url = URL.createObjectURL(new Blob([bytes], { type }));
+      const a = document.createElement('a'); a.href = url; a.download = name;
+      document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 2000);
+    }
+    const fmt = b => b < 1024 ? b + ' B' : b < 1048576 ? (b / 1024).toFixed(1) + ' KB' : (b / 1048576).toFixed(2) + ' MB';
+    const fail = msg => { $('status').textContent = msg; $('status').classList.add('error'); };
+    const ok = msg => { $('status').textContent = msg; $('status').classList.remove('error'); };
+    $('makeBtn').addEventListener('click', async () => {
+      if (items.length === 0) return fail('Add at least one image.');
+      try {
+        ok('Making the PDF…');
+        const out = await PDFDocument.create();
+        for (const it of items) {
+          const { bytes, w, h } = await toPng(it.file);
+          const img = await out.embedPng(bytes);
+          const L = imagePage($('preset').value, w, h, 24);
+          const page = out.addPage([L.pageWidth, L.pageHeight]);
+          page.drawImage(img, { x: L.x, y: L.y, width: L.drawWidth, height: L.drawHeight });
+        }
+        download(await out.save(), 'images.pdf', 'application/pdf');
+        ok(`Made a ${items.length}-page PDF.`);
+      } catch (err) { fail(err.message); }
+    });
+
+  </script>
+</body>
+</html>
