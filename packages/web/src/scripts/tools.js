@@ -91,6 +91,7 @@ export const TOOLS = [
     path: 'pages/json-compare.html',
     icon: '⚖️',
     category: 'json',
+    card: 'json-formatter',
     description: 'Compare two JSON documents. See each changed value by path and the changed lines.',
     keywords: ['json', 'compare', 'diff', 'difference', 'changes', 'json diff'],
   },
@@ -117,6 +118,15 @@ export const TOOLS = [
     category: 'generate',
     description: 'Lorem ipsum placeholder text and URL-friendly slugs.',
     keywords: ['lorem', 'ipsum', 'placeholder', 'slug', 'url'],
+  },
+  {
+    name: 'Email Generator',
+    path: 'pages/email-generator.html',
+    icon: '✉️',
+    category: 'generate',
+    card: 'generators',
+    description: 'Make 1 to 10,000 random test email addresses. Copy them or download CSV or XLS.',
+    keywords: ['email', 'emails', 'random email', 'fake email', 'test email', 'csv', 'xls', 'excel', 'list', 'generator'],
   },
   {
     name: 'Password Generator',
