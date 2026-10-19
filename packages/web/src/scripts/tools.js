@@ -13,6 +13,8 @@ export const CATEGORIES = [
   { id: 'json', name: 'JSON' },
   { id: 'convert', name: 'Convert' },
   { id: 'calculate', name: 'Calculate' },
+  { id: 'everyday', name: 'Everyday' },
+  { id: 'fun', name: 'Fun' },
 ];
 
 export const NOTEPAD = {
@@ -288,6 +290,42 @@ export const TOOLS = [
     textCard: true,
     description: 'Pick winners at random from a list of names.',
     keywords: ['random', 'name picker', 'raffle', 'giveaway', 'winner', 'pick', 'team', 'draw'],
+  },
+  {
+    name: 'Date Calculator',
+    path: 'pages/date-calculator.html',
+    icon: '📅',
+    category: 'everyday',
+    textCard: true,
+    description: 'Days between dates, working days, add or subtract days, and a live countdown.',
+    keywords: ['date', 'days between', 'working days', 'countdown', 'add days', 'calendar', 'deadline', 'business days'],
+  },
+  {
+    name: 'QR Code Generator',
+    path: 'pages/qr-code-generator.html',
+    icon: '▦',
+    category: 'everyday',
+    textCard: true,
+    description: 'Make a QR code from a link or text. Generated in your browser, downloadable as PNG.',
+    keywords: ['qr', 'qr code', 'qrcode', 'barcode', 'link', 'scan', 'generator'],
+  },
+  {
+    name: 'Dice Roller and Coin Flip',
+    path: 'pages/dice-and-coin.html',
+    icon: '🪙',
+    category: 'fun',
+    textCard: true,
+    description: 'Roll any dice with any number of sides, or flip coins.',
+    keywords: ['dice', 'die', 'roll', 'coin', 'flip', 'heads', 'tails', 'd20', 'random', 'game'],
+  },
+  {
+    name: 'JWT Decoder',
+    path: 'pages/jwt-decoder.html',
+    icon: '🔐',
+    category: 'developer',
+    textCard: true,
+    description: 'Read a JSON Web Token: header, payload, issued and expiry times. Decoding only.',
+    keywords: ['jwt', 'json web token', 'token', 'decode', 'bearer', 'claims', 'expiry', 'auth'],
   },
 ];
 

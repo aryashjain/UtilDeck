@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date Calculator - Days Between Dates, Working Days, Countdown | UtilDeck</title>
+  <meta name="description" content="Count the days between two dates, the working days, add or subtract days, and see a live countdown to an event. Free, runs in your browser.">
+  <meta name="keywords" content="date calculator, days between dates, working days calculator, add days to date, countdown timer, date difference, business days">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/date-calculator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="Date Calculator - Days Between Dates, Working Days, Countdown | UtilDeck">
+  <meta property="og:description" content="Count the days between two dates, the working days, add or subtract days, and see a live countdown to an event. Free, runs in your browser.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/date-calculator.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Date Calculator - Days Between Dates, Working Days, Countdown | UtilDeck">
+  <meta name="twitter:description" content="Count the days between two dates, the working days, add or subtract days, and see a live countdown to an event. Free, runs in your browser.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Date Calculator</h2>
+      <p class="tool-description">Work out days between two dates, working days, or add days to a date. Calendar dates are used as they are, so time zones never shift a day.</p>
+      <form id="diffForm" class="control-panel" novalidate>
+        <div class="field"><label for="start">Start date (YYYY-MM-DD)</label><input type="text" id="start" class="text-input" value="2026-01-01" ></div>
+        <div class="field"><label for="end">End date (YYYY-MM-DD)</label><input type="text" id="end" class="text-input" value="2026-12-31" ></div>
+        <div class="control-row control-row-full"><button type="submit" class="btn btn-primary">Calculate</button></div>
+      </form>
+      <div id="diffResult" class="result-box"></div>
+      <p id="diffStatus" class="status" aria-live="polite"></p>
+      <h3 class="related-title">Add or subtract days</h3>
+      <form id="addForm" class="control-panel" novalidate>
+        <div class="field"><label for="addStart">From date (YYYY-MM-DD)</label><input type="text" id="addStart" class="text-input" value="2026-10-19" ></div>
+        <div class="field"><label for="days">Days (negative to subtract)</label><input type="number" id="days" class="text-input" value="30" ></div>
+        <div class="control-row control-row-full"><button type="submit" class="btn btn-primary">Add days</button></div>
+      </form>
+      <div id="addResult" class="result-box"></div>
+      <h3 class="related-title">Countdown</h3>
+      <form id="cdForm" class="control-panel" novalidate>
+        <div class="field field-full"><label for="target">Event date and time (your local time)</label><input type="datetime-local" id="target" class="text-input" value="2026-12-31T23:59" ></div>
+      </form>
+      <div id="cdResult" class="result-box"></div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-date-calculator">
+      <h2 id="guide-date-calculator">How to use Date Calculator</h2>
+      <ol class="guide-steps"><li>Enter two dates as YYYY-MM-DD to see the calendar and working days between them.</li><li>Enter a start date and a number of days to add or subtract.</li><li>Pick a date and time for the countdown.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>How are working days counted?</h3><p>Monday to Friday. Weekends are skipped, and public holidays are not.</p></div><div class="faq-item"><h3>Does the time zone change the day count?</h3><p>No. Dates are counted as calendar days, so a day never shifts.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/qr-code-generator.html">QR Code Generator</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Date Calculator", "description": "Days between dates, working days, add or subtract days, and a live countdown.", "url": "https://utildeck.bot747.workers.dev/pages/date-calculator.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How are working days counted?", "acceptedAnswer": {"@type": "Answer", "text": "Monday to Friday. Weekends are skipped, and public holidays are not."}}, {"@type": "Question", "name": "Does the time zone change the day count?", "acceptedAnswer": {"@type": "Answer", "text": "No. Dates are counted as calendar days, so a day never shifts."}}]}]}</script>
+  <script type="module">
+    import { initTheme } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { daysBetween, workingDaysBetween, addDays, countdownParts } from '../scripts/everyday.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const $ = id => document.getElementById(id);
+    const card = (l, v) => `<div class="stat-card wide"><div class="stat-label">${l}</div><div class="stat-value small">${v}</div></div>`;
+    const diff = () => {
+      try {
+        const days = daysBetween($('start').value, $('end').value);
+        const work = workingDaysBetween($('start').value, $('end').value);
+        $('diffResult').innerHTML = card('Calendar days', String(days)) + card('Working days (Mon to Fri)', String(work));
+        $('diffStatus').textContent = ''; $('diffStatus').classList.remove('error');
+      } catch (err) { $('diffResult').innerHTML = ''; $('diffStatus').textContent = err.message; $('diffStatus').classList.add('error'); }
+    };
+    const add = () => {
+      try { $('addResult').innerHTML = card('Result date', addDays($('addStart').value, $('days').value)); }
+      catch (err) { $('addResult').innerHTML = ''; $('diffStatus').textContent = err.message; $('diffStatus').classList.add('error'); }
+    };
+    let timer = null;
+    const countdown = () => {
+      clearInterval(timer);
+      const target = $('target').value;
+      if (!target) { $('cdResult').innerHTML = ''; return; }
+      const tick = () => {
+        const p = countdownParts(new Date(target).toISOString());
+        $('cdResult').innerHTML = p
+          ? card('Time left', `${p.days} days, ${p.hours} h, ${p.minutes} min, ${p.seconds} s`)
+          : card('Time left', 'That moment has passed');
+        if (!p) clearInterval(timer);
+      };
+      tick();
+      timer = setInterval(tick, 1000);
+    };
+    $('diffForm').addEventListener('submit', e => { e.preventDefault(); diff(); });
+    $('addForm').addEventListener('submit', e => { e.preventDefault(); add(); });
+    ['start','end'].forEach(id => $(id).addEventListener('input', diff));
+    ['addStart','days'].forEach(id => $(id).addEventListener('input', add));
+    $('target').addEventListener('input', countdown);
+    diff(); add(); countdown();
+
+  </script>
+</body>
+</html>
