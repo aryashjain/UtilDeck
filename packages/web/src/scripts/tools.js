@@ -263,13 +263,13 @@ export const TOOLS = [
     keywords: ['protein', 'muscle', 'diet', 'gym', 'macros'],
   },
   {
-    name: 'Bill Splitter',
+    name: 'Expense Splitter',
     path: 'pages/bill-splitter.html',
     icon: '🧾',
     category: 'calculate',
     textCard: true,
-    description: 'Split a bill with tip between people.',
-    keywords: ['bill', 'split', 'tip', 'restaurant', 'share', 'group'],
+    description: 'Splitwise-style expense splitter: equal, percentage or exact splits, and the fewest payments to settle up.',
+    keywords: ['splitwise', 'expense', 'split', 'bill', 'tip', 'percentage', 'share', 'group', 'settle up', 'roommates', 'friends'],
   },
   {
     name: 'Percentage Calculator',

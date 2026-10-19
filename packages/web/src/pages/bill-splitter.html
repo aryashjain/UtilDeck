@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bill Splitter - Split a Bill with Tip | UtilDeck</title>
-  <meta name="description" content="Split a restaurant or group bill with tip. See the tip, the total and what each person pays. Free, runs in your browser.">
-  <meta name="keywords" content="bill splitter, split the bill, tip calculator, split bill with tip, restaurant bill calculator, free calculator">
+  <title>Expense Splitter - Splitwise-style Bill Split | UtilDeck</title>
+  <meta name="description" content="Split shared expenses like Splitwise. Add people, split equally, by percentage or exact amounts, and see the fewest payments to settle up. Free, runs in your browser.">
+  <meta name="keywords" content="expense splitter, splitwise alternative, split bills with friends, split expenses, bill splitter, percentage split, settle up, free calculator">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/bill-splitter.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="UtilDeck">
-  <meta property="og:title" content="Bill Splitter - Split a Bill with Tip | UtilDeck">
-  <meta property="og:description" content="Split a restaurant or group bill with tip. See the tip, the total and what each person pays. Free, runs in your browser.">
+  <meta property="og:title" content="Expense Splitter - Splitwise-style Bill Split | UtilDeck">
+  <meta property="og:description" content="Split shared expenses like Splitwise. Add people, split equally, by percentage or exact amounts, and see the fewest payments to settle up. Free, runs in your browser.">
   <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/bill-splitter.html">
   <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Bill Splitter - Split a Bill with Tip | UtilDeck">
-  <meta name="twitter:description" content="Split a restaurant or group bill with tip. See the tip, the total and what each person pays. Free, runs in your browser.">
+  <meta name="twitter:title" content="Expense Splitter - Splitwise-style Bill Split | UtilDeck">
+  <meta name="twitter:description" content="Split shared expenses like Splitwise. Add people, split equally, by percentage or exact amounts, and see the fewest payments to settle up. Free, runs in your browser.">
   <script>
     // Apply the saved theme before the page is first drawn, so it never flashes light
     (function () {
@@ -52,35 +52,86 @@
 
   <main class="container">
     <section class="editor-section">
-      <h2>Bill Splitter</h2>
-      <p class="tool-description">Enter the bill, the tip you want to leave and how many people are paying.</p>
+      <h2>Expense Splitter</h2>
+      <p class="tool-description">
+        Split shared costs like Splitwise. Add people, add expenses (split equally, by percentage or by exact amounts), and see who owes whom, with the fewest payments to settle up. Saved in your browser.
+      </p>
 
-      <form id="form" class="control-panel" novalidate>
+      <h3 class="related-title">1. People</h3>
+      <form id="personForm" class="control-row" novalidate>
+        <div class="field" style="flex: 1 1 240px;">
+          <label for="personName">Name</label>
+          <input type="text" id="personName" class="text-input" maxlength="40" placeholder="e.g. Ana" autocomplete="off">
+        </div>
+        <button type="submit" class="btn btn-primary">Add person</button>
+      </form>
+      <div id="people" class="chip-row"></div>
+      <p id="personStatus" class="status" aria-live="polite"></p>
+
+      <h3 class="related-title">2. Add an expense</h3>
+      <form id="expenseForm" class="control-panel" novalidate>
         <div class="field">
-          <label for="total">Bill total</label>
-          <input type="number" id="total" class="text-input" value="100" >
+          <label for="desc">What for</label>
+          <input type="text" id="desc" class="text-input" maxlength="60" placeholder="e.g. Dinner">
         </div>
         <div class="field">
-          <label for="tip">Tip (%)</label>
-          <input type="number" id="tip" class="text-input" value="10" >
+          <label for="amount">Amount</label>
+          <input type="number" id="amount" class="text-input" min="0" step="0.01" placeholder="0.00">
         </div>
         <div class="field">
-          <label for="people">People</label>
-          <input type="number" id="people" class="text-input" value="4" >
+          <label for="paidBy">Paid by</label>
+          <select id="paidBy" class="text-input"></select>
+        </div>
+        <div class="field">
+          <label for="splitType">Split</label>
+          <select id="splitType" class="text-input">
+            <option value="equal">Equally</option>
+            <option value="percent">By percentage</option>
+            <option value="exact">By exact amounts</option>
+          </select>
+        </div>
+        <div class="field field-full">
+          <label>Who shares it</label>
+          <div id="participants" class="check-row"></div>
+        </div>
+        <div class="field field-full" id="valuesWrap" hidden>
+          <label id="valuesLabel">Amounts</label>
+          <div id="values" class="values-grid"></div>
         </div>
         <div class="control-row control-row-full">
-          <button type="submit" id="calcBtn" class="btn btn-primary">Split the bill</button>
+          <button type="submit" class="btn btn-primary">Add expense</button>
         </div>
       </form>
+      <p id="expenseStatus" class="status" aria-live="polite"></p>
 
-      <p id="status" class="status" aria-live="polite"></p>
-      <div id="result" class="result-box"></div>
+      <h3 class="related-title">3. Expenses</h3>
+      <div class="diff-table-wrap">
+        <table class="diff-table">
+          <thead><tr><th>What</th><th>Amount</th><th>Paid by</th><th>Split</th><th></th></tr></thead>
+          <tbody id="expenseRows"></tbody>
+        </table>
+      </div>
+
+      <h3 class="related-title">4. Balances</h3>
+      <div class="diff-table-wrap">
+        <table class="diff-table">
+          <thead><tr><th>Person</th><th>Net</th><th>Status</th></tr></thead>
+          <tbody id="balanceRows"></tbody>
+        </table>
+      </div>
+
+      <h3 class="related-title">5. Settle up</h3>
+      <ul id="settle" class="key-list"></ul>
+      <div class="control-row">
+        <button id="copyBtn" class="btn btn-secondary">Copy summary</button>
+        <button id="clearBtn" class="btn btn-secondary">Clear everything</button>
+      </div>
     </section>
 
     <section class="seo-guide" aria-labelledby="guide-bill-splitter">
-      <h2 id="guide-bill-splitter">How to use Bill Splitter</h2>
-      <ol class="guide-steps"><li>Enter the bill total.</li><li>Enter the tip percentage.</li><li>Enter how many people are paying.</li></ol>
-      <div class="faq"><div class="faq-item"><h3>Is the tip taken from the total?</h3><p>The tip is added to the bill total, and the grand total is split equally.</p></div><div class="faq-item"><h3>Does it handle uneven splits?</h3><p>This version splits evenly. Each person pays the same share.</p></div></div>
+      <h2 id="guide-bill-splitter">How to use Expense Splitter</h2>
+      <ol class="guide-steps"><li>Add everyone in the group.</li><li>Add each expense, choose who paid, and split it equally, by percentage or by exact amounts.</li><li>Read the balances and the payments listed under Settle up.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>How do I split a bill with friends?</h3><p>Add everyone, enter the bill, and choose who paid. The balances show what each person owes or is owed.</p></div><div class="faq-item"><h3>Is this a Splitwise alternative?</h3><p>It covers the core of Splitwise: several people, equal, percentage and exact splits, and the fewest payments to settle up. Data stays in your browser and is not synced across devices.</p></div></div>
       <h3 class="related-title">Related tools</h3>
       <ul class="related-tools"><li><a href="pages/percentage-calculator.html">Percentage Calculator</a></li></ul>
     </section>
@@ -96,25 +147,159 @@
     </div>
   </footer>
 
-  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Bill Splitter", "description": "Split a bill with tip between people.", "url": "https://utildeck.bot747.workers.dev/pages/bill-splitter.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is the tip taken from the total?", "acceptedAnswer": {"@type": "Answer", "text": "The tip is added to the bill total, and the grand total is split equally."}}, {"@type": "Question", "name": "Does it handle uneven splits?", "acceptedAnswer": {"@type": "Answer", "text": "This version splits evenly. Each person pays the same share."}}]}]}</script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Bill Splitter", "description": "Split a bill with tip between people.", "url": "https://utildeck.bot747.workers.dev/pages/bill-splitter.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is the tip taken from the total?", "acceptedAnswer": {"@type": "Answer", "text": "The tip is added to the bill total, and the grand total is split equally."}}, {"@type": "Question", "name": "Does it handle uneven splits?", "acceptedAnswer": {"@type": "Answer", "text": "This version splits evenly. Each person pays the same share."}}]}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Expense Splitter", "description": "Splitwise-style expense splitter: equal, percentage or exact splits, and the fewest payments to settle up.", "url": "https://utildeck.bot747.workers.dev/pages/bill-splitter.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I split a bill with friends?", "acceptedAnswer": {"@type": "Answer", "text": "Add everyone, enter the bill, and choose who paid. The balances show what each person owes or is owed."}}, {"@type": "Question", "name": "Is this a Splitwise alternative?", "acceptedAnswer": {"@type": "Answer", "text": "It covers the core of Splitwise: several people, equal, percentage and exact splits, and the fewest payments to settle up. Data stays in your browser and is not synced across devices."}}]}]}</script>
   <script type="module">
-    import { initTheme } from '../scripts/utils.js';
+    import { initTheme, copyText } from '../scripts/utils.js';
     import { initNav } from '../scripts/nav.js';
-    import { splitBill } from '../scripts/extra-tools.js';
+    import { toCents, formatCents, expenseShares, balances, settle } from '../scripts/splitter.js';
     initNav(); initTheme(document.getElementById('themeToggle'));
-    const status = document.getElementById('status'), result = document.getElementById('result');
-    const card = (l, v) => `<div class="stat-card"><div class="stat-label">${l}</div><div class="stat-value small">${v}</div></div>`;
-    const run = () => {
+
+    const KEY = 'toolkit_splitter_v1';
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    const $ = id => document.getElementById(id);
+    let state = { people: [], expenses: [] };
+    try { state = JSON.parse(localStorage.getItem(KEY)) || state; } catch (e) { /* start fresh */ }
+    const save = () => localStorage.setItem(KEY, JSON.stringify(state));
+
+    const fail = (el, msg) => { el.textContent = msg; el.classList.add('error'); };
+    const ok = (el, msg = '') => { el.textContent = msg; el.classList.remove('error'); };
+
+    function renderPeople() {
+      $('people').innerHTML = state.people.map(p =>
+        `<span class="summary-chip">${esc(p)} <button type="button" class="chip-x" data-person="${esc(p)}" aria-label="Remove ${esc(p)}">x</button></span>`).join('') ||
+        '<span class="tool-description">Add at least two people to start.</span>';
+      const paid = $('paidBy'), current = paid.value;
+      paid.innerHTML = state.people.map(p => `<option ${p === current ? 'selected' : ''}>${esc(p)}</option>`).join('');
+      $('participants').innerHTML = state.people.map(p =>
+        `<label class="checkbox-option"><input type="checkbox" value="${esc(p)}" checked> ${esc(p)}</label>`).join('');
+      renderValueInputs();
+    }
+
+    function chosenParticipants() {
+      return [...$('participants').querySelectorAll('input:checked')].map(i => i.value);
+    }
+
+    function renderValueInputs() {
+      const type = $('splitType').value;
+      const wrap = $('valuesWrap');
+      wrap.hidden = type === 'equal';
+      if (type === 'equal') return;
+      $('valuesLabel').textContent = type === 'percent' ? 'Percentage for each person (must total 100)' : 'Amount for each person (must total the expense)';
+      $('values').innerHTML = chosenParticipants().map(p =>
+        `<div class="field"><label>${esc(p)}</label><input type="number" min="0" step="${type === 'percent' ? '0.01' : '0.01'}" class="text-input" data-value="${esc(p)}"></div>`).join('');
+    }
+
+    function renderExpenses() {
+      $('expenseRows').innerHTML = state.expenses.map(e => `
+        <tr>
+          <td>${esc(e.description)}</td>
+          <td>${formatCents(e.amountCents)}</td>
+          <td>${esc(e.paidBy)}</td>
+          <td>${e.type === 'equal' ? 'Equally' : e.type === 'percent' ? 'By %' : 'Exact'} among ${e.participants.length}</td>
+          <td><button type="button" class="btn btn-secondary" data-expense="${esc(e.id)}">Delete</button></td>
+        </tr>`).join('') || '<tr><td colspan="5" class="tool-description">No expenses yet.</td></tr>';
+    }
+
+    function renderResults() {
       try {
-        const r = splitBill({ total: document.getElementById('total').value, tipPercent: document.getElementById('tip').value, people: document.getElementById('people').value });
-        result.innerHTML = `<div class="stats-grid">${card('Tip', r.tipAmount.toFixed(2))}${card('Total with tip', r.grandTotal.toFixed(2))}${card('Each person pays', r.perPerson.toFixed(2))}</div>`;
-        status.textContent = ''; status.classList.remove('error');
-      } catch (err) { result.innerHTML = ''; status.textContent = err.message; status.classList.add('error'); }
-    };
-    document.getElementById('form').addEventListener('submit', e => { e.preventDefault(); run(); });
-    ['total','tip','people'].forEach(id => document.getElementById(id).addEventListener('input', run));
-    run();
+        const net = balances(state.people, state.expenses);
+        $('balanceRows').innerHTML = state.people.map(p => {
+          const v = net[p];
+          const status = v > 0 ? 'is owed' : v < 0 ? 'owes' : 'settled';
+          return `<tr><td>${esc(p)}</td><td>${(v / 100).toFixed(2)}</td><td>${status}</td></tr>`;
+        }).join('') || '<tr><td colspan="3" class="tool-description">Add people and expenses to see balances.</td></tr>';
+        const pays = settle(net);
+        $('settle').innerHTML = pays.map(p => `<li><strong>${esc(p.from)}</strong> pays <strong>${esc(p.to)}</strong> ${formatCents(p.cents)}</li>`).join('') ||
+          '<li>Everyone is settled.</li>';
+      } catch (err) {
+        $('balanceRows').innerHTML = ''; $('settle').innerHTML = '';
+        fail($('expenseStatus'), err.message);
+      }
+    }
+
+    function render() {
+      renderPeople(); renderExpenses(); renderResults();
+      save();
+    }
+
+    $('personForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const name = $('personName').value.trim();
+      if (!name) return fail($('personStatus'), 'Type a name first.');
+      if (state.people.some(p => p.toLowerCase() === name.toLowerCase())) return fail($('personStatus'), `${name} is already in the group.`);
+      if (state.people.length >= 30) return fail($('personStatus'), 'Up to 30 people.');
+      state.people.push(name);
+      $('personName').value = '';
+      ok($('personStatus'), `Added ${name}.`);
+      render();
+    });
+
+    $('people').addEventListener('click', e => {
+      const name = e.target.dataset.person;
+      if (!name) return;
+      const used = state.expenses.some(x => x.paidBy === name || x.participants.includes(name));
+      if (used) return fail($('personStatus'), `${name} is in an expense. Delete those expenses first.`);
+      state.people = state.people.filter(p => p !== name);
+      ok($('personStatus'));
+      render();
+    });
+
+    $('splitType').addEventListener('change', renderValueInputs);
+    $('participants').addEventListener('change', renderValueInputs);
+
+    $('expenseForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const st = $('expenseStatus');
+      try {
+        const description = $('desc').value.trim();
+        if (!description) throw new Error('Describe the expense.');
+        if (state.people.length < 2) throw new Error('Add at least two people first.');
+        const amountCents = toCents($('amount').value);
+        if (amountCents <= 0) throw new Error('The amount must be more than zero.');
+        const participants = chosenParticipants();
+        if (participants.length === 0) throw new Error('Pick at least one person who shares it.');
+        const type = $('splitType').value;
+        const values = {};
+        if (type !== 'equal') {
+          for (const input of $('values').querySelectorAll('input')) {
+            const who = input.dataset.value;
+            if (input.value === '') throw new Error(`Enter a value for ${who}.`);
+            values[who] = type === 'percent' ? Number(input.value) : toCents(input.value);
+          }
+        }
+        const expense = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), description, amountCents,
+          paidBy: $('paidBy').value, type, participants, values };
+        expenseShares(expense);
+        state.expenses.push(expense);
+        $('desc').value = ''; $('amount').value = '';
+        ok(st, 'Expense added.');
+        render();
+      } catch (err) { fail(st, err.message); }
+    });
+
+    $('expenseRows').addEventListener('click', e => {
+      const id = e.target.dataset.expense;
+      if (!id) return;
+      state.expenses = state.expenses.filter(x => x.id !== id);
+      render();
+    });
+
+    $('copyBtn').addEventListener('click', () => {
+      const net = (() => { try { return balances(state.people, state.expenses); } catch (e) { return null; } })();
+      if (!net) return;
+      const lines = ['Expense summary', ...state.expenses.map(x => `- ${x.description}: ${formatCents(x.amountCents)} paid by ${x.paidBy}`), '', 'Settle up:',
+        ...settle(net).map(p => `- ${p.from} pays ${p.to} ${formatCents(p.cents)}`)];
+      if (lines.length === 0) return;
+      copyText(lines.join('\n'), $('copyBtn'));
+    });
+
+    $('clearBtn').addEventListener('click', () => {
+      if (!confirm('Remove all people and expenses?')) return;
+      state = { people: [], expenses: [] };
+      render();
+    });
+
+    render();
 
   </script>
 </body>

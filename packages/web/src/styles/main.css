@@ -1650,3 +1650,37 @@ html.dark-mode .theme-toggle::before {
   text-transform: none;
   letter-spacing: 0;
 }
+
+/* Expense splitter */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.chip-x {
+  margin-left: 0.35rem;
+  padding: 0 0.3rem;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font: inherit;
+}
+
+.chip-x:hover {
+  color: var(--danger-color);
+}
+
+.check-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
