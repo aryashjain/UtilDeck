@@ -95,3 +95,30 @@ export function parsePair(leftText, rightText) {
   if (r.error) return r;
   return { left: l.value, right: r.value };
 }
+
+// Counts of each kind of difference, for the summary
+export function summarize(diffs) {
+  const counts = { added: 0, removed: 0, changed: 0 };
+  for (const d of diffs) counts[d.kind] += 1;
+  return { ...counts, total: diffs.length };
+}
+
+// Plain text report ready to paste into a message or ticket
+export function formatReport(diffs) {
+  if (diffs.length === 0) return 'JSON Compare: the two documents are identical.';
+  const s = summarize(diffs);
+  const lines = [
+    'JSON Compare report',
+    `Total differences: ${s.total}`,
+    `Added: ${s.added}`,
+    `Removed: ${s.removed}`,
+    `Modified: ${s.changed}`,
+    '',
+    ...diffs.map(d => {
+      if (d.kind === 'added') return `+ ${d.path} = ${JSON.stringify(d.right)}`;
+      if (d.kind === 'removed') return `- ${d.path} (was ${JSON.stringify(d.left)})`;
+      return `~ ${d.path}: ${JSON.stringify(d.left)} -> ${JSON.stringify(d.right)}`;
+    }),
+  ];
+  return lines.join('\n');
+}
