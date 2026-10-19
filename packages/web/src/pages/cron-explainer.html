@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cron Explainer: What Does This Cron Expression Mean? | UtilDeck</title>
+  <meta name="description" content="Turn a cron expression into plain English and see its next five run times in your local time. Free cron explainer.">
+  <meta name="keywords" content="cron explainer, cron expression explained, crontab generator, cron next run, cron schedule, free developer tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/cron-explainer.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="Cron Explainer: What Does This Cron Expression Mean? | UtilDeck">
+  <meta property="og:description" content="Turn a cron expression into plain English and see its next five run times in your local time. Free cron explainer.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/cron-explainer.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cron Explainer: What Does This Cron Expression Mean? | UtilDeck">
+  <meta name="twitter:description" content="Turn a cron expression into plain English and see its next five run times in your local time. Free cron explainer.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Cron Explainer</h2>
+      <p class="tool-description">Type a five-field cron expression to see it in plain English, with the next five run times in your local time.</p>
+      <form id="form" class="control-row" novalidate>
+        <div class="field" style="flex: 1 1 320px;"><label for="expr">Cron expression (minute hour day month weekday)</label><input type="text" id="expr" class="text-input" value="0 9 * * 1-5" spellcheck="false"></div>
+        <button type="submit" class="btn btn-primary">Explain</button>
+      </form>
+      <div class="control-row">
+        <button class="btn btn-secondary" data-example="*/15 * * * *">Every 15 min</button>
+        <button class="btn btn-secondary" data-example="0 9 * * 1-5">Weekdays 9:00</button>
+        <button class="btn btn-secondary" data-example="30 8 1 * *">1st of month 8:30</button>
+      </div>
+      <p id="status" class="status" aria-live="polite"></p>
+      <div id="explain" class="result-box"></div>
+      <h3 class="related-title">Next 5 runs</h3>
+      <ul id="runs" class="key-list"></ul>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-cron-explainer">
+      <h2 id="guide-cron-explainer">How to use Cron Explainer</h2>
+      <ol class="guide-steps"><li>Type a five-field cron expression.</li><li>Read the plain English version and the next five run times.</li><li>Use the examples to start from a common schedule.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>What do the five cron fields mean?</h3><p>Minute, hour, day of month, month and day of week, in that order.</p></div><div class="faq-item"><h3>Which time zone are the run times in?</h3><p>Your device&#x27;s local time. Servers often use UTC, so check the zone your scheduler uses.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/encoder.html">Encoder</a></li><li><a href="pages/regex-tester.html">Regex Tester</a></li><li><a href="pages/hash-generator.html">Hash Generator</a></li><li><a href="pages/markdown-preview.html">Markdown Preview</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Cron Explainer", "description": "Turn a cron expression into plain English, with its next five run times.", "url": "https://utildeck.bot747.workers.dev/pages/cron-explainer.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What do the five cron fields mean?", "acceptedAnswer": {"@type": "Answer", "text": "Minute, hour, day of month, month and day of week, in that order."}}, {"@type": "Question", "name": "Which time zone are the run times in?", "acceptedAnswer": {"@type": "Answer", "text": "Your device's local time. Servers often use UTC, so check the zone your scheduler uses."}}]}]}</script>
+  <script type="module">
+    import { initTheme, copyText } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { nextRuns, explainCron } from '../scripts/cron.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const $ = id => document.getElementById(id);
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    const run = () => {
+      try {
+        const expr = $('expr').value;
+        $('explain').innerHTML = `<div class="stat-card wide"><div class="stat-label">In plain English</div><div class="stat-value small">${esc(explainCron(expr))}</div></div>`;
+        const runs = nextRuns(expr, 5);
+        $('runs').innerHTML = runs.map(d => `<li>${d.toLocaleString([], { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</li>`).join('');
+        $('status').textContent = ''; $('status').classList.remove('error');
+      } catch (err) { $('explain').innerHTML = ''; $('runs').innerHTML = ''; $('status').textContent = err.message; $('status').classList.add('error'); }
+    };
+    $('form').addEventListener('submit', e => { e.preventDefault(); run(); });
+    $('expr').addEventListener('input', run);
+    document.querySelectorAll('[data-example]').forEach(b => b.addEventListener('click', () => { $('expr').value = b.dataset.example; run(); }));
+    run();
+
+  </script>
+</body>
+</html>

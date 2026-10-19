@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Format Converter: PNG, JPEG and WebP Online | UtilDeck</title>
+  <meta name="description" content="Convert images between PNG, JPEG and WebP, with quality control for lossy formats. Free, and the image is never uploaded.">
+  <meta name="keywords" content="image converter, png to webp, jpg to png, webp converter, convert image format, free image tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/image-converter.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="Image Format Converter: PNG, JPEG and WebP Online | UtilDeck">
+  <meta property="og:description" content="Convert images between PNG, JPEG and WebP, with quality control for lossy formats. Free, and the image is never uploaded.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/image-converter.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Image Format Converter: PNG, JPEG and WebP Online | UtilDeck">
+  <meta name="twitter:description" content="Convert images between PNG, JPEG and WebP, with quality control for lossy formats. Free, and the image is never uploaded.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Image Format Converter</h2>
+      <p class="tool-description">Convert a PNG, JPEG or WebP image to another format. Choose the quality for JPEG and WebP. Runs in your browser; the image is never uploaded.</p>
+      <label id="dropZone" class="drop-zone" tabindex="0">
+        <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp" hidden>
+        <span class="drop-zone-title">Drop an image here, or click to choose one</span>
+        <span class="drop-zone-hint">PNG, JPEG or WebP</span>
+      </label>
+      <div id="workspace" hidden>
+        <div class="control-panel">
+          <div class="field"><label for="to">Convert to</label><select id="to" class="text-input"><option value="image/png">PNG (lossless)</option><option value="image/jpeg">JPEG</option><option value="image/webp">WebP</option></select></div>
+          <div class="field"><label for="quality">Quality: <strong id="qv">85</strong>% (JPEG and WebP)</label><input type="range" id="quality" min="10" max="100" value="85"></div>
+        </div>
+        <p id="status" class="status" aria-live="polite"></p>
+        <div class="compare-grid"><figure class="compare-card"><figcaption>Original</figcaption><p id="origMeta" class="compare-meta"></p></figure><figure class="compare-card"><figcaption>Converted</figcaption><p id="newMeta" class="compare-meta"></p></figure></div>
+        <div class="control-row" style="justify-content: flex-end; margin-top: 1rem;"><button id="downloadBtn" class="btn btn-primary">Download converted image</button></div>
+      </div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-image-converter">
+      <h2 id="guide-image-converter">How to use Image Format Converter</h2>
+      <ol class="guide-steps"><li>Drop a PNG, JPEG or WebP image.</li><li>Choose the format and, for JPEG or WebP, the quality.</li><li>Download the converted image.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>Why can I not convert to WebP in some browsers?</h3><p>Some browsers cannot write WebP. In that case the tool asks you to use PNG or JPEG.</p></div><div class="faq-item"><h3>Is my image uploaded?</h3><p>No. Conversion happens in your browser.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/image-compressor.html">Image Compressor</a></li><li><a href="pages/image-cropper.html">Image Cropper</a></li><li><a href="pages/favicon-generator.html">Favicon Generator</a></li><li><a href="pages/svg-optimiser.html">SVG Optimiser</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Image Format Converter", "description": "Convert PNG, JPEG and WebP images to another format, with quality control.", "url": "https://utildeck.bot747.workers.dev/pages/image-converter.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why can I not convert to WebP in some browsers?", "acceptedAnswer": {"@type": "Answer", "text": "Some browsers cannot write WebP. In that case the tool asks you to use PNG or JPEG."}}, {"@type": "Question", "name": "Is my image uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. Conversion happens in your browser."}}]}]}</script>
+  <script type="module">
+    import { initTheme, copyText } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const $ = id => document.getElementById(id);
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    let source = null, outBlob = null, outUrl = null;
+    const dz = $('dropZone');
+    const fmt = b => b < 1024 ? b + ' B' : b < 1048576 ? (b / 1024).toFixed(1) + ' KB' : (b / 1048576).toFixed(2) + ' MB';
+    function loadFile(file) {
+      if (!file || !file.type.startsWith('image/')) { $('status').textContent = 'Please choose a PNG, JPEG or WebP image.'; $('status').classList.add('error'); return; }
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
+        c.getContext('2d').drawImage(img, 0, 0);
+        c.toBlob(b => { source = { canvas: c, blob: b, name: file.name, type: file.type }; URL.revokeObjectURL(url); dz.hidden = true; $('workspace').hidden = false; $('origMeta').textContent = `${img.naturalWidth} × ${img.naturalHeight} · ${fmt(file.size)} · ${file.type.replace('image/', '').toUpperCase()}`; convert(); }, 'image/png');
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); $('status').textContent = 'That file could not be read as an image.'; $('status').classList.add('error'); };
+      img.src = url;
+    }
+    function convert() {
+      if (!source) return;
+      const to = $('to').value;
+      $('qv').textContent = $('quality').value;
+      const q = Number($('quality').value) / 100;
+      source.canvas.toBlob(blob => {
+        if (!blob) return;
+        if (to !== 'image/png' && blob.type !== to) {
+          $('status').textContent = 'Your browser cannot write ' + to.replace('image/', '').toUpperCase() + ' here. Use PNG or JPEG.';
+          $('status').classList.add('error');
+          outBlob = null; $('newMeta').textContent = ''; return;
+        }
+        outBlob = blob;
+        $('newMeta').textContent = `${blob.type.replace('image/', '').toUpperCase()} · ${fmt(blob.size)}`;
+        $('status').textContent = `Converted: ${fmt(blob.size)}.`; $('status').classList.remove('error');
+      }, to, q);
+    }
+    $('fileInput').addEventListener('change', () => loadFile($('fileInput').files[0]));
+    dz.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('fileInput').click(); } });
+    dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('dragging'); });
+    dz.addEventListener('dragleave', () => dz.classList.remove('dragging'));
+    dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('dragging'); loadFile(e.dataTransfer.files[0]); });
+    ['to', 'quality'].forEach(id => $(id).addEventListener('input', convert));
+    $('downloadBtn').addEventListener('click', () => {
+      if (!outBlob) return;
+      const ext = $('to').value.replace('image/', '').replace('jpeg', 'jpg');
+      const url = URL.createObjectURL(outBlob);
+      const a = document.createElement('a'); a.href = url; a.download = 'converted.' + ext;
+      document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
+
+  </script>
+</body>
+</html>

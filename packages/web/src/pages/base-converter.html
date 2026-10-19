@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number Base Converter: Binary, Octal, Decimal, Hex | UtilDeck</title>
+  <meta name="description" content="Convert numbers between binary, octal, decimal and hexadecimal, exactly, even for very large values. Free base converter.">
+  <meta name="keywords" content="base converter, binary to decimal, hex to decimal, decimal to hex, number base converter, free developer tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/base-converter.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="Number Base Converter: Binary, Octal, Decimal, Hex | UtilDeck">
+  <meta property="og:description" content="Convert numbers between binary, octal, decimal and hexadecimal, exactly, even for very large values. Free base converter.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/base-converter.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Number Base Converter: Binary, Octal, Decimal, Hex | UtilDeck">
+  <meta name="twitter:description" content="Convert numbers between binary, octal, decimal and hexadecimal, exactly, even for very large values. Free base converter.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Base Converter</h2>
+      <p class="tool-description">Convert a number between binary, octal, decimal and hex. Updates as you type, and handles very large numbers exactly.</p>
+      <form id="form" class="control-panel" novalidate>
+        <div class="field"><label for="num">Number</label><input type="text" id="num" class="text-input" value="FF" spellcheck="false"></div>
+        <div class="field"><label for="base">It is in</label><select id="base" class="text-input"><option value="16">Hex (base 16)</option><option value="10">Decimal (base 10)</option><option value="8">Octal (base 8)</option><option value="2">Binary (base 2)</option></select></div>
+      </form>
+      <p id="status" class="status" aria-live="polite"></p>
+      <div class="diff-table-wrap"><table class="diff-table"><thead><tr><th>Base</th><th>Value</th><th></th></tr></thead><tbody id="rows"></tbody></table></div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-base-converter">
+      <h2 id="guide-base-converter">How to use Base Converter</h2>
+      <ol class="guide-steps"><li>Type a number and choose its base.</li><li>Read it in binary, octal, decimal and hex, and copy any value.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>Does it handle very large numbers?</h3><p>Yes. It uses exact integer arithmetic, so large numbers stay correct.</p></div><div class="faq-item"><h3>Can I type a prefix such as 0x?</h3><p>Yes. The prefixes 0x, 0b and 0o are accepted.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/encoder.html">Encoder</a></li><li><a href="pages/regex-tester.html">Regex Tester</a></li><li><a href="pages/hash-generator.html">Hash Generator</a></li><li><a href="pages/markdown-preview.html">Markdown Preview</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Base Converter", "description": "Convert numbers between binary, octal, decimal and hex, exactly.", "url": "https://utildeck.bot747.workers.dev/pages/base-converter.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does it handle very large numbers?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It uses exact integer arithmetic, so large numbers stay correct."}}, {"@type": "Question", "name": "Can I type a prefix such as 0x?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The prefixes 0x, 0b and 0o are accepted."}}]}]}</script>
+  <script type="module">
+    import { initTheme, copyText } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { convertBase } from '../scripts/converters.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const $ = id => document.getElementById(id);
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    const LABEL = { 2: 'Binary (base 2)', 8: 'Octal (base 8)', 10: 'Decimal (base 10)', 16: 'Hex (base 16)' };
+    const KEY = { 2: 'binary', 8: 'octal', 10: 'decimal', 16: 'hex' };
+    const run = () => {
+      try {
+        const r = convertBase($('num').value, $('base').value);
+        $('rows').innerHTML = [16, 10, 8, 2].map(b => `<tr><td>${LABEL[b]}</td><td><code>${esc(r[KEY[b]])}</code></td><td><button class="btn btn-secondary" data-copy="${esc(r[KEY[b]])}">Copy</button></td></tr>`).join('');
+        $('status').textContent = ''; $('status').classList.remove('error');
+      } catch (err) { $('rows').innerHTML = ''; $('status').textContent = err.message; $('status').classList.add('error'); }
+    };
+    $('form').addEventListener('submit', e => { e.preventDefault(); run(); });
+    ['num', 'base'].forEach(id => $(id).addEventListener('input', run));
+    $('rows').addEventListener('click', e => { const v = e.target.dataset.copy; if (v !== undefined) copyText(v, e.target); });
+    run();
+
+  </script>
+</body>
+</html>

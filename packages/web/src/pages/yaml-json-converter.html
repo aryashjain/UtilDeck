@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YAML to JSON and JSON to YAML Converter Online | UtilDeck</title>
+  <meta name="description" content="Convert YAML to JSON and JSON to YAML, with the line number of any error. Free online converter, runs in your browser.">
+  <meta name="keywords" content="yaml to json, json to yaml, yaml converter, yaml formatter, yaml validator, free developer tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/yaml-json-converter.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="YAML to JSON and JSON to YAML Converter Online | UtilDeck">
+  <meta property="og:description" content="Convert YAML to JSON and JSON to YAML, with the line number of any error. Free online converter, runs in your browser.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/yaml-json-converter.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="YAML to JSON and JSON to YAML Converter Online | UtilDeck">
+  <meta name="twitter:description" content="Convert YAML to JSON and JSON to YAML, with the line number of any error. Free online converter, runs in your browser.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <script src="../assets/vendor/yaml.min.js"></script>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>YAML and JSON Converter</h2>
+      <p class="tool-description">Convert YAML to JSON or JSON to YAML. Errors point to the line that needs fixing. Runs in your browser.</p>
+      <form id="form" class="control-panel" novalidate>
+        <div class="field field-full"><label for="dir">Direction</label><select id="dir" class="text-input"><option value="yaml2json">YAML to JSON</option><option value="json2yaml">JSON to YAML</option></select></div>
+      </form>
+      <div class="split-layout" style="height: auto;">
+        <div class="split-input"><div class="split-input-pair"><label for="input">Input</label><textarea id="input" class="output-box" style="min-height: 320px;" spellcheck="false">name: Ana
+skills:
+  - python
+  - sql
+active: true</textarea></div></div>
+        <div class="split-input"><div class="split-input-pair"><label for="output">Output</label><textarea id="output" class="output-box" style="min-height: 320px;" readonly spellcheck="false"></textarea></div></div>
+      </div>
+      <p id="status" class="status" aria-live="polite"></p>
+      <div class="control-row"><button id="copyBtn" class="btn btn-secondary">Copy output</button><button id="downloadBtn" class="btn btn-secondary">Download</button></div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-yaml-json-converter">
+      <h2 id="guide-yaml-json-converter">How to use YAML and JSON Converter</h2>
+      <ol class="guide-steps"><li>Paste YAML and choose YAML to JSON, or paste JSON and choose JSON to YAML.</li><li>Fix any error at the line shown, and copy the result.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>Why does YAML fail on indentation?</h3><p>YAML uses spaces to show structure, so a line indented wrongly changes or breaks the meaning.</p></div><div class="faq-item"><h3>Is my YAML sent anywhere?</h3><p>No. It is parsed in your browser.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/encoder.html">Encoder</a></li><li><a href="pages/regex-tester.html">Regex Tester</a></li><li><a href="pages/hash-generator.html">Hash Generator</a></li><li><a href="pages/markdown-preview.html">Markdown Preview</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "YAML and JSON Converter", "description": "Convert YAML to JSON and JSON to YAML, with line numbers for errors.", "url": "https://utildeck.bot747.workers.dev/pages/yaml-json-converter.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why does YAML fail on indentation?", "acceptedAnswer": {"@type": "Answer", "text": "YAML uses spaces to show structure, so a line indented wrongly changes or breaks the meaning."}}, {"@type": "Question", "name": "Is my YAML sent anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. It is parsed in your browser."}}]}]}</script>
+  <script type="module">
+    import { initTheme, copyText } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const $ = id => document.getElementById(id);
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    let latest = '';
+    const run = () => {
+      const src = $('input').value;
+      try {
+        const out = $('dir').value === 'yaml2json'
+          ? JSON.stringify(window.YAML.parse(src), null, 2)
+          : window.YAML.stringify(JSON.parse(src));
+        latest = out; $('output').value = out;
+        $('status').textContent = 'Converted.'; $('status').classList.remove('error');
+      } catch (err) {
+        latest = ''; $('output').value = '';
+        const where = err.linePos && err.linePos[0] ? ` (line ${err.linePos[0].line}, column ${err.linePos[0].col})` : '';
+        $('status').textContent = ($('dir').value === 'yaml2json' ? 'The YAML is not valid' : 'The JSON is not valid') + where + ': ' + (err.message || '').split('\n')[0];
+        $('status').classList.add('error');
+      }
+    };
+    ['input', 'dir'].forEach(id => $(id).addEventListener('input', run));
+    $('dir').addEventListener('change', run);
+    $('copyBtn').addEventListener('click', () => copyText(latest, $('copyBtn')));
+    $('downloadBtn').addEventListener('click', () => {
+      if (!latest) return;
+      const ext = $('dir').value === 'yaml2json' ? 'json' : 'yaml';
+      const url = URL.createObjectURL(new Blob([latest], { type: 'text/plain' }));
+      const a = document.createElement('a'); a.href = url; a.download = 'converted.' + ext;
+      document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
+    run();
+
+  </script>
+</body>
+</html>
