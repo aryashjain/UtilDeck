@@ -1695,3 +1695,8 @@ html.dark-mode .theme-toggle::before {
   margin: 1rem auto 0;
   width: fit-content;
 }
+
+/* Pomodoro */
+.pomodoro { text-align: center; padding: 1.5rem 0; }
+.pomo-phase { font-size: 1.1rem; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; }
+.pomo-clock { font-size: clamp(3.5rem, 12vw, 6rem); font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.1; margin: 0.5rem 0; color: var(--accent-color); }

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomodoro Timer - Focus and Break Timer with Sound | UtilDeck</title>
+  <meta name="description" content="A Pomodoro timer for focused work: 25 minute focus blocks, short and long breaks, and a sound at each change. Free, runs in your browser.">
+  <meta name="keywords" content="pomodoro timer, pomodoro online, focus timer, 25 minute timer, break timer, study timer, free productivity tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/pomodoro-timer.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="Pomodoro Timer - Focus and Break Timer with Sound | UtilDeck">
+  <meta property="og:description" content="A Pomodoro timer for focused work: 25 minute focus blocks, short and long breaks, and a sound at each change. Free, runs in your browser.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/pomodoro-timer.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pomodoro Timer - Focus and Break Timer with Sound | UtilDeck">
+  <meta name="twitter:description" content="A Pomodoro timer for focused work: 25 minute focus blocks, short and long breaks, and a sound at each change. Free, runs in your browser.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Pomodoro Timer</h2>
+      <p class="tool-description">Work in focused blocks with short breaks, and a long break after every four. A short sound marks each change.</p>
+      <div class="pomodoro">
+        <p id="phase" class="pomo-phase">Focus</p>
+        <p id="clock" class="pomo-clock" aria-live="off">25:00</p>
+        <p id="count" class="tool-description">Focus sessions completed: 0</p>
+        <div class="control-row" style="justify-content: center;">
+          <button id="startBtn" class="btn btn-primary">Start</button>
+          <button id="skipBtn" class="btn btn-secondary">Skip</button>
+          <button id="resetBtn" class="btn btn-secondary">Reset</button>
+        </div>
+        <p class="tool-description" style="text-align:center;">Focus 25 min, short break 5 min, long break 15 min after every fourth focus.</p>
+      </div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-pomodoro-timer">
+      <h2 id="guide-pomodoro-timer">How to use Pomodoro Timer</h2>
+      <ol class="guide-steps"><li>Press Start to begin a 25 minute focus session.</li><li>Take the short break when it ends. After four focus sessions you get a long break.</li><li>A sound plays at each change. Reset starts the count again.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>What is the Pomodoro technique?</h3><p>Working in focused 25 minute blocks, with short breaks between them and a longer break after four.</p></div><div class="faq-item"><h3>Why does the timer keep time when the tab is in the background?</h3><p>It works from the end time rather than counting ticks, so it stays accurate even when the browser slows background tabs.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/date-calculator.html">Date Calculator</a></li><li><a href="pages/qr-code-generator.html">QR Code Generator</a></li><li><a href="pages/age-calculator.html">Age Calculator</a></li><li><a href="pages/world-clock.html">World Clock and Meeting Planner</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Pomodoro Timer", "description": "Focus and break timer with a sound at each change, for focused work.", "url": "https://utildeck.bot747.workers.dev/pages/pomodoro-timer.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the Pomodoro technique?", "acceptedAnswer": {"@type": "Answer", "text": "Working in focused 25 minute blocks, with short breaks between them and a longer break after four."}}, {"@type": "Question", "name": "Why does the timer keep time when the tab is in the background?", "acceptedAnswer": {"@type": "Answer", "text": "It works from the end time rather than counting ticks, so it stays accurate even when the browser slows background tabs."}}]}]}</script>
+  <script type="module">
+    import { initTheme } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { nextPhase, phaseMinutes } from '../scripts/everyday.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const $ = id => document.getElementById(id);
+    const LABELS = { focus: 'Focus', short: 'Short break', long: 'Long break' };
+    let state = { phase: 'focus', completed: 0 };
+    let remaining = phaseMinutes('focus') * 60 * 1000;
+    let endAt = null;
+    let timer = null;
+    let audio = null;
+
+    // Short beep through the Web Audio API. Browsers allow sound only after a click, so the first Start sets it up.
+    function beep(times = 3) {
+      if (!audio) audio = new (window.AudioContext || window.webkitAudioContext)();
+      for (let i = 0; i < times; i++) {
+        const osc = audio.createOscillator(), gain = audio.createGain();
+        osc.frequency.value = 880;
+        osc.connect(gain); gain.connect(audio.destination);
+        const t = audio.currentTime + i * 0.4;
+        gain.gain.setValueAtTime(0.2, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+        osc.start(t); osc.stop(t + 0.3);
+      }
+    }
+
+    const show = () => {
+      const total = Math.ceil(remaining / 1000);
+      const mm = String(Math.floor(total / 60)).padStart(2, '0'), ss = String(total % 60).padStart(2, '0');
+      $('clock').textContent = `${mm}:${ss}`;
+      $('phase').textContent = LABELS[state.phase];
+      $('count').textContent = `Focus sessions completed: ${state.completed}`;
+      document.title = `${mm}:${ss} ${LABELS[state.phase]} | UtilDeck`;
+    };
+
+    const changePhase = () => {
+      state = nextPhase(state);
+      remaining = phaseMinutes(state.phase) * 60 * 1000;
+      beep();
+    };
+
+    const tick = () => {
+      remaining = Math.max(0, endAt - Date.now());
+      if (remaining === 0) { changePhase(); endAt = Date.now() + remaining; }
+      show();
+    };
+
+    const running = () => timer !== null;
+    const pause = () => {
+      clearInterval(timer); timer = null;
+      remaining = Math.max(0, endAt - Date.now());
+      $('startBtn').textContent = 'Start';
+      show();
+    };
+    const start = () => {
+      if (!audio) audio = new (window.AudioContext || window.webkitAudioContext)();
+      endAt = Date.now() + remaining;
+      timer = setInterval(tick, 250);
+      $('startBtn').textContent = 'Pause';
+    };
+
+    $('startBtn').addEventListener('click', () => (running() ? pause() : start()));
+    $('skipBtn').addEventListener('click', () => {
+      if (running()) pause();
+      changePhase();
+      show();
+    });
+    $('resetBtn').addEventListener('click', () => {
+      if (running()) pause();
+      state = { phase: 'focus', completed: 0 };
+      remaining = phaseMinutes('focus') * 60 * 1000;
+      show();
+    });
+    show();
+
+  </script>
+</body>
+</html>

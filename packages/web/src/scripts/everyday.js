@@ -103,3 +103,97 @@ export function decodeJwt(token, now = new Date()) {
     expired: typeof payload.exp === 'number' ? nowSec >= payload.exp : null,
   };
 }
+
+// ---- Age ----
+const isLeap = y => (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;
+
+// Exact age from a birth date to a day, in years, months and days, plus days until the next birthday.
+// Counts whole months from the birth date (clamping the day to the month's length), then the leftover days.
+export function ageParts(birthIso, todayIso) {
+  const b = parseDate(birthIso), t = parseDate(todayIso);
+  if (t < b) throw new Error('The birth date is after the date you chose.');
+  const bd = new Date(b), td = new Date(t);
+  const bYear = bd.getUTCFullYear(), bMonth = bd.getUTCMonth(), bDay = bd.getUTCDate();
+
+  // Date of the anniversary that is k whole months after the birth date
+  const monthsLater = k => {
+    const total = bYear * 12 + bMonth + k;
+    const y = Math.floor(total / 12), m = total % 12;
+    const last = new Date(Date.UTC(y, m + 1, 0)).getUTCDate();
+    return Date.UTC(y, m, Math.min(bDay, last));
+  };
+
+  let k = (td.getUTCFullYear() * 12 + td.getUTCMonth()) - (bYear * 12 + bMonth);
+  while (k > 0 && monthsLater(k) > t) k -= 1;
+  const anniversary = monthsLater(k);
+  const days = Math.round((t - anniversary) / DAY_MS);
+
+  const birthdayIn = year => {
+    // 29 February birthdays fall on 28 February in common years
+    const day = bMonth === 1 && bDay === 29 && !isLeap(year) ? 28 : bDay;
+    return Date.UTC(year, bMonth, day);
+  };
+  let next = birthdayIn(td.getUTCFullYear());
+  if (next < t) next = birthdayIn(td.getUTCFullYear() + 1);
+  const years = Math.floor(k / 12);
+  return { years, months: k % 12, days, daysUntilBirthday: Math.round((next - t) / DAY_MS), turns: years + 1 };
+}
+
+// ---- World clock and meeting planner ----
+export const CITIES = [
+  ['UTC', 'UTC'],
+  ['America/Los_Angeles', 'Los Angeles'],
+  ['America/New_York', 'New York'],
+  ['America/Sao_Paulo', 'São Paulo'],
+  ['Europe/London', 'London'],
+  ['Europe/Berlin', 'Berlin'],
+  ['Africa/Lagos', 'Lagos'],
+  ['Asia/Dubai', 'Dubai'],
+  ['Asia/Kolkata', 'Kolkata'],
+  ['Asia/Singapore', 'Singapore'],
+  ['Asia/Tokyo', 'Tokyo'],
+  ['Australia/Sydney', 'Sydney'],
+];
+
+const hourFormat = new Map();
+function hourIn(ms, zone) {
+  if (!hourFormat.has(zone)) {
+    hourFormat.set(zone, new Intl.DateTimeFormat('en-GB', { timeZone: zone, hour: '2-digit', hourCycle: 'h23' }));
+  }
+  const part = hourFormat.get(zone).formatToParts(new Date(ms)).find(p => p.type === 'hour');
+  return Number(part.value);
+}
+
+export function localTime(ms, zone) {
+  return new Intl.DateTimeFormat('en-GB', { timeZone: zone, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(new Date(ms));
+}
+
+// UTC hours on a date where every zone is inside working hours [start, end)
+export function sharedHours(dateIso, zones, start = 9, end = 18) {
+  if (zones.length === 0) throw new Error('Pick at least one city.');
+  if (!(start >= 0 && end <= 24 && start < end)) throw new Error('Working hours must run from an earlier hour to a later one, within 0 to 24.');
+  const day = parseDate(dateIso);
+  const slots = [];
+  for (let h = 0; h < 24; h++) {
+    const ms = day + h * 3600000;
+    const ok = zones.every(z => { const lh = hourIn(ms, z); return lh >= start && lh < end; });
+    if (ok) slots.push({ utc: `${String(h).padStart(2, '0')}:00`, times: Object.fromEntries(zones.map(z => [z, localTime(ms, z)])) });
+  }
+  return slots;
+}
+
+// ---- Pomodoro ----
+export const POMODORO = { focus: 25, shortBreak: 5, longBreak: 15, cyclesBeforeLong: 4 };
+
+// After a phase ends: focus -> short or long break; break -> focus. `completed` counts finished focus sessions.
+export function nextPhase({ phase, completed }) {
+  if (phase === 'focus') {
+    const done = completed + 1;
+    return { phase: done % POMODORO.cyclesBeforeLong === 0 ? 'long' : 'short', completed: done };
+  }
+  return { phase: 'focus', completed };
+}
+
+export function phaseMinutes(phase) {
+  return phase === 'focus' ? POMODORO.focus : phase === 'long' ? POMODORO.longBreak : POMODORO.shortBreak;
+}

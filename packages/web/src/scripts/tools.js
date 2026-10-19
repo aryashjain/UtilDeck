@@ -327,6 +327,33 @@ export const TOOLS = [
     description: 'Read a JSON Web Token: header, payload, issued and expiry times. Decoding only.',
     keywords: ['jwt', 'json web token', 'token', 'decode', 'bearer', 'claims', 'expiry', 'auth'],
   },
+  {
+    name: 'Age Calculator',
+    path: 'pages/age-calculator.html',
+    icon: '🎂',
+    category: 'everyday',
+    textCard: true,
+    description: 'Exact age in years, months and days, and days until the next birthday.',
+    keywords: ['age', 'birthday', 'how old', 'years', 'months', 'days', 'calculator'],
+  },
+  {
+    name: 'World Clock and Meeting Planner',
+    path: 'pages/world-clock.html',
+    icon: '🌍',
+    category: 'everyday',
+    textCard: true,
+    description: 'See the time in many cities, and find meeting hours that work for everyone.',
+    keywords: ['world clock', 'time zone', 'timezone', 'meeting', 'planner', 'schedule', 'across time zones'],
+  },
+  {
+    name: 'Pomodoro Timer',
+    path: 'pages/pomodoro-timer.html',
+    icon: '🍅',
+    category: 'everyday',
+    textCard: true,
+    description: 'Focus and break timer with a sound at each change, for focused work.',
+    keywords: ['pomodoro', 'timer', 'focus', 'break', 'productivity', 'study', '25 minutes'],
+  },
 ];
 
 const CATEGORY_NAMES = Object.fromEntries(CATEGORIES.map(c => [c.id, c.name]));

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Clock and Meeting Planner - Time Zones | UtilDeck</title>
+  <meta name="description" content="See the time in many cities and find meeting hours that fall within working hours for everyone. Free, runs in your browser.">
+  <meta name="keywords" content="world clock, time zone converter, meeting planner, find meeting time across time zones, what time is it in, time zones, free tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/world-clock.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="World Clock and Meeting Planner - Time Zones | UtilDeck">
+  <meta property="og:description" content="See the time in many cities and find meeting hours that fall within working hours for everyone. Free, runs in your browser.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/world-clock.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="World Clock and Meeting Planner - Time Zones | UtilDeck">
+  <meta name="twitter:description" content="See the time in many cities and find meeting hours that fall within working hours for everyone. Free, runs in your browser.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>World Clock and Meeting Planner</h2>
+      <p class="tool-description">See the time in several cities at once, then find the hours that fall inside working hours everywhere you pick.</p>
+      <h3 class="related-title">Cities</h3>
+      <div id="cities" class="check-row"></div>
+      <h3 class="related-title">Now</h3>
+      <div class="diff-table-wrap"><table class="diff-table"><thead><tr><th>City</th><th>Local time now</th></tr></thead><tbody id="nowRows"></tbody></table></div>
+      <h3 class="related-title">Meeting planner</h3>
+      <form id="form" class="control-panel" novalidate>
+        <div class="field"><label for="date">Meeting date</label><input type="date" id="date" class="text-input"></div>
+        <div class="field"><label for="start">Working day starts (hour, 0 to 23)</label><input type="number" id="start" class="text-input" min="0" max="23" value="9"></div>
+        <div class="field"><label for="end">Working day ends (hour, 1 to 24)</label><input type="number" id="end" class="text-input" min="1" max="24" value="18"></div>
+        <div class="control-row control-row-full"><button type="submit" class="btn btn-primary">Find shared hours</button></div>
+      </form>
+      <p id="status" class="status" aria-live="polite"></p>
+      <div class="diff-table-wrap"><table class="diff-table"><thead><tr id="slotHead"></tr></thead><tbody id="slotRows"></tbody></table></div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-world-clock">
+      <h2 id="guide-world-clock">How to use World Clock and Meeting Planner</h2>
+      <ol class="guide-steps"><li>Pick the cities you want to compare.</li><li>Choose a meeting date and your working hours.</li><li>Read the UTC hours where everyone is inside working hours.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>How are shared hours found?</h3><p>For each UTC hour on the date, the tool checks whether every city is inside the working hours you set.</p></div><div class="faq-item"><h3>Does it account for daylight saving time?</h3><p>Yes. Each city uses its own time zone rules for that date.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/date-calculator.html">Date Calculator</a></li><li><a href="pages/qr-code-generator.html">QR Code Generator</a></li><li><a href="pages/age-calculator.html">Age Calculator</a></li><li><a href="pages/pomodoro-timer.html">Pomodoro Timer</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "World Clock and Meeting Planner", "description": "See the time in many cities, and find meeting hours that work for everyone.", "url": "https://utildeck.bot747.workers.dev/pages/world-clock.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How are shared hours found?", "acceptedAnswer": {"@type": "Answer", "text": "For each UTC hour on the date, the tool checks whether every city is inside the working hours you set."}}, {"@type": "Question", "name": "Does it account for daylight saving time?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Each city uses its own time zone rules for that date."}}]}]}</script>
+  <script type="module">
+    import { initTheme } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { CITIES, localTime, sharedHours } from '../scripts/everyday.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const $ = id => document.getElementById(id);
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    const defaults = ['Europe/London', 'America/New_York', 'Asia/Kolkata', 'Asia/Tokyo'];
+    $('cities').innerHTML = CITIES.map(([zone, name]) =>
+      `<label class="checkbox-option"><input type="checkbox" value="${zone}" ${defaults.includes(zone) ? 'checked' : ''}> ${esc(name)}</label>`).join('');
+    $('date').value = new Date().toISOString().slice(0, 10);
+    const picked = () => [...$('cities').querySelectorAll('input:checked')].map(i => i.value);
+    const nameOf = zone => (CITIES.find(c => c[0] === zone) || [zone, zone])[1];
+    const now = () => {
+      const rows = picked().map(z => `<tr><td>${esc(nameOf(z))}</td><td>${localTime(Date.now(), z)}</td></tr>`).join('');
+      $('nowRows').innerHTML = rows || '<tr><td colspan="2" class="tool-description">Pick at least one city.</td></tr>';
+    };
+    const plan = () => {
+      try {
+        const zones = picked();
+        const slots = sharedHours($('date').value, zones, Number($('start').value), Number($('end').value));
+        $('slotHead').innerHTML = '<th>UTC</th>' + zones.map(z => `<th>${esc(nameOf(z))}</th>`).join('');
+        $('slotRows').innerHTML = slots.map(s => `<tr><td>${s.utc}</td>${zones.map(z => `<td>${s.times[z]}</td>`).join('')}</tr>`).join('') ||
+          '<tr><td colspan="99" class="tool-description">No hour fits everyone in that window. Try wider working hours or fewer cities.</td></tr>';
+        $('status').textContent = slots.length ? `${slots.length} shared hour${slots.length === 1 ? '' : 's'} found.` : ''; $('status').classList.remove('error');
+      } catch (err) { $('slotRows').innerHTML = ''; $('status').textContent = err.message; $('status').classList.add('error'); }
+    };
+    $('cities').addEventListener('change', () => { now(); plan(); });
+    $('form').addEventListener('submit', e => { e.preventDefault(); plan(); });
+    ['date', 'start', 'end'].forEach(id => $(id).addEventListener('input', plan));
+    now(); plan();
+    setInterval(now, 30000);
+
+  </script>
+</body>
+</html>
