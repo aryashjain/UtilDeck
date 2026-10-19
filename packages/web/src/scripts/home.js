@@ -22,15 +22,24 @@ const SECTIONS = [
 
 // The hero deck: one card image per tool, in registry order.
 // Each image is named after its page, e.g. pages/word-counter.html -> assets/cards/word-counter.png.
-// A tool can reuse another card with a `card` field in tools.js.
+// A tool with textCard: true gets a text card with its own name.
 const cardImage = tool => `assets/cards/${tool.card ? `${tool.card}.png` : tool.path.split('/').pop().replace('.html', '.png')}`;
 
 deckEl.innerHTML = ALL_TOOLS
-  .map(tool => `
+  .map(tool => {
+    // Tools without their own artwork get a text card that shows the tool's own name
+    if (tool.textCard) {
+      return `
+    <a class="deck-card deck-card-text" href="${tool.path}" title="${tool.description}">
+      <span class="deck-card-label">${tool.name}</span>
+    </a>`;
+    }
+    return `
     <a class="deck-card" href="${tool.path}" title="${tool.description}">
       <img src="${cardImage(tool)}" alt="${tool.name} card" width="338" height="471" loading="lazy" draggable="false" onerror="this.parentElement.classList.add('deck-card-text')">
       <span class="deck-card-label">${tool.name}</span>
-    </a>`)
+    </a>`;
+  })
   .join('');
 
 const escapeText = text => text.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);

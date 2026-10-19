@@ -1650,3 +1650,13 @@ button.summary-chip[aria-pressed="true"] {
   margin: 0 0 1rem 1.25rem;
   line-height: 1.8;
 }
+
+/* Text card labels: no link underline or link color */
+.deck-card,
+.deck-card .deck-card-label {
+  text-decoration: none;
+}
+
+.deck-card-text .deck-card-label {
+  color: #f2f2f2;
+}
