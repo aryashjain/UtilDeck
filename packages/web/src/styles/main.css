@@ -1592,3 +1592,61 @@ html.dark-mode .theme-toggle::before {
   align-items: center;
   justify-content: center;
 }
+
+/* Result boxes for the calculator and converter tools */
+.result-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.result-box > .stats-grid,
+.result-box .stat-card.wide {
+  flex: 1 1 260px;
+}
+
+.stat-value.small {
+  font-size: 1.1rem;
+  word-break: break-word;
+}
+
+.markdown-preview {
+  min-height: 320px;
+  padding: 1rem 1.25rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.markdown-preview h1,
+.markdown-preview h2,
+.markdown-preview h3 {
+  margin: 0.6rem 0 0.4rem;
+}
+
+.markdown-preview code {
+  padding: 0.05rem 0.3rem;
+  background: var(--bg-secondary);
+  border-radius: 0.25rem;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+.markdown-preview pre {
+  padding: 0.75rem;
+  background: var(--bg-secondary);
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+.markdown-preview a {
+  color: var(--accent-color);
+}
+
+/* Unit labels keep their case (m, km, fl oz) */
+.stat-label.plain-label {
+  text-transform: none;
+  letter-spacing: 0;
+}

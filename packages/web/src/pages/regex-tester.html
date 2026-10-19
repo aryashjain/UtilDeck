@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Tester - Test Regular Expressions Online | UtilDeck</title>
+  <meta name="description" content="Test regular expressions online. See every match with its position and capture groups, with flags for case, multiline and global matching. Free, runs in your browser.">
+  <meta name="keywords" content="regex tester, regular expression tester, regex online, test regex, regex matches, javascript regex tester">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/regex-tester.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="Regex Tester - Test Regular Expressions Online | UtilDeck">
+  <meta property="og:description" content="Test regular expressions online. See every match with its position and capture groups, with flags for case, multiline and global matching. Free, runs in your browser.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/regex-tester.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Tester - Test Regular Expressions Online | UtilDeck">
+  <meta name="twitter:description" content="Test regular expressions online. See every match with its position and capture groups, with flags for case, multiline and global matching. Free, runs in your browser.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Regex Tester</h2>
+      <p class="tool-description">Type a pattern and some text. Every match is listed with its position and any capture groups. Uses JavaScript regular expression syntax.</p>
+
+      <form id="form" class="control-panel" novalidate>
+        <div class="field field-full">
+          <label for="pattern">Pattern (without slashes)</label>
+          <input type="text" id="pattern" class="text-input" value="\d+" >
+        </div>
+        <div class="field">
+          <label for="flags">Flags (g, i, m, s)</label>
+          <input type="text" id="flags" class="text-input" value="g" >
+        </div>
+        <div class="field field-full">
+          <label for="text">Test text</label>
+          <textarea id="text" class="output-box" style="min-height: 160px;" spellcheck="false" >Order 66 shipped on 2026-10-19 to Ana and Ben.</textarea>
+        </div>
+        <div class="control-row control-row-full">
+          <button type="submit" id="testBtn" class="btn btn-primary">Test pattern</button>
+        </div>
+      </form>
+
+      <p id="status" class="status" aria-live="polite"></p>
+      <div id="result" class="result-box"></div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-regex-tester">
+      <h2 id="guide-regex-tester">How to use Regex Tester</h2>
+      <ol class="guide-steps"><li>Type a pattern without the slashes.</li><li>Add flags such as g for all matches or i to ignore case.</li><li>Read each match with its position and capture groups.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>What do the flags mean?</h3><p>g finds all matches, i ignores case, m makes ^ and $ match each line, and s lets dot match new lines.</p></div><div class="faq-item"><h3>Does this use the same regex rules as JavaScript?</h3><p>Yes. It uses JavaScript regular expression syntax.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/encoder.html">Encoder</a></li><li><a href="pages/hash-generator.html">Hash Generator</a></li><li><a href="pages/markdown-preview.html">Markdown Preview</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Regex Tester", "description": "Test regular expressions and see every match and capture group.", "url": "https://utildeck.bot747.workers.dev/pages/regex-tester.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What do the flags mean?", "acceptedAnswer": {"@type": "Answer", "text": "g finds all matches, i ignores case, m makes ^ and $ match each line, and s lets dot match new lines."}}, {"@type": "Question", "name": "Does this use the same regex rules as JavaScript?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It uses JavaScript regular expression syntax."}}]}]}</script>
+  <script type="module">
+    import { initTheme } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { findMatches } from '../scripts/extra-tools.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const pattern = document.getElementById('pattern'), flags = document.getElementById('flags'), text = document.getElementById('text');
+    const status = document.getElementById('status'), result = document.getElementById('result');
+    const escape = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    const run = () => {
+      if (!pattern.value) { result.innerHTML = ''; status.textContent = 'Type a pattern to test.'; status.classList.remove('error'); return; }
+      try {
+        const matches = findMatches(pattern.value, flags.value, text.value);
+        status.textContent = `${matches.length} match${matches.length === 1 ? '' : 'es'}${matches.length >= 500 ? ' (showing the first 500)' : ''}.`;
+        status.classList.remove('error');
+        result.innerHTML = matches.length ? `<ul class="meal-split">${matches.map(m => `<li>At position <strong>${m.index}</strong>: <code>${escape(m.match)}</code>${m.groups.length ? ' groups: ' + m.groups.map(g => `<code>${escape(g ?? '')}</code>`).join(' ') : ''}</li>`).join('')}</ul>` : '';
+      } catch (err) { result.innerHTML = ''; status.textContent = 'Invalid pattern or flags: ' + err.message; status.classList.add('error'); }
+    };
+    document.getElementById('form').addEventListener('submit', e => { e.preventDefault(); run(); });
+    [pattern, flags, text].forEach(el => el.addEventListener('input', run));
+    run();
+
+  </script>
+</body>
+</html>

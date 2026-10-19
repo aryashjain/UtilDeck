@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Protein Calculator - Daily Protein Needs | UtilDeck</title>
+  <meta name="description" content="Calculate your daily protein from your weight and goal: general health, regular exercise or building muscle. Free, runs in your browser.">
+  <meta name="keywords" content="protein calculator, daily protein needs, protein intake calculator, how much protein per day, free fitness tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/protein-calculator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="Protein Calculator - Daily Protein Needs | UtilDeck">
+  <meta property="og:description" content="Calculate your daily protein from your weight and goal: general health, regular exercise or building muscle. Free, runs in your browser.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/protein-calculator.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Protein Calculator - Daily Protein Needs | UtilDeck">
+  <meta name="twitter:description" content="Calculate your daily protein from your weight and goal: general health, regular exercise or building muscle. Free, runs in your browser.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Protein Calculator</h2>
+      <p class="tool-description">Pick your goal to get a daily protein target in grams, based on your weight.</p>
+
+      <form id="form" class="control-panel" novalidate>
+        <div class="field">
+          <label for="weight">Weight (kg)</label>
+          <input type="number" id="weight" class="text-input" value="70" >
+        </div>
+        <div class="field field-full">
+          <label for="goal">Goal</label>
+          <select id="goal" class="text-input"><option value="general">General health (0.8 g per kg)</option><option value="active">Regular exercise (1.4 g per kg)</option><option value="muscle">Building muscle (2.0 g per kg)</option></select>
+        </div>
+        <div class="control-row control-row-full">
+          <button type="submit" id="calcBtn" class="btn btn-primary">Calculate</button>
+        </div>
+      </form>
+
+      <p id="status" class="status" aria-live="polite"></p>
+      <div id="result" class="result-box"></div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-protein-calculator">
+      <h2 id="guide-protein-calculator">How to use Protein Calculator</h2>
+      <ol class="guide-steps"><li>Enter your weight.</li><li>Pick your goal.</li><li>Read your daily protein target in grams.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>How much protein do I need?</h3><p>The general guideline is 0.8 g per kg. People who train or build muscle often need more.</p></div><div class="faq-item"><h3>Is this a medical recommendation?</h3><p>No. Talk to a doctor or dietitian for a plan that fits your health.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/calorie-counter.html">Calorie Counter</a></li><li><a href="pages/meal-picker.html">What Should I Eat?</a></li><li><a href="pages/bmi-calculator.html">BMI Calculator</a></li><li><a href="pages/water-intake.html">Water Intake</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Protein Calculator", "description": "Work out your daily protein target from your weight and goal.", "url": "https://utildeck.bot747.workers.dev/pages/protein-calculator.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much protein do I need?", "acceptedAnswer": {"@type": "Answer", "text": "The general guideline is 0.8 g per kg. People who train or build muscle often need more."}}, {"@type": "Question", "name": "Is this a medical recommendation?", "acceptedAnswer": {"@type": "Answer", "text": "No. Talk to a doctor or dietitian for a plan that fits your health."}}]}]}</script>
+  <script type="module">
+    import { initTheme } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { proteinGrams } from '../scripts/extra-tools.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const status = document.getElementById('status'), result = document.getElementById('result');
+    const run = () => {
+      try {
+        const g = proteinGrams(document.getElementById('weight').value, document.getElementById('goal').value);
+        result.innerHTML = `<div class="stat-card wide"><div class="stat-label">Protein per day</div><div class="stat-value">${g} g</div><div class="stat-label">Spread across your meals</div></div>`;
+        status.textContent = 'Ranges vary by age, training and health. Ask a professional for a personal plan.'; status.classList.remove('error');
+      } catch (err) { result.innerHTML = ''; status.textContent = err.message; status.classList.add('error'); }
+    };
+    document.getElementById('form').addEventListener('submit', e => { e.preventDefault(); run(); });
+    ['weight','goal'].forEach(id => document.getElementById(id).addEventListener('input', run));
+    run();
+
+  </script>
+</body>
+</html>

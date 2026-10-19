@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bill Splitter - Split a Bill with Tip | UtilDeck</title>
+  <meta name="description" content="Split a restaurant or group bill with tip. See the tip, the total and what each person pays. Free, runs in your browser.">
+  <meta name="keywords" content="bill splitter, split the bill, tip calculator, split bill with tip, restaurant bill calculator, free calculator">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/bill-splitter.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="Bill Splitter - Split a Bill with Tip | UtilDeck">
+  <meta property="og:description" content="Split a restaurant or group bill with tip. See the tip, the total and what each person pays. Free, runs in your browser.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/bill-splitter.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bill Splitter - Split a Bill with Tip | UtilDeck">
+  <meta name="twitter:description" content="Split a restaurant or group bill with tip. See the tip, the total and what each person pays. Free, runs in your browser.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Bill Splitter</h2>
+      <p class="tool-description">Enter the bill, the tip you want to leave and how many people are paying.</p>
+
+      <form id="form" class="control-panel" novalidate>
+        <div class="field">
+          <label for="total">Bill total</label>
+          <input type="number" id="total" class="text-input" value="100" >
+        </div>
+        <div class="field">
+          <label for="tip">Tip (%)</label>
+          <input type="number" id="tip" class="text-input" value="10" >
+        </div>
+        <div class="field">
+          <label for="people">People</label>
+          <input type="number" id="people" class="text-input" value="4" >
+        </div>
+        <div class="control-row control-row-full">
+          <button type="submit" id="calcBtn" class="btn btn-primary">Split the bill</button>
+        </div>
+      </form>
+
+      <p id="status" class="status" aria-live="polite"></p>
+      <div id="result" class="result-box"></div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-bill-splitter">
+      <h2 id="guide-bill-splitter">How to use Bill Splitter</h2>
+      <ol class="guide-steps"><li>Enter the bill total.</li><li>Enter the tip percentage.</li><li>Enter how many people are paying.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>Is the tip taken from the total?</h3><p>The tip is added to the bill total, and the grand total is split equally.</p></div><div class="faq-item"><h3>Does it handle uneven splits?</h3><p>This version splits evenly. Each person pays the same share.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/percentage-calculator.html">Percentage Calculator</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Bill Splitter", "description": "Split a bill with tip between people.", "url": "https://utildeck.bot747.workers.dev/pages/bill-splitter.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is the tip taken from the total?", "acceptedAnswer": {"@type": "Answer", "text": "The tip is added to the bill total, and the grand total is split equally."}}, {"@type": "Question", "name": "Does it handle uneven splits?", "acceptedAnswer": {"@type": "Answer", "text": "This version splits evenly. Each person pays the same share."}}]}]}</script>
+  <script type="module">
+    import { initTheme } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { splitBill } from '../scripts/extra-tools.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const status = document.getElementById('status'), result = document.getElementById('result');
+    const card = (l, v) => `<div class="stat-card"><div class="stat-label">${l}</div><div class="stat-value small">${v}</div></div>`;
+    const run = () => {
+      try {
+        const r = splitBill({ total: document.getElementById('total').value, tipPercent: document.getElementById('tip').value, people: document.getElementById('people').value });
+        result.innerHTML = `<div class="stats-grid">${card('Tip', r.tipAmount.toFixed(2))}${card('Total with tip', r.grandTotal.toFixed(2))}${card('Each person pays', r.perPerson.toFixed(2))}</div>`;
+        status.textContent = ''; status.classList.remove('error');
+      } catch (err) { result.innerHTML = ''; status.textContent = err.message; status.classList.add('error'); }
+    };
+    document.getElementById('form').addEventListener('submit', e => { e.preventDefault(); run(); });
+    ['total','tip','people'].forEach(id => document.getElementById(id).addEventListener('input', run));
+    run();
+
+  </script>
+</body>
+</html>

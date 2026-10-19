@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hash Generator - SHA-1, SHA-256, SHA-512 Online | UtilDeck</title>
+  <meta name="description" content="Generate SHA-1, SHA-256, SHA-384 and SHA-512 hashes of any text. Runs in your browser, so the text is never sent anywhere.">
+  <meta name="keywords" content="hash generator, sha256 online, sha512 generator, sha1 hash, checksum, text hash, free hash tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/hash-generator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="Hash Generator - SHA-1, SHA-256, SHA-512 Online | UtilDeck">
+  <meta property="og:description" content="Generate SHA-1, SHA-256, SHA-384 and SHA-512 hashes of any text. Runs in your browser, so the text is never sent anywhere.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/hash-generator.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hash Generator - SHA-1, SHA-256, SHA-512 Online | UtilDeck">
+  <meta name="twitter:description" content="Generate SHA-1, SHA-256, SHA-384 and SHA-512 hashes of any text. Runs in your browser, so the text is never sent anywhere.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Hash Generator</h2>
+      <p class="tool-description">Type or paste text to get its hash. The hash is computed in your browser, so the text is never sent anywhere.</p>
+
+      <form id="form" class="control-panel" novalidate>
+        <div class="field">
+          <label for="algo">Algorithm</label>
+          <select id="algo" class="text-input"><option value="SHA-1">SHA-1</option><option value="SHA-256">SHA-256</option><option value="SHA-384">SHA-384</option><option value="SHA-512">SHA-512</option></select>
+        </div>
+        <div class="field field-full">
+          <label for="text">Text</label>
+          <textarea id="text" class="output-box" style="min-height: 160px;" spellcheck="false" >abc</textarea>
+        </div>
+        <div class="control-row control-row-full">
+          <button type="submit" id="hashBtn" class="btn btn-primary">Generate hash</button>
+        </div>
+      </form>
+
+      <p id="status" class="status" aria-live="polite"></p>
+      <div id="result" class="result-box"></div>
+      <div class="output-header"><h3>Hash</h3><div class="output-actions"><button type="button" id="copyBtn" class="btn btn-secondary">Copy</button></div></div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-hash-generator">
+      <h2 id="guide-hash-generator">How to use Hash Generator</h2>
+      <ol class="guide-steps"><li>Type or paste your text.</li><li>Choose SHA-1, SHA-256, SHA-384 or SHA-512.</li><li>Copy the hash.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>Is my text sent to a server?</h3><p>No. The hash is computed in your browser with the built-in Web Crypto API.</p></div><div class="faq-item"><h3>Which hash should I use?</h3><p>SHA-256 is a good default for checksums. SHA-1 is older and no longer secure against deliberate attacks.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/encoder.html">Encoder</a></li><li><a href="pages/regex-tester.html">Regex Tester</a></li><li><a href="pages/markdown-preview.html">Markdown Preview</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Hash Generator", "description": "Generate SHA-1, SHA-256 and SHA-512 hashes. Computed in your browser.", "url": "https://utildeck.bot747.workers.dev/pages/hash-generator.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is my text sent to a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. The hash is computed in your browser with the built-in Web Crypto API."}}, {"@type": "Question", "name": "Which hash should I use?", "acceptedAnswer": {"@type": "Answer", "text": "SHA-256 is a good default for checksums. SHA-1 is older and no longer secure against deliberate attacks."}}]}]}</script>
+  <script type="module">
+    import { initTheme, copyText } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { hashText } from '../scripts/extra-tools.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const algo = document.getElementById('algo'), text = document.getElementById('text'), result = document.getElementById('result');
+    const status = document.getElementById('status'), copyBtn = document.getElementById('copyBtn');
+    let last = '';
+    const run = async () => {
+      try {
+        last = await hashText(text.value, algo.value);
+        result.innerHTML = `<div class="stat-card wide"><div class="stat-label">${algo.value}</div><div class="stat-value small" style="word-break: break-all;"><code>${last}</code></div></div>`;
+        status.textContent = ''; status.classList.remove('error');
+      } catch (err) { last = ''; result.innerHTML = ''; status.textContent = err.message; status.classList.add('error'); }
+    };
+    document.getElementById('form').addEventListener('submit', e => { e.preventDefault(); run(); });
+    [algo, text].forEach(el => el.addEventListener('input', run));
+    copyBtn.addEventListener('click', () => copyText(last, copyBtn));
+    run();
+
+  </script>
+</body>
+</html>

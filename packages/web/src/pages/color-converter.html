@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Converter and Contrast Checker - HEX, RGB, HSL | UtilDeck</title>
+  <meta name="description" content="Convert colors between HEX, RGB and HSL, and check text contrast against WCAG accessibility levels. Free, runs in your browser.">
+  <meta name="keywords" content="color converter, hex to rgb, rgb to hex, hsl converter, contrast checker, wcag contrast, accessible colors, color picker">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/color-converter.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="Color Converter and Contrast Checker - HEX, RGB, HSL | UtilDeck">
+  <meta property="og:description" content="Convert colors between HEX, RGB and HSL, and check text contrast against WCAG accessibility levels. Free, runs in your browser.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/color-converter.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Color Converter and Contrast Checker - HEX, RGB, HSL | UtilDeck">
+  <meta name="twitter:description" content="Convert colors between HEX, RGB and HSL, and check text contrast against WCAG accessibility levels. Free, runs in your browser.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Color Converter and Contrast Checker</h2>
+      <p class="tool-description">Pick a color or type a HEX value. Check the text and background pair against WCAG contrast levels.</p>
+
+      <form id="form" class="control-panel" novalidate>
+        <div class="field">
+          <label for="hex">Color (HEX)</label>
+          <input type="text" id="hex" class="text-input" value="#1e90ff" >
+        </div>
+        <div class="field">
+          <label for="picker">Picker</label>
+          <input type="color" id="picker" value="#1e90ff" class="text-input" style="height: 44px; padding: 4px;">
+        </div>
+        <div class="field">
+          <label for="text">Text color</label>
+          <input type="color" id="text" value="#000000" class="text-input" style="height: 44px; padding: 4px;">
+        </div>
+        <div class="field">
+          <label for="bg">Background color</label>
+          <input type="color" id="bg" value="#ffffff" class="text-input" style="height: 44px; padding: 4px;">
+        </div>
+        <div class="control-row control-row-full">
+          <button type="submit" id="convertBtn" class="btn btn-primary">Update</button>
+        </div>
+      </form>
+
+      <p id="status" class="status" aria-live="polite"></p>
+      <div id="result" class="result-box"></div>
+      <div id="contrast" class="result-box" style="margin-top: 1rem;"></div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-color-converter">
+      <h2 id="guide-color-converter">How to use Color Converter</h2>
+      <ol class="guide-steps"><li>Pick a color with the picker or type a HEX value.</li><li>Read the RGB and HSL values.</li><li>Set a text and background color to check the contrast ratio.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>What contrast ratio is good enough for text?</h3><p>WCAG AA asks for 4.5 to 1 for normal text and 3 to 1 for large text. AAA asks for 7 to 1.</p></div><div class="faq-item"><h3>Which color formats are supported?</h3><p>HEX (3 or 6 digits), RGB and HSL.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/unit-converter.html">Unit Converter</a></li><li><a href="pages/timestamp-converter.html">Timestamp Converter</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Color Converter", "description": "Convert HEX, RGB and HSL, and check text contrast for accessibility.", "url": "https://utildeck.bot747.workers.dev/pages/color-converter.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What contrast ratio is good enough for text?", "acceptedAnswer": {"@type": "Answer", "text": "WCAG AA asks for 4.5 to 1 for normal text and 3 to 1 for large text. AAA asks for 7 to 1."}}, {"@type": "Question", "name": "Which color formats are supported?", "acceptedAnswer": {"@type": "Answer", "text": "HEX (3 or 6 digits), RGB and HSL."}}]}]}</script>
+  <script type="module">
+    import { initTheme } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { hexToRgb, rgbToHex, rgbToHsl, contrastRatio } from '../scripts/extra-tools.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const hex = document.getElementById('hex'), picker = document.getElementById('picker');
+    const text = document.getElementById('text'), bg = document.getElementById('bg');
+    const status = document.getElementById('status'), result = document.getElementById('result'), contrast = document.getElementById('contrast');
+    const escape = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    const card = (l, v) => `<div class="stat-card wide"><div class="stat-label">${escape(l)}</div><div class="stat-value small">${escape(v)}</div></div>`;
+    const run = (source) => {
+      try {
+        if (source === 'picker') hex.value = picker.value;
+        const rgb = hexToRgb(hex.value);
+        const h = rgbToHex(rgb);
+        picker.value = h;
+        const hsl = rgbToHsl(rgb);
+        result.innerHTML = card('HEX', h) + card('RGB', `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`) + card('HSL', `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`);
+        status.textContent = ''; status.classList.remove('error');
+      } catch (err) { result.innerHTML = ''; status.textContent = err.message; status.classList.add('error'); }
+      try {
+        const r = contrastRatio(text.value, bg.value);
+        const level = r >= 7 ? 'Passes AAA for all text' : r >= 4.5 ? 'Passes AA for normal text, AAA for large text' : r >= 3 ? 'Passes AA for large text only' : 'Fails WCAG contrast';
+        contrast.innerHTML = card('Contrast ratio', r.toFixed(2) + ' : 1') + card('WCAG', level);
+      } catch (err) { contrast.innerHTML = ''; }
+    };
+    document.getElementById('form').addEventListener('submit', e => { e.preventDefault(); run('hex'); });
+    hex.addEventListener('input', () => run('hex'));
+    picker.addEventListener('input', () => run('picker'));
+    [text, bg].forEach(el => el.addEventListener('input', () => run('hex')));
+    run('hex');
+
+  </script>
+</body>
+</html>

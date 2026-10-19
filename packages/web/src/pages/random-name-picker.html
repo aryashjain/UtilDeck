@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Name Picker - Pick a Winner from a List | UtilDeck</title>
+  <meta name="description" content="Paste a list of names and pick one or more at random for giveaways, raffles, teams or turns. Fair random choice, runs in your browser.">
+  <meta name="keywords" content="random name picker, random picker, raffle picker, giveaway winner, pick a name at random, random team generator, free random tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://utildeck.bot747.workers.dev/pages/random-name-picker.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UtilDeck">
+  <meta property="og:title" content="Random Name Picker - Pick a Winner from a List | UtilDeck">
+  <meta property="og:description" content="Paste a list of names and pick one or more at random for giveaways, raffles, teams or turns. Fair random choice, runs in your browser.">
+  <meta property="og:url" content="https://utildeck.bot747.workers.dev/pages/random-name-picker.html">
+  <meta property="og:image" content="https://utildeck.bot747.workers.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Random Name Picker - Pick a Winner from a List | UtilDeck">
+  <meta name="twitter:description" content="Paste a list of names and pick one or more at random for giveaways, raffles, teams or turns. Fair random choice, runs in your browser.">
+  <script>
+    // Apply the saved theme before the page is first drawn, so it never flashes light
+    (function () {
+      var saved = localStorage.getItem('toolkit_theme');
+      var dark = saved === 'dark' || (saved === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark-mode');
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="../assets/light-icon64.png">
+  <link rel="apple-touch-icon" href="../assets/light-icon180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img class="brand-logo" src="../assets/light-icon64.png" alt="" width="36" height="36">
+        <div class="brand-text">
+          <h1>UtilDeck</h1>
+          <span class="brand-tagline">Your everyday toolkit</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <nav class="tool-nav" id="toolNav"></nav>
+
+  <main class="container">
+    <section class="editor-section">
+      <h2>Random Name Picker</h2>
+      <p class="tool-description">Paste one name per line, choose how many winners you want, and pick. Every name has the same chance.</p>
+
+      <form id="form" class="control-panel" novalidate>
+        <div class="field field-full">
+          <label for="names">Names (one per line)</label>
+          <textarea id="names" class="output-box" style="min-height: 160px;" spellcheck="false" >Ana
+Ben
+Chen
+Dev
+Eve
+Farah</textarea>
+        </div>
+        <div class="field">
+          <label for="count">Winners</label>
+          <input type="number" id="count" class="text-input" value="1" >
+        </div>
+        <div class="control-row control-row-full">
+          <button type="submit" id="pickBtn" class="btn btn-primary">Pick</button>
+        </div>
+      </form>
+
+      <p id="status" class="status" aria-live="polite"></p>
+      <div id="result" class="result-box"></div>
+      <div class="control-row" style="margin-top: 1rem;"><button type="button" id="againBtn" class="btn btn-secondary">Pick again</button></div>
+    </section>
+
+    <section class="seo-guide" aria-labelledby="guide-random-name-picker">
+      <h2 id="guide-random-name-picker">How to use Random Name Picker</h2>
+      <ol class="guide-steps"><li>Paste one name per line.</li><li>Choose how many winners you need.</li><li>Press Pick. Use Pick again to draw a new set.</li></ol>
+      <div class="faq"><div class="faq-item"><h3>Is the pick fair?</h3><p>Yes. Names are shuffled with the browser&#x27;s secure random source, so every name has the same chance.</p></div><div class="faq-item"><h3>Are the names stored?</h3><p>No. The list stays in your browser and is not sent anywhere.</p></div></div>
+      <h3 class="related-title">Related tools</h3>
+      <ul class="related-tools"><li><a href="pages/generators.html">Generators</a></li><li><a href="pages/email-generator.html">Email Generator</a></li><li><a href="pages/password-generator.html">Password Generator</a></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-made">Made with <span aria-label="love">❤️</span> by <strong>Aryash</strong></p>
+      <div class="footer-links">
+        <a href="https://x.com/Aaryash747" target="_blank" rel="noopener">@Aaryash747</a>
+        <a href="mailto:aryashjain747@gmail.com">aryashjain747@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Random Name Picker", "description": "Pick winners at random from a list of names.", "url": "https://utildeck.bot747.workers.dev/pages/random-name-picker.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires a modern web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is the pick fair?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Names are shuffled with the browser's secure random source, so every name has the same chance."}}, {"@type": "Question", "name": "Are the names stored?", "acceptedAnswer": {"@type": "Answer", "text": "No. The list stays in your browser and is not sent anywhere."}}]}]}</script>
+  <script type="module">
+    import { initTheme } from '../scripts/utils.js';
+    import { initNav } from '../scripts/nav.js';
+    import { parseNames, pickNames } from '../scripts/extra-tools.js';
+    initNav(); initTheme(document.getElementById('themeToggle'));
+    const names = document.getElementById('names'), count = document.getElementById('count');
+    const status = document.getElementById('status'), result = document.getElementById('result');
+    const escape = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    const pick = () => {
+      try {
+        const list = parseNames(names.value);
+        const winners = pickNames(list, count.value);
+        result.innerHTML = `<div class="stats-grid">${winners.map((w, i) => `<div class="stat-card"><div class="stat-label">Winner ${i + 1}</div><div class="stat-value small">${escape(w)}</div></div>`).join('')}</div>`;
+        status.textContent = `Picked ${winners.length} of ${list.length} names.`; status.classList.remove('error');
+      } catch (err) { result.innerHTML = ''; status.textContent = err.message; status.classList.add('error'); }
+    };
+    document.getElementById('form').addEventListener('submit', e => { e.preventDefault(); pick(); });
+    document.getElementById('againBtn').addEventListener('click', pick);
+
+  </script>
+</body>
+</html>
