@@ -1453,6 +1453,135 @@ header .brand h1 {
   color: var(--danger-color);
 }
 
+/* ===== Responsive pass: every tool, from small phones to large monitors ===== */
+
+/* Grid tracks may shrink below their content, so wide children never force sideways scrolling */
+.split-layout,
+.control-panel,
+.field-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.split-layout > *,
+.control-panel > *,
+.field-grid > * {
+  min-width: 0;
+}
+
+/* Long URLs and values can break anywhere, so they never push the page sideways */
+body {
+  overflow-wrap: anywhere;
+}
+
+/* Keep canvases, code and long values inside their boxes */
+canvas,
+pre {
+  max-width: 100%;
+}
+
+canvas {
+  height: auto;
+}
+
+pre,
+code {
+  overflow-wrap: anywhere;
+}
+
+.output-header,
+.output-actions,
+.json-toolbar,
+.control-row,
+.editor-toolbar {
+  min-width: 0;
+}
+
+.output-header {
+  flex-wrap: wrap;
+}
+
+.output-actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* Large screens: scale the type and widen the page instead of leaving empty margins */
+@media (min-width: 1920px) {
+  html {
+    font-size: 17.5px;
+  }
+}
+
+@media (min-width: 2200px) {
+  html {
+    font-size: 19px;
+  }
+
+  .container {
+    max-width: 1760px;
+  }
+}
+
+/* Small screens: one column everywhere, no fixed-width grids */
+@media (max-width: 900px) {
+  .split-layout,
+  .control-panel,
+  .field-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  /* Stop iOS from zooming in when a field is focused */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+
+  .output-actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .output-actions .btn {
+    flex: 1 1 auto;
+  }
+
+  .nav-inner {
+    flex-wrap: wrap;
+    row-gap: 0.25rem;
+  }
+
+  .nav-search {
+    width: 100%;
+    order: 10;
+  }
+
+  .qr-wrap {
+    max-width: 100%;
+    padding: 1rem;
+  }
+}
+
+/* Touch screens: controls at least 44px tall so they are easy to hit */
+@media (pointer: coarse) {
+  .btn,
+  .nav-link,
+  .theme-toggle,
+  .summary-chip,
+  .category-chip,
+  .text-input,
+  select.text-input,
+  .related-tools a {
+    min-height: 44px;
+  }
+
+  .segmented .btn {
+    min-height: 44px;
+  }
+}
+
 img,
 video,
 svg {
