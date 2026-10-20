@@ -335,7 +335,8 @@ main {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
-  height: calc(100vh - 300px);
+  /* Fill the viewport, but stay within a sensible band on tall or very large screens */
+  height: clamp(420px, calc(100vh - 300px), 880px);
   margin-top: 1.5rem;
 }
 
@@ -1224,6 +1225,84 @@ header .brand h1 {
 /* Responsive: tool layouts stack into one column on smaller screens */
 .split-layout > * {
   min-width: 0;
+}
+
+/* Large screens: give the tool pages more room instead of a narrow centred column */
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1440px;
+  }
+
+  .editor-section {
+    padding: 2.5rem;
+  }
+}
+
+/* JSON formatter: toolbar, status pill and result actions */
+.json-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.json-toolbar .segmented .btn {
+  min-width: 7rem;
+  padding: 0.65rem 1.1rem;
+}
+
+.json-indent {
+  min-width: 10rem;
+}
+
+.json-indent select.text-input {
+  padding: 0.65rem 0.75rem;
+}
+
+.json-indent select.text-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.json-status {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  min-height: 0;
+  margin: 0.25rem 0 0;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: var(--bg-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.json-status:empty {
+  display: none;
+}
+
+.json-status.ok {
+  color: var(--success-color);
+  border-color: var(--success-color);
+}
+
+.json-status.error {
+  color: var(--danger-color);
+  border-color: var(--danger-color);
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.json-output {
+  flex: 1;
+  min-height: 0;
+}
+
+.split-output .output-header .btn {
+  padding: 0.6rem 1rem;
+  white-space: nowrap;
 }
 
 img,

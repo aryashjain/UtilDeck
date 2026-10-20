@@ -66,12 +66,12 @@
         </div>
 
         <div class="split-output">
-          <div class="control-row">
+          <div class="json-toolbar">
             <div class="segmented" role="group" aria-label="Output mode">
-              <button class="btn btn-secondary active" data-mode="format">Format</button>
-              <button class="btn btn-secondary" data-mode="minify">Minify</button>
+              <button class="btn btn-secondary active" data-mode="format" aria-pressed="true">Format</button>
+              <button class="btn btn-secondary" data-mode="minify" aria-pressed="false">Minify</button>
             </div>
-            <div class="field">
+            <div class="field json-indent">
               <label for="indent">Indent</label>
               <select id="indent" class="text-input">
                 <option value="2">2 spaces</option>
@@ -81,16 +81,16 @@
             </div>
           </div>
 
-          <p id="status" class="status" aria-live="polite"></p>
+          <p id="status" class="status json-status" aria-live="polite"></p>
 
           <div class="output-header">
             <h3>Result</h3>
             <div class="output-actions">
               <button id="useResultBtn" class="btn btn-secondary">Use as input</button>
-              <button id="copyBtn" class="btn btn-secondary">Copy</button>
+              <button id="copyBtn" class="btn btn-primary">Copy</button>
             </div>
           </div>
-          <textarea id="output" placeholder="Formatted JSON will appear here..." readonly style="flex: 1; min-height: 0;" spellcheck="false"></textarea>
+          <textarea id="output" class="json-output" placeholder="Formatted JSON will appear here..." readonly spellcheck="false"></textarea>
         </div>
       </div>
     </section>
@@ -134,12 +134,20 @@
 
     initTheme(themeToggle);
 
+    function setStatus(text, state) {
+      status.textContent = text;
+      status.classList.toggle('ok', state === 'ok');
+      status.classList.toggle('error', state === 'error');
+    }
+
     function update() {
+      // Indent only affects Format output, so grey it out in Minify mode
+      indent.disabled = mode === 'minify';
+
       const text = input.value;
       if (!text.trim()) {
         output.value = '';
-        status.textContent = '';
-        status.classList.remove('error');
+        setStatus('', null);
         return;
       }
 
@@ -148,8 +156,7 @@
         parsed = JSON.parse(text);
       } catch (err) {
         output.value = '';
-        status.textContent = `Invalid JSON: ${err.message}`;
-        status.classList.add('error');
+        setStatus(`Invalid JSON: ${err.message}`, 'error');
         return;
       }
 
@@ -157,14 +164,17 @@
       output.value = mode === 'minify'
         ? JSON.stringify(parsed)
         : JSON.stringify(parsed, null, space);
-      status.textContent = '✓ Valid JSON';
-      status.classList.remove('error');
+      setStatus('✓ Valid JSON', 'ok');
     }
 
     modeButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         mode = btn.dataset.mode;
-        modeButtons.forEach(b => b.classList.toggle('active', b === btn));
+        modeButtons.forEach(b => {
+          const active = b === btn;
+          b.classList.toggle('active', active);
+          b.setAttribute('aria-pressed', String(active));
+        });
         update();
       });
     });
