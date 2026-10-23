@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "UtilDeck",
+  "version": "1.0.0",
+  "description": "14 handy text and developer tools in one tab: JSON, JWT, hashes, Base64, QR codes, diff and more. Works offline.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Open UtilDeck",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}

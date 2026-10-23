@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UtilDeck</title>
+  <link rel="icon" href="icons/icon48.png">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="icons/icon48.png" alt="">
+        <span>UtilDeck</span>
+      </div>
+      <input id="search" type="search" placeholder="Search tools   /" autocomplete="off">
+      <nav id="nav" aria-label="Tools"></nav>
+      <div class="sidebar-foot">
+        <button id="theme" class="btn ghost sm" type="button">Theme: Auto</button>
+        <a href="https://buymeacoffee.com/aryashenun" target="_blank" rel="noopener">☕ Buy me a coffee</a>
+      </div>
+    </aside>
+    <main>
+      <div class="tool-wrap">
+        <header class="tool-head">
+          <h1 id="tool-title"></h1>
+          <p id="tool-desc"></p>
+        </header>
+        <section id="tool" class="tool"></section>
+      </div>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
