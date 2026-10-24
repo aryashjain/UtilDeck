@@ -101,6 +101,8 @@
     .added { background-color: rgba(40, 167, 69, 0.2); color: #28a745; }
     .removed { background-color: rgba(220, 53, 69, 0.2); color: #dc3545; }
     .neutral { color: var(--text-secondary); }
+    .word-add { background-color: rgba(40, 167, 69, 0.35); border-radius: 3px; }
+    .word-del { background-color: rgba(220, 53, 69, 0.35); border-radius: 3px; }
     @media (max-width: 1024px) {
       .diff-wrapper {
         grid-template-columns: 1fr;
@@ -162,13 +164,13 @@
           </div>
 
           <div class="diff-output-section">
-            <h3 style="margin: 0;">Differences</h3>
+            <h3 style="margin: 0;">Changes</h3>
             <div class="diff-result" id="diffOutput" style="display: none;"></div>
             <div id="diffEmpty" style="text-align: center; color: var(--text-secondary); padding: 2rem; flex: 1; display: flex; align-items: center; justify-content: center;">
-              Click "Compare" to see differences
+              Click "Compare" to see changes
             </div>
             <div class="editor-toolbar" style="margin-top: auto;">
-              <button id="copyDiffBtn" class="btn btn-secondary" style="display: none;">Copy Diff</button>
+              <button id="copyDiffBtn" class="btn btn-secondary" style="display: none;">Copy Changes</button>
             </div>
           </div>
         </div>
@@ -264,46 +266,151 @@
     });
 
     // Text Diff
-    compareBtn.addEventListener('click', () => {
-      const t1 = text1.value.split('\n');
-      const t2 = text2.value.split('\n');
+    // Text Diff: LCS alignment, so one inserted line doesn't mark everything after it.
+    // Shown the same way as the JSON diff: only the changed lines, as "+" and "-" entries.
+    const MAX_CELLS = 4000000;
 
-      let html = '';
-      const maxLines = Math.max(t1.length, t2.length);
-
-      for (let i = 0; i < maxLines; i++) {
-        const line1 = t1[i] || '';
-        const line2 = t2[i] || '';
-
-        if (line1 === line2) {
-          html += `<div class="neutral">${escapeHtml(line1)}</div>`;
-        } else {
-          if (line1) html += `<div class="removed">- ${escapeHtml(line1)}</div>`;
-          if (line2) html += `<div class="added">+ ${escapeHtml(line2)}</div>`;
+    function lcsOps(a, b, same) {
+      const n = a.length;
+      const m = b.length;
+      const table = Array.from({ length: n + 1 }, () => new Uint32Array(m + 1));
+      for (let i = n - 1; i >= 0; i--) {
+        for (let j = m - 1; j >= 0; j--) {
+          table[i][j] = same(a[i], b[j]) ? table[i + 1][j + 1] + 1 : Math.max(table[i + 1][j], table[i][j + 1]);
         }
       }
+      const ops = [];
+      let i = 0;
+      let j = 0;
+      while (i < n && j < m) {
+        if (same(a[i], b[j])) { ops.push({ type: 'same', a: a[i], b: b[j] }); i++; j++; }
+        else if (table[i + 1][j] >= table[i][j + 1]) { ops.push({ type: 'del', a: a[i] }); i++; }
+        else { ops.push({ type: 'add', b: b[j] }); j++; }
+      }
+      while (i < n) ops.push({ type: 'del', a: a[i++] });
+      while (j < m) ops.push({ type: 'add', b: b[j++] });
+      return ops;
+    }
 
-      diffOutput.innerHTML = html;
-      diffOutput.style.display = 'block';
+    // Highlights the words that differ between two lines. Spaces are kept so the text reads the same.
+    function wordHighlight(oldLine, newLine) {
+      const ta = oldLine.split(/(\s+)/).filter(Boolean);
+      const tb = newLine.split(/(\s+)/).filter(Boolean);
+      if (ta.length * tb.length > MAX_CELLS) {
+        return [`<span class="word-del">${escapeHtml(oldLine)}</span>`, `<span class="word-add">${escapeHtml(newLine)}</span>`];
+      }
+      let oldHtml = '';
+      let newHtml = '';
+      let oldRun = '';
+      let newRun = '';
+      const flushRuns = () => {
+        if (oldRun) oldHtml += `<span class="word-del">${escapeHtml(oldRun)}</span>`;
+        if (newRun) newHtml += `<span class="word-add">${escapeHtml(newRun)}</span>`;
+        oldRun = '';
+        newRun = '';
+      };
+      for (const op of lcsOps(ta, tb, (x, y) => x === y)) {
+        if (op.type === 'same') {
+          flushRuns();
+          oldHtml += escapeHtml(op.a);
+          newHtml += escapeHtml(op.b);
+        } else if (op.type === 'del') {
+          oldRun += op.a;
+        } else {
+          newRun += op.b;
+        }
+      }
+      flushRuns();
+      return [oldHtml, newHtml];
+    }
+
+    // Changed lines only, numbered like the JSON diff shows its paths.
+    function buildChanges(ops) {
+      const changes = [];
+      let oldNo = 0;
+      let newNo = 0;
+      for (let k = 0; k < ops.length;) {
+        if (ops[k].type === 'same') {
+          oldNo++;
+          newNo++;
+          k++;
+          continue;
+        }
+        const dels = [];
+        const adds = [];
+        while (k < ops.length && ops[k].type !== 'same') {
+          (ops[k].type === 'del' ? dels : adds).push(ops[k]);
+          k++;
+        }
+        const paired = Math.min(dels.length, adds.length);
+        for (let p = 0; p < paired; p++) {
+          oldNo++;
+          newNo++;
+          changes.push({ kind: 'changed', oldText: dels[p].a, newText: adds[p].b, oldNo, newNo });
+        }
+        for (let p = paired; p < dels.length; p++) {
+          oldNo++;
+          changes.push({ kind: 'removed', text: dels[p].a, oldNo });
+        }
+        for (let p = paired; p < adds.length; p++) {
+          newNo++;
+          changes.push({ kind: 'added', text: adds[p].b, newNo });
+        }
+      }
+      return changes;
+    }
+
+    function changeHtml(change) {
+      if (change.kind === 'removed') {
+        return `<div class="removed">- Line ${change.oldNo}: ${escapeHtml(change.text)}</div>`;
+      }
+      if (change.kind === 'added') {
+        return `<div class="added">+ Line ${change.newNo}: ${escapeHtml(change.text)}</div>`;
+      }
+      const [oldHtml, newHtml] = wordHighlight(change.oldText, change.newText);
+      return `<div class="removed">- Line ${change.oldNo}: ${oldHtml}</div>`
+        + `<div class="added">+ Line ${change.newNo}: ${newHtml}</div>`;
+    }
+
+    compareBtn.addEventListener('click', () => {
       document.getElementById('diffEmpty').style.display = 'none';
+      diffOutput.style.display = 'block';
       copyDiffBtn.style.display = 'block';
+
+      if (!text1.value && !text2.value) {
+        diffOutput.innerHTML = '<div class="neutral">Paste both texts to see changes.</div>';
+        return;
+      }
+      const lines1 = text1.value.split('\n');
+      const lines2 = text2.value.split('\n');
+      if (lines1.length * lines2.length > MAX_CELLS) {
+        diffOutput.innerHTML = '<div class="removed">These texts are too long to compare in the browser.</div>';
+        return;
+      }
+
+      const changes = buildChanges(lcsOps(lines1, lines2, (x, y) => x === y));
+      if (!changes.length) {
+        diffOutput.innerHTML = '<div class="neutral">No differences found. The two texts are identical.</div>';
+        return;
+      }
+      diffOutput.innerHTML = changes.map(changeHtml).join('');
     });
 
     copyDiffBtn.addEventListener('click', () => {
       const text = diffOutput.innerText;
       if (!text) {
         copyDiffBtn.textContent = 'Nothing to copy';
-        setTimeout(() => copyDiffBtn.textContent = 'Copy Diff', 2000);
+        setTimeout(() => copyDiffBtn.textContent = 'Copy Changes', 2000);
         return;
       }
       navigator.clipboard.writeText(text).then(() => {
-        const originalText = 'Copy Diff';
+        const originalText = 'Copy Changes';
         copyDiffBtn.textContent = '✓ Copied';
         setTimeout(() => copyDiffBtn.textContent = originalText, 2000);
       }).catch(err => {
         console.error('Copy failed:', err);
         copyDiffBtn.textContent = '✓ Copied';
-        setTimeout(() => copyDiffBtn.textContent = 'Copy Diff', 2000);
+        setTimeout(() => copyDiffBtn.textContent = 'Copy Changes', 2000);
       });
     });
 
