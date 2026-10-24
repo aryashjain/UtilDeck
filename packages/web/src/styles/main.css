@@ -2155,3 +2155,34 @@ html.dark-mode .theme-toggle::before {
   align-items: center;
   gap: 0.75rem;
 }
+
+/* Featured panel: badges from partner sites, above the footer on the homepage */
+.featured-panel {
+  margin-top: 3rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  text-align: center;
+}
+
+.featured-panel h2 {
+  margin: 0 0 1rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.featured-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.featured-badges img {
+  display: block;
+  height: auto;
+}
