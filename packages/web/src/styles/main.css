@@ -1111,34 +1111,6 @@ select.text-input {
   .deck-card { transition: none; }
 }
 
-/* Deck layout: two columns on phones, and a wrapping grid that fills wide screens.
-   The horizontal strip only showed a few cards on a phone and left most of a large screen empty. */
-@media (max-width: 640px) {
-  .deck {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem 0.75rem;
-    overflow: visible;
-    padding: 1rem 0 1.5rem;
-  }
-}
-
-@media (min-width: 641px) {
-  .deck {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 1.5rem 1rem;
-    overflow: visible;
-    padding: 1rem 0.5rem 1.5rem;
-  }
-}
-
-@media (min-width: 1600px) {
-  .deck {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  }
-}
-
 /* Category index: row of buttons above the grid */
 .category-index {
   display: flex;
